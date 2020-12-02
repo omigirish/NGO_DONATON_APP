@@ -39,23 +39,23 @@ class _HomePageState extends State<HomePage> {
         iconSize: 32,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.heart_o),
+            icon: Icon(LineAwesomeIcons.user),
             label: "Heart",
           ),
           BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.search),
+            icon: Icon(LineAwesomeIcons.bell_o),
             label: "Search",
           ),
           BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.signal),
+            icon: Icon(LineAwesomeIcons.search),
             label: "Signal",
           ),
           BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.bell_o),
+            icon: Icon(LineAwesomeIcons.signal),
             label: "Notification",
           ),
           BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.user),
+            icon: Icon(LineAwesomeIcons.heart_o),
             label: "Profile",
           ),
         ],
