@@ -103,10 +103,28 @@ class _BodyState extends State<Body> {
                         size: 32,
                         color: Colors.orange[800],
                       ),
-                      Icon(
-                        FontAwesomeIcons.google,
-                        size: 32,
-                        color: Colors.orange[800],
+                      FlatButton(
+                        onPressed: () async {
+                          setState(() {
+                            loading = true;
+                          });
+                          dynamic result = await _auth.googleSignIn();
+                          if (result != null) {
+                            print(result.uid);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()));
+                          } else {
+                            print("Problem in signing in");
+                            loading = false;
+                          }
+                        },
+                        child: Icon(
+                          FontAwesomeIcons.google,
+                          size: 32,
+                          color: Colors.orange[800],
+                        ),
                       ),
                     ],
                   )

@@ -66,7 +66,7 @@ class _BodyState extends State<Body> {
                       dynamic result = await _auth.signinWithEmailAndPassword(
                           email, password);
                       if (result != null) {
-                        print(result.uid);
+                        print(result);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

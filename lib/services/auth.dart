@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:mydonationapp/models/user.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   //create user obj based on firebase user
   User _userFromFirebaseUser(auth.User user) {
@@ -52,9 +54,27 @@ class AuthService {
     }
   }
 
+  //signin with google
+  Future googleSignIn() async {
+    try {
+      GoogleSignInAccount googleuser = await _googleSignIn.signIn();
+      GoogleSignInAuthentication googleauth = await googleuser.authentication;
+      auth.AuthCredential credential = auth.GoogleAuthProvider.credential(
+          accessToken: googleauth.accessToken, idToken: googleauth.idToken);
+      auth.UserCredential result = await _auth.signInWithCredential(credential);
+      auth.User user = result.user;
+      print(user);
+      return _userFromFirebaseUser(user);
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
   Future signOut() async {
     try {
-      return await _auth.signOut();
+      await _auth.signOut();
+      await _googleSignIn.signOut();
     } catch (e) {
       print(e.toString());
       return null;

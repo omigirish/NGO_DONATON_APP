@@ -20,7 +20,7 @@ class _LoginState extends State<Authenticate> {
       print("user null");
       return WelcomeScreen();
     } else {
-      print("logged in");
+      print("Logged in");
       return HomePage();
     }
   }
