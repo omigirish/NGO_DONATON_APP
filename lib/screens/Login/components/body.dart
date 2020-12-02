@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mydonationapp/Screens/Login/components/background.dart';
-import 'package:mydonationapp/Screens/Signup/signup_screen.dart';
+import 'package:mydonationapp/screens/Login/components/background.dart';
+import 'package:mydonationapp/screens/Signup/signup_screen.dart';
 import 'package:mydonationapp/components/already_have_an_account_acheck.dart';
 import 'package:mydonationapp/components/rounded_button.dart';
 import 'package:mydonationapp/components/rounded_input_field.dart';

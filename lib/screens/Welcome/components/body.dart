@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mydonationapp/Screens/Login/login_screen.dart';
-import 'package:mydonationapp/Screens/Signup/signup_screen.dart';
-import 'package:mydonationapp/Screens/Welcome/components/background.dart';
+import 'package:mydonationapp/screens/Login/login_screen.dart';
+import 'package:mydonationapp/screens/Signup/signup_screen.dart';
+import 'package:mydonationapp/screens/Welcome/components/background.dart';
 import 'package:mydonationapp/components/rounded_button.dart';
 import 'package:mydonationapp/constants.dart';
 import 'package:flutter_svg/svg.dart';
