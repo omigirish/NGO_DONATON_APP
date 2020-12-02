@@ -2,8 +2,8 @@ import 'package:mydonationapp/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mydonationapp/services/auth.dart';
-import 'package:provider/provider.dart';
-import 'package:mydonationapp/models/user.dart';
+// import 'package:provider/provider.dart';
+// import 'package:mydonationapp/models/user.dart';
 
 class Login extends StatefulWidget {
   @override
