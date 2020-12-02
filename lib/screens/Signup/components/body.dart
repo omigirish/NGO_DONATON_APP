@@ -7,12 +7,16 @@ import 'package:mydonationapp/components/already_have_an_account_acheck.dart';
 import 'package:mydonationapp/components/rounded_button.dart';
 import 'package:mydonationapp/components/rounded_input_field.dart';
 import 'package:mydonationapp/components/rounded_password_field.dart';
+import 'package:mydonationapp/homePage.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mydonationapp/services/auth.dart';
 
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final AuthService _auth = AuthService();
+    String email, password;
     return Background(
       child: SingleChildScrollView(
         child: Column(
@@ -29,14 +33,28 @@ class Body extends StatelessWidget {
             ),
             RoundedInputField(
               hintText: "Your Email",
-              onChanged: (value) {},
+              onChanged: (value) {
+                email = value;
+              },
             ),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                password = value;
+              },
             ),
             RoundedButton(
               text: "SIGNUP",
-              press: () {},
+              press: () async {
+                dynamic result =
+                    await _auth.registerWithEmailAndPassword(email, password);
+                if (result != null) {
+                  print(result.uid);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                } else {
+                  print("Problem in signing in");
+                }
+              },
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(

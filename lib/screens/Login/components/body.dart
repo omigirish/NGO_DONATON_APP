@@ -20,7 +20,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final AuthService _auth = AuthService();
-
+  String email, password;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -41,16 +41,20 @@ class _BodyState extends State<Body> {
             SizedBox(height: size.height * 0.03),
             RoundedInputField(
               hintText: "Your Email",
-              onChanged: (value) {},
+              onChanged: (value) {
+                email = value;
+              },
             ),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                password = value;
+              },
             ),
             RoundedButton(
               text: "LOGIN",
               press: () async {
-                print("Hello");
-                dynamic result = await _auth.signInAnon();
+                dynamic result =
+                    await _auth.signinWithEmailAndPassword(email, password);
                 if (result != null) {
                   print(result.uid);
                   Navigator.push(context,
