@@ -21,7 +21,7 @@ class Body extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 55,
-                  fontFamily: "sans-serif"),
+                  fontFamily: "YellowTail"),
             ),
             SizedBox(height: size.height * 0.05),
             SvgPicture.asset(

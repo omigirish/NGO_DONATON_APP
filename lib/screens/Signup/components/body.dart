@@ -11,6 +11,7 @@ import 'package:mydonationapp/homePage.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mydonationapp/services/auth.dart';
 import 'package:mydonationapp/shared/loading.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -32,8 +33,11 @@ class _BodyState extends State<Body> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "SIGNUP",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    "Sign Up",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "YellowTail",
+                        fontSize: 50),
                   ),
                   SizedBox(height: size.height * 0.03),
                   SvgPicture.asset(
@@ -86,20 +90,23 @@ class _BodyState extends State<Body> {
                     },
                   ),
                   OrDivider(),
-                  Row(
+                  Row(,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SocalIcon(
-                        iconSrc: "assets/icons/facebook.svg",
-                        press: () {},
+                      Icon(
+                        FontAwesomeIcons.facebookSquare,
+                        size: 32,
+                        color: Colors.orange[800],
                       ),
-                      SocalIcon(
-                        iconSrc: "assets/icons/twitter.svg",
-                        press: () {},
+                      Icon(
+                        FontAwesomeIcons.twitter,
+                        size: 32,
+                        color: Colors.orange[800],
                       ),
-                      SocalIcon(
-                        iconSrc: "assets/icons/google-plus.svg",
-                        press: () {},
+                      Icon(
+                        FontAwesomeIcons.google,
+                        size: 32,
+                        color: Colors.orange[800],
                       ),
                     ],
                   )
