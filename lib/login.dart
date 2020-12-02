@@ -30,6 +30,7 @@ class _LoginState extends State<Login> {
                 height: MediaQuery.of(context).size.height / 2.15,
               ),
               TextFormField(
+                onChanged: (val) {},
                 style: TextStyle(
                     color: Colors.black, fontFamily: "CentraleSansRegular"),
                 decoration: InputDecoration(
@@ -49,6 +50,7 @@ class _LoginState extends State<Login> {
                 height: 20,
               ),
               TextFormField(
+                onChanged: (val) {},
                 obscureText: true,
                 style: TextStyle(
                     color: Colors.black, fontFamily: "CentraleSansRegular"),

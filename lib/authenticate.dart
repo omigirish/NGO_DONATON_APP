@@ -1,6 +1,5 @@
 import 'package:mydonationapp/homePage.dart';
 import 'package:flutter/material.dart';
-import 'package:mydonationapp/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:mydonationapp/models/user.dart';
 import 'package:mydonationapp/login.dart';
