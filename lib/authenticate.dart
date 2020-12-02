@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:mydonationapp/models/user.dart';
 // import 'package:mydonationapp/login.dart';
 import 'package:mydonationapp/screens/Welcome/welcome_screen.dart';
+// import 'package:mydonationapp/screens/Login/login_screen.dart';
 
 class Authenticate extends StatefulWidget {
   @override

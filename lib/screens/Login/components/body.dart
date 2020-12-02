@@ -8,6 +8,7 @@ import 'package:mydonationapp/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mydonationapp/services/auth.dart';
 import 'package:mydonationapp/homePage.dart';
+import 'package:mydonationapp/shared/loading.dart';
 
 class Body extends StatefulWidget {
   const Body({
@@ -20,62 +21,75 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final AuthService _auth = AuthService();
-
+  String email, password;
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Background(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "LOGIN",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: size.height * 0.03),
-            SvgPicture.asset(
-              "assets/icons/login.svg",
-              height: size.height * 0.35,
-            ),
-            SizedBox(height: size.height * 0.03),
-            RoundedInputField(
-              hintText: "Your Email",
-              onChanged: (value) {},
-            ),
-            RoundedPasswordField(
-              onChanged: (value) {},
-            ),
-            RoundedButton(
-              text: "LOGIN",
-              press: () async {
-                print("Hello");
-                dynamic result = await _auth.signInAnon();
-                if (result != null) {
-                  print(result.uid);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePage()));
-                } else {
-                  print("Problem in signing in");
-                }
-              },
-            ),
-            SizedBox(height: size.height * 0.03),
-            AlreadyHaveAnAccountCheck(
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpScreen();
+    return loading
+        ? Loading()
+        : Background(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "LOGIN",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: size.height * 0.03),
+                  SvgPicture.asset(
+                    "assets/icons/login.svg",
+                    height: size.height * 0.35,
+                  ),
+                  SizedBox(height: size.height * 0.03),
+                  RoundedInputField(
+                    hintText: "Your Email",
+                    onChanged: (value) {
+                      email = value;
                     },
                   ),
-                );
-              },
+                  RoundedPasswordField(
+                    onChanged: (value) {
+                      password = value;
+                    },
+                  ),
+                  RoundedButton(
+                    text: "LOGIN",
+                    press: () async {
+                      setState(() {
+                        loading = true;
+                      });
+                      dynamic result = await _auth.signinWithEmailAndPassword(
+                          email, password);
+                      if (result != null) {
+                        print(result.uid);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
+                      } else {
+                        print("Problem in signing in");
+                        loading = false;
+                      }
+                    },
+                  ),
+                  SizedBox(height: size.height * 0.03),
+                  AlreadyHaveAnAccountCheck(
+                    press: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SignUpScreen();
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }

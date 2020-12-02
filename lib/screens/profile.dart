@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mydonationapp/authenticate.dart';
 // import 'package:mydonationapp/authenticate.dart';
 import 'package:mydonationapp/services/auth.dart';
 // import 'package:mydonationapp/login.dart';
@@ -26,7 +27,9 @@ class _ProfileState extends State<Profile> {
                   side: BorderSide(color: Color(0xff00b4ff), width: 3)),
               onPressed: () async {
                 await _auth.signOut();
-                Navigator.of(context).pop();
+                // Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => Authenticate()));
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
