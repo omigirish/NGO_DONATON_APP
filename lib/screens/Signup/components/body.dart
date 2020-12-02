@@ -90,7 +90,7 @@ class _BodyState extends State<Body> {
                     },
                   ),
                   OrDivider(),
-                  Row(,
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Icon(
