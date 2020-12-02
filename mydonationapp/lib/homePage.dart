@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(LineAwesomeIcons.heart_o),
-            title: Text("Heart"),
+            label: "Heart",
           ),
           BottomNavigationBarItem(
             icon: Icon(LineAwesomeIcons.search),
