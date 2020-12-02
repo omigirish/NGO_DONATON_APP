@@ -90,23 +90,23 @@ class _BodyState extends State<Body> {
                     },
                   ),
                   OrDivider(),
-                  Row(,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Icon(
                         FontAwesomeIcons.facebookSquare,
                         size: 32,
-                        color: Colors.orange[800],
+                        color: Colors.purple[100],
                       ),
                       Icon(
                         FontAwesomeIcons.twitter,
                         size: 32,
-                        color: Colors.orange[800],
+                        color: Colors.purple[100],
                       ),
                       Icon(
                         FontAwesomeIcons.google,
                         size: 32,
-                        color: Colors.orange[800],
+                        color: Colors.purple[100],
                       ),
                     ],
                   )
