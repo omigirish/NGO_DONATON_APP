@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mydonationapp/authenticate.dart';
+// import 'package:mydonationapp/authenticate.dart';
 import 'package:mydonationapp/services/auth.dart';
-import 'package:mydonationapp/login.dart';
+// import 'package:mydonationapp/login.dart';
 
 class Profile extends StatefulWidget {
   @override
