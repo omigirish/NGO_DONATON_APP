@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:mydonationapp/authenticate.dart';
+import 'package:mydonationapp/services/auth.dart';
+import 'package:mydonationapp/login.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -14,13 +24,15 @@ class Profile extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide(color: Color(0xff00b4ff), width: 3)),
-              onPressed: () {},
+              onPressed: () async {
+                await _auth.signOut();
+              },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Text(
-                    "logged out",
+                    "Log Out",
                     style: TextStyle(
                         color: Color(0xff00b4ff),
                         fontFamily: "CentraleSansRegular",

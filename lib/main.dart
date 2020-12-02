@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mydonationapp/authenticate.dart';
 import 'package:mydonationapp/services/auth.dart';
-import 'login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:mydonationapp/models/user.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Login(),
+        home: Authenticate(),
       ),
     );
   }
