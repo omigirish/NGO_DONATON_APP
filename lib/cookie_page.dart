@@ -30,7 +30,7 @@ class CookiePage extends StatelessWidget {
                       false, false, context)
                 ],
               )),
-          SizedBox(height: 15.0)
+          SizedBox(height: 0.0)
         ],
       ),
     );

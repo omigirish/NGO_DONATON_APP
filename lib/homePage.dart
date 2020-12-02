@@ -3,7 +3,7 @@ import 'package:mydonationapp/screens/heart.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mydonationapp/screens/profile.dart';
-import 'package:mydonationapp/cookie_page.dart';
+import 'package:mydonationapp/items_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _children = [
     Heart(),
     Explore(),
-    CookiePage(),
+    Items(),
     Container(),
     Profile(),
   ];

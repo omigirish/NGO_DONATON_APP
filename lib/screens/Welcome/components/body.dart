@@ -17,8 +17,11 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "WELCOME TO EDU",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              "One for All",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 55,
+                  fontFamily: "sans-serif"),
             ),
             SizedBox(height: size.height * 0.05),
             SvgPicture.asset(

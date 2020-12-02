@@ -2,8 +2,8 @@ import 'package:mydonationapp/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mydonationapp/models/user.dart';
-import 'package:mydonationapp/login.dart';
-import 'package:mydonationapp/screens/Login/login_screen.dart';
+// import 'package:mydonationapp/login.dart';
+import 'package:mydonationapp/screens/Welcome/welcome_screen.dart';
 
 class Authenticate extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _LoginState extends State<Authenticate> {
 
     if (user == null) {
       print("user null");
-      return LoginScreen();
+      return WelcomeScreen();
     } else {
       print("logged in");
       return HomePage();
