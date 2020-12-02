@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mydonationapp/screens/profile.dart';
 import 'package:mydonationapp/items_page.dart';
+import 'package:mydonationapp/user.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,10 +14,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   List<Widget> _children = [
-    Heart(),
+    User(),
     Explore(),
     Items(),
-    Container(),
+    User(),
     Profile(),
   ];
 
@@ -30,12 +31,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black87,
         onTap: onTabTapped,
         currentIndex: _currentIndex,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.purple,
+        unselectedItemColor: Colors.white,
         elevation: 0,
         iconSize: 32,
         items: [

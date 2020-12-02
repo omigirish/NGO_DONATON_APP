@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mydonationapp/screens/Login/login_screen.dart';
 import 'package:mydonationapp/screens/Signup/components/background.dart';
 import 'package:mydonationapp/screens/Signup/components/or_divider.dart';
-import 'package:mydonationapp/screens/Signup/components/social_icon.dart';
+// import 'package:mydonationapp/screens/Signup/components/social_icon.dart';
 import 'package:mydonationapp/components/already_have_an_account_acheck.dart';
 import 'package:mydonationapp/components/rounded_button.dart';
 import 'package:mydonationapp/components/rounded_input_field.dart';
@@ -91,17 +91,17 @@ class _BodyState extends State<Body> {
                   ),
                   OrDivider(),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Icon(
                         FontAwesomeIcons.facebookSquare,
                         size: 32,
-                        color: Colors.orange[800],
+                        color: Colors.purple[100],
                       ),
                       Icon(
                         FontAwesomeIcons.twitter,
                         size: 32,
-                        color: Colors.orange[800],
+                        color: Colors.purple[100],
                       ),
                       FlatButton(
                         onPressed: () async {
@@ -123,7 +123,7 @@ class _BodyState extends State<Body> {
                         child: Icon(
                           FontAwesomeIcons.google,
                           size: 32,
-                          color: Colors.orange[800],
+                          color: Colors.purple[100],
                         ),
                       ),
                     ],
