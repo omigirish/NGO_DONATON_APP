@@ -26,6 +26,7 @@ class _ProfileState extends State<Profile> {
                   side: BorderSide(color: Color(0xff00b4ff), width: 3)),
               onPressed: () async {
                 await _auth.signOut();
+                Navigator.of(context).pop();
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
