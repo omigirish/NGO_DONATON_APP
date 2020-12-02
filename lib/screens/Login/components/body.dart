@@ -6,11 +6,20 @@ import 'package:mydonationapp/components/rounded_button.dart';
 import 'package:mydonationapp/components/rounded_input_field.dart';
 import 'package:mydonationapp/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mydonationapp/services/auth.dart';
+import 'package:mydonationapp/homePage.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({
     Key key,
   }) : super(key: key);
+
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +29,22 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "LOGIN",
-              style: TextStyle(fontWeight: FontWeight.bold),
+            FlatButton(
+              onPressed: () async {
+                print("Hello");
+                dynamic result = await _auth.signInAnon();
+                if (result != null) {
+                  print(result.uid);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                } else {
+                  print("Problem in signing in");
+                }
+              },
+              child: Text(
+                "LOGIN",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
             SizedBox(height: size.height * 0.03),
             SvgPicture.asset(
