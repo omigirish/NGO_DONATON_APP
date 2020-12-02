@@ -20,7 +20,7 @@ class Profile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Text(
-                    "Connect with Facebook",
+                    "Logout",
                     style: TextStyle(
                         color: Color(0xff00b4ff),
                         fontFamily: "CentraleSansRegular",
