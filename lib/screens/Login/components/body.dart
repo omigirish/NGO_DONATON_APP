@@ -29,22 +29,9 @@ class _BodyState extends State<Body> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            FlatButton(
-              onPressed: () async {
-                print("Hello");
-                dynamic result = await _auth.signInAnon();
-                if (result != null) {
-                  print(result.uid);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePage()));
-                } else {
-                  print("Problem in signing in");
-                }
-              },
-              child: Text(
-                "LOGIN",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+            Text(
+              "LOGIN",
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(height: size.height * 0.03),
             SvgPicture.asset(
@@ -61,7 +48,17 @@ class _BodyState extends State<Body> {
             ),
             RoundedButton(
               text: "LOGIN",
-              press: () {},
+              press: () async {
+                print("Hello");
+                dynamic result = await _auth.signInAnon();
+                if (result != null) {
+                  print(result.uid);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                } else {
+                  print("Problem in signing in");
+                }
+              },
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
