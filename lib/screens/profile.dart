@@ -20,7 +20,7 @@ class Profile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Text(
-                    "Logout",
+                    "logged out",
                     style: TextStyle(
                         color: Color(0xff00b4ff),
                         fontFamily: "CentraleSansRegular",
