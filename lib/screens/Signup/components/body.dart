@@ -19,12 +19,12 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  final AuthService _auth = AuthService();
+  String email, password;
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final AuthService _auth = AuthService();
-    String email, password;
-    bool loading = false;
     return loading
         ? Loading()
         : Background(
