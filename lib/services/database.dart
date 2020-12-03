@@ -22,4 +22,8 @@ class DatabaseService {
       'img': img,
     });
   }
+
+  Stream<QuerySnapshot> get users {
+    return userCollection.snapshots();
+  }
 }

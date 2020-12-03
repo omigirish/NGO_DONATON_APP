@@ -10,7 +10,7 @@ import 'package:mydonationapp/models/user.dart' as firebaseuser;
 import 'package:provider/provider.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:mydonationapp/services/auth.dart';
-import 'package:mydonationapp/authenticate.dart';
+// import 'package:mydonationapp/authenticate.dart';
 // import 'package:url_launcher/url_launcher.dart';
 
 class User extends StatelessWidget {
