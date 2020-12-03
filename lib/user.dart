@@ -4,6 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mydonationapp/constants.dart';
 import 'package:mydonationapp/profile_list_item.dart';
+import 'package:mydonationapp/models/user.dart' as firebaseuser;
+import 'package:provider/provider.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
+import 'package:mydonationapp/services/auth.dart';
+import 'package:mydonationapp/authenticate.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 class User extends StatelessWidget {
   // This widget is the root of your application.
@@ -27,6 +33,8 @@ class User extends StatelessWidget {
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final fuser = Provider.of<firebaseuser.User>(context);
+    final AuthService _auth = AuthService();
     ScreenUtil.init(context, height: 896, width: 414, allowFontScaling: true);
 
     var profileInfo = Expanded(
@@ -38,9 +46,12 @@ class ProfileScreen extends StatelessWidget {
             margin: EdgeInsets.only(top: kSpacingUnit.w * 3),
             child: Stack(
               children: <Widget>[
-                CircleAvatar(
-                  radius: kSpacingUnit.w * 5,
-                  backgroundImage: AssetImage('assets/images/avatar.png'),
+                CircularProfileAvatar(
+                  fuser.img,
+                  onTap: () {
+                    print(fuser);
+                  },
+                  // radius: kSpacingUnit.w * 5,
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -67,12 +78,12 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: kSpacingUnit.w * 2),
           Text(
-            'Nicolas Adams',
+            fuser.name,
             style: kTitleTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 0.5),
           Text(
-            'nicolasadams@gmail.com',
+            fuser.email,
             style: kCaptionTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 2),
@@ -168,10 +179,19 @@ class ProfileScreen extends StatelessWidget {
                         icon: LineAwesomeIcons.user_plus,
                         text: 'Invite a Friend',
                       ),
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.alternate_sign_out,
-                        text: 'Logout',
-                        hasNavigation: false,
+                      GestureDetector(
+                        onTap: () async {
+                          await _auth.signOut();
+                          // Navigator.of(context).pop();
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => Authenticate()));
+                        },
+                        child: ProfileListItem(
+                          icon: LineAwesomeIcons.alternate_sign_out,
+                          text: 'Logout',
+                          hasNavigation: false,
+                        ),
                       ),
                     ],
                   ),

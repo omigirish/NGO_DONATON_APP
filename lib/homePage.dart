@@ -1,5 +1,4 @@
 import 'package:mydonationapp/screens/explore.dart';
-import 'package:mydonationapp/screens/heart.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mydonationapp/screens/profile.dart';
@@ -18,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     Explore(),
     Items(),
     User(),
-    Profile(),
+    User(),
   ];
 
   void onTabTapped(int index) {
