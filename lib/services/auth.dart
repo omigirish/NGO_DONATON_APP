@@ -17,7 +17,7 @@ class AuthService {
 
       name = name == null ? "" : name;
       email = email == null ? "" : email;
-      img = img == null ? "" : img.substring(0, user.photoURL.length - 10);
+      img = img == null ? "" : img;
 
       return User(uid: uid, name: name, img: img, phone: phone, email: email);
     } else {

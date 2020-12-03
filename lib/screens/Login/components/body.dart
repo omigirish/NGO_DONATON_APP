@@ -9,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mydonationapp/services/auth.dart';
 import 'package:mydonationapp/homePage.dart';
 import 'package:mydonationapp/shared/loading.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Body extends StatefulWidget {
   const Body({
@@ -76,6 +77,58 @@ class _BodyState extends State<Body> {
                         loading = false;
                       }
                     },
+                  ),
+                  // SizedBox(height: size.height * 0.03),
+                  // AlreadyHaveAnAccountCheck(
+                  //   press: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) {
+                  //           return SignUpScreen();
+                  //         },
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
+                  SizedBox(height: size.height * 0.02),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Icon(
+                        FontAwesomeIcons.facebookSquare,
+                        size: 32,
+                        color: Colors.purple[100],
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            loading = true;
+                          });
+                          dynamic result = await _auth.googleSignIn();
+                          if (result != null) {
+                            print(result.uid);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()));
+                          } else {
+                            print("Problem in signing in");
+                            loading = false;
+                          }
+                        },
+                        child: Icon(
+                          FontAwesomeIcons.google,
+                          size: 32,
+                          color: Colors.purple[100],
+                        ),
+                      ),
+                      Icon(
+                        FontAwesomeIcons.twitter,
+                        size: 32,
+                        color: Colors.purple[100],
+                      ),
+                    ],
                   ),
                   SizedBox(height: size.height * 0.03),
                   AlreadyHaveAnAccountCheck(

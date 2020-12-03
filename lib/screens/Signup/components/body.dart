@@ -98,13 +98,8 @@ class _BodyState extends State<Body> {
                         size: 32,
                         color: Colors.purple[100],
                       ),
-                      Icon(
-                        FontAwesomeIcons.twitter,
-                        size: 32,
-                        color: Colors.purple[100],
-                      ),
-                      FlatButton(
-                        onPressed: () async {
+                      GestureDetector(
+                        onTap: () async {
                           setState(() {
                             loading = true;
                           });
@@ -125,6 +120,11 @@ class _BodyState extends State<Body> {
                           size: 32,
                           color: Colors.purple[100],
                         ),
+                      ),
+                      Icon(
+                        FontAwesomeIcons.twitter,
+                        size: 32,
+                        color: Colors.purple[100],
                       ),
                     ],
                   )

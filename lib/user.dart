@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mydonationapp/constants.dart';
+import 'package:mydonationapp/main.dart';
 import 'package:mydonationapp/profile_list_item.dart';
 import 'package:mydonationapp/models/user.dart' as firebaseuser;
 // import 'package:mydonationapp/shared/loading.dart';
@@ -56,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 CircularProfileAvatar(
                   fuser == null ? "" : fuser.img,
                   onTap: () {
-                    print(fuser);
+                    print(fuser.img);
                   },
                   // radius: kSpacingUnit.w * 5,
                 ),
@@ -189,9 +190,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       GestureDetector(
                         onTap: () async {
                           await _auth.signOut();
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => Authenticate()));
+                          Navigator.of(context, rootNavigator: true)
+                              .pushReplacement(MaterialPageRoute(
+                                  builder: (context) => new MyApp()));
                         },
                         child: ProfileListItem(
                           icon: LineAwesomeIcons.alternate_sign_out,

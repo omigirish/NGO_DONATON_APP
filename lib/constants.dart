@@ -3,13 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const kPrimaryColor = Color(0xFF6F35A5);
 const kPrimaryLightColor = Color(0xFFF1E6FF);
-const kSpacingUnit = 10;
+const kSpacingUnit = 9.5;
 
 const kDarkPrimaryColor = Color(0xFF212121);
 const kDarkSecondaryColor = Color(0xFF373737);
 const kLightPrimaryColor = Color(0xFFFFFFFF);
 const kLightSecondaryColor = Color(0xFFF3F7FB);
-const kAccentColor = Color(0xFFFFC107);
+//
+const kAccentColor = Colors.purple;
 
 final kTitleTextStyle = TextStyle(
   fontSize: ScreenUtil().setSp(kSpacingUnit.w * 1.7),
