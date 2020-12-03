@@ -4,6 +4,7 @@ import 'package:line_awesome_icons/line_awesome_icons.dart';
 // import 'package:mydonationapp/screens/profile.dart';
 import 'package:mydonationapp/items_page.dart';
 import 'package:mydonationapp/user.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,9 +12,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
+  int _currentIndex = 2;
   List<Widget> _children = [
-    User(),
+    Container(),
     Explore(),
     Items(),
     User(),

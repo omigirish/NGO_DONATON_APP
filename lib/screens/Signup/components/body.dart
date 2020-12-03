@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mydonationapp/screens/Login/login_screen.dart';
+// import 'package:mydonationapp/screens/Login/login_screen.dart';
 import 'package:mydonationapp/screens/Signup/components/background.dart';
 import 'package:mydonationapp/screens/Signup/components/or_divider.dart';
 // import 'package:mydonationapp/screens/Signup/components/social_icon.dart';
-import 'package:mydonationapp/components/already_have_an_account_acheck.dart';
+// import 'package:mydonationapp/components/already_have_an_account_acheck.dart';
 import 'package:mydonationapp/components/rounded_button.dart';
 import 'package:mydonationapp/components/rounded_input_field.dart';
 import 'package:mydonationapp/components/rounded_password_field.dart';
@@ -12,6 +12,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mydonationapp/services/auth.dart';
 import 'package:mydonationapp/shared/loading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -22,6 +23,7 @@ class _BodyState extends State<Body> {
   final AuthService _auth = AuthService();
   String email, password;
   bool loading = false;
+  List<bool> _selections = [true, false];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -55,40 +57,64 @@ class _BodyState extends State<Body> {
                       password = value;
                     },
                   ),
-                  RoundedButton(
-                    text: "SIGNUP",
-                    press: () async {
-                      setState(() {
-                        loading = true;
-                      });
-                      dynamic result = await _auth.registerWithEmailAndPassword(
-                          email, password);
-                      if (result != null) {
-                        print(result.uid);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage()));
-                      } else {
-                        print("Problem in signing in");
-                        loading = false;
-                      }
-                    },
-                  ),
-                  SizedBox(height: size.height * 0.03),
-                  AlreadyHaveAnAccountCheck(
-                    login: false,
-                    press: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return LoginScreen();
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LiteRollingSwitch(
+                        //initial value
+                        value: true,
+                        textOn: '  Donor ',
+                        textOff: 'NGO   ',
+                        colorOn: Colors.deepPurple[300],
+                        colorOff: Colors.deepPurple,
+                        iconOn: FontAwesomeIcons.gift,
+                        iconOff: Icons.remove_circle_outline,
+                        textSize: 18.0,
+                        onChanged: (bool state) {
+                          //Use it to manage the different states
+                          print('Current State of SWITCH IS: $state');
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: RoundedButton(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          text: "SIGNUP",
+                          press: () async {
+                            setState(() {
+                              loading = true;
+                            });
+                            dynamic result = await _auth
+                                .registerWithEmailAndPassword(email, password);
+                            if (result != null) {
+                              print(result.uid);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()));
+                            } else {
+                              print("Problem in signing in");
+                              loading = false;
+                            }
                           },
                         ),
-                      );
-                    },
+                      ),
+                    ],
                   ),
+                  // SizedBox(height: size.height * 0.03),
+                  // AlreadyHaveAnAccountCheck(
+                  //   login: false,
+                  //   press: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) {
+                  //           return LoginScreen();
+                  //         },
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
                   OrDivider(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
