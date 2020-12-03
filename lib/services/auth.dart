@@ -5,17 +5,25 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthService {
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-
+  dynamic uid, name, img, phone, email;
   //create user obj based on firebase user
   User _userFromFirebaseUser(auth.User user) {
-    return user != null
-        ? User(
-            uid: user.uid,
-            name: user.displayName,
-            img: user.photoURL.substring(0, user.photoURL.length - 10),
-            phone: user.phoneNumber,
-            email: user.email)
-        : null;
+    if (user != null) {
+      uid = user.uid;
+      name = user.displayName;
+      img = user.photoURL;
+      phone = user.phoneNumber;
+      email = user.email;
+
+      name = name == null ? "" : name;
+      email = email == null ? "" : email;
+      img = img == null ? "" : img.substring(0, user.photoURL.length - 10);
+
+      return User(uid: uid, name: name, img: img, phone: phone, email: email);
+    } else {
+      return null;
+    }
+    ;
   }
 
   //auth change user stream
@@ -57,6 +65,7 @@ class AuthService {
       auth.User user = result.user;
       return _userFromFirebaseUser(user);
     } catch (e) {
+      print(e);
       return null;
     }
   }

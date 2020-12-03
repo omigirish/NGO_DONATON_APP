@@ -5,6 +5,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mydonationapp/constants.dart';
 import 'package:mydonationapp/profile_list_item.dart';
 import 'package:mydonationapp/models/user.dart' as firebaseuser;
+import 'package:mydonationapp/shared/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:mydonationapp/services/auth.dart';
@@ -30,11 +31,17 @@ class User extends StatelessWidget {
   }
 }
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     final fuser = Provider.of<firebaseuser.User>(context);
-    final AuthService _auth = AuthService();
     ScreenUtil.init(context, height: 896, width: 414, allowFontScaling: true);
 
     var profileInfo = Expanded(
@@ -47,7 +54,7 @@ class ProfileScreen extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 CircularProfileAvatar(
-                  fuser.img,
+                  fuser == null ? "" : fuser.img,
                   onTap: () {
                     print(fuser);
                   },
@@ -78,12 +85,12 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: kSpacingUnit.w * 2),
           Text(
-            fuser.name,
+            fuser == null ? "" : fuser.name,
             style: kTitleTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 0.5),
           Text(
-            fuser.email,
+            fuser == null ? "" : fuser.email,
             style: kCaptionTextStyle,
           ),
           SizedBox(height: kSpacingUnit.w * 2),
@@ -182,7 +189,6 @@ class ProfileScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () async {
                           await _auth.signOut();
-                          // Navigator.of(context).pop();
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                   builder: (context) => Authenticate()));
