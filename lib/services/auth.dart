@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:mydonationapp/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mydonationapp/services/database.dart';
 
 class AuthService {
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
@@ -51,6 +52,9 @@ class AuthService {
       auth.UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       auth.User user = result.user;
+
+      //create a new document for the user
+      await DatabaseService(uid: user.uid).updateUserData(email: user.email);
       return _userFromFirebaseUser(user);
     } catch (e) {
       return null;
@@ -80,6 +84,11 @@ class AuthService {
       auth.UserCredential result = await _auth.signInWithCredential(credential);
       auth.User user = result.user;
       print(user);
+      await DatabaseService(uid: user.uid).updateUserData(
+          email: user.email,
+          name: user.displayName,
+          phone: user.phoneNumber,
+          img: user.photoURL);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);
