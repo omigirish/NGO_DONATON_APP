@@ -110,7 +110,7 @@ class AuthService {
               img: user.photoURL,
               type: newtype);
         } else if (val == false) {
-          _auth.signOut();
+          await signOut();
           return null;
         }
       }
