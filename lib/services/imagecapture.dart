@@ -30,6 +30,22 @@ class _ImageCaptureState extends State<ImageCapture> {
     });
   }
 
+  final FirebaseStorage _storage =
+      FirebaseStorage.instanceFor(bucket: 'gs://donationapp-89333.appspot.com');
+
+  UploadTask _uploadTask;
+
+  Future<String> _startUpload(file) async {
+    /// Unique file name for the file
+    String fileName = DateTime.now().toString();
+    String filePath = 'images/${fileName}.png';
+    await _storage.ref().child(filePath).putFile(file);
+    print(' THis is File name ..........images/${fileName}.png');
+    var ref =
+        await Future.value(_storage.ref().child("images/" + fileName + ".png"));
+    return await ref.getDownloadURL();
+  }
+
   /// Select an image via gallery or camera
   Future<void> _pickImage(ImageSource source) async {
     File selected = await ImagePicker.pickImage(source: source);
@@ -80,48 +96,17 @@ class _ImageCaptureState extends State<ImageCapture> {
                 ),
               ],
             ),
-            Uploader(file: _imageFile)
+            // Uploader(file: _imageFile)
+            FlatButton.icon(
+              label: Text('Upload to Firebase'),
+              icon: Icon(Icons.cloud_upload),
+              onPressed: () async {
+                print(await _startUpload(_imageFile));
+              },
+            ),
           ]
         ],
       ),
-    );
-  }
-}
-
-class Uploader extends StatefulWidget {
-  final File file;
-  Uploader({Key key, this.file}) : super(key: key);
-  createState() => _UploaderState();
-}
-
-class _UploaderState extends State<Uploader> {
-  final FirebaseStorage _storage =
-      FirebaseStorage.instanceFor(bucket: 'gs://donationapp-89333.appspot.com');
-
-  UploadTask _uploadTask;
-
-  /// Starts an upload task
-  Future<String> _startUpload() async {
-    /// Unique file name for the file
-    String fileName = DateTime.now().toString();
-    String filePath = 'images/${fileName}.png';
-    await _storage.ref().child(filePath).putFile(widget.file);
-    print(' THis is File name ..........images/${fileName}.png');
-    var ref =
-        await Future.value(_storage.ref().child("images/" + fileName + ".png"));
-    return await ref.getDownloadURL();
-  }
-// donationapp-89333.appspot.com/images/2020-12-04 23:12:58.304680.png
-
-  @override
-  Widget build(BuildContext context) {
-    // Allows user to decide when to start the upload
-    return FlatButton.icon(
-      label: Text('Upload to Firebase'),
-      icon: Icon(Icons.cloud_upload),
-      onPressed: () async {
-        print(await _startUpload());
-      },
     );
   }
 }
