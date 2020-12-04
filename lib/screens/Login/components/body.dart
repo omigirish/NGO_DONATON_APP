@@ -105,7 +105,7 @@ class _BodyState extends State<Body> {
                           setState(() {
                             loading = true;
                           });
-                          dynamic result = await _auth.googleSignIn();
+                          dynamic result = await _auth.googleSignIn(null);
                           if (result != null) {
                             print(result.uid);
                             Navigator.push(

@@ -24,6 +24,7 @@ class _BodyState extends State<Body> {
   String email, password;
   bool loading = false;
   List<bool> _selections = [true, false];
+  bool currentstate;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -72,7 +73,7 @@ class _BodyState extends State<Body> {
                         textSize: 18.0,
                         onChanged: (bool state) {
                           //Use it to manage the different states
-                          print('Current State of SWITCH IS: $state');
+                          currentstate = state;
                         },
                       ),
                       Padding(
@@ -84,8 +85,9 @@ class _BodyState extends State<Body> {
                             setState(() {
                               loading = true;
                             });
-                            dynamic result = await _auth
-                                .registerWithEmailAndPassword(email, password);
+                            dynamic result =
+                                await _auth.registerWithEmailAndPassword(
+                                    email, password, currentstate);
                             if (result != null) {
                               print(result.uid);
                               Navigator.push(
@@ -129,7 +131,8 @@ class _BodyState extends State<Body> {
                           setState(() {
                             loading = true;
                           });
-                          dynamic result = await _auth.googleSignIn();
+                          dynamic result =
+                              await _auth.googleSignIn(currentstate);
                           if (result != null) {
                             print(result.uid);
                             Navigator.push(

@@ -26,4 +26,37 @@ class DatabaseService {
   Stream<QuerySnapshot> get users {
     return userCollection.snapshots();
   }
+
+  Future<bool> checkuservalid(String email) async {
+    QuerySnapshot qs = await userCollection.get();
+    bool val = false;
+    qs.docs.forEach((element) {
+      if (element.data().containsValue(email)) {
+        val = true;
+      }
+    });
+    return val;
+  }
+
+  Future<dynamic> checktype(String email, String toCompare) async {
+    Future<dynamic> val;
+    QuerySnapshot qShot = await userCollection.get();
+    print("to check : " + email);
+    qShot.docs.forEach((element) {
+      print(element.get('email'));
+      if (element.get('email') == email) {
+        print("Found match");
+        print("type of email is from db: " + element.get('type'));
+        print("type from signin is : " + toCompare);
+        if (element.get('type').toString() == toCompare) {
+          print("Itssss sameee");
+          print(val);
+          val = Future.value(true);
+          print(val);
+        } else
+          val = Future.value(false);
+      }
+    });
+    return await val;
+  }
 }
