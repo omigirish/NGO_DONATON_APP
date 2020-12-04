@@ -116,6 +116,11 @@ class _AddnewState extends State<Addnew> {
                     SizedBox(
                       height: 20.0,
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("How Many Items will you donate?",
+                          style: TextStyle(color: Colors.white)),
+                    ),
                     FadeAnimation(
                       1,
                       Slider(
@@ -262,12 +267,11 @@ class _UploaderState extends State<Uploader> {
   UploadTask _uploadTask;
 
   /// Starts an upload task
-  void _startUpload() async {
+  void _startUpload() {
     /// Unique file name for the file
     String fileName = DateTime.now().toString();
     String filePath = 'images/${fileName}.png';
     _uploadTask = _storage.ref().child(filePath).putFile(widget.file);
-    print(' THis is File name ..........images/${fileName}.png');
     var ref = _storage.ref().child("images/" + fileName + ".png");
     Future.delayed(
       Duration(seconds: 5),
