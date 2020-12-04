@@ -4,6 +4,10 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:mydonationapp/models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mydonationapp/globals.dart' as global;
 
 class ImageCapture extends StatefulWidget {
   createState() => _ImageCaptureState();
@@ -120,7 +124,7 @@ class _UploaderState extends State<Uploader> {
       label: Text('Upload to Firebase'),
       icon: Icon(Icons.cloud_upload),
       onPressed: () async {
-        print(await _startUpload());
+        global.imgurl = await _startUpload();
       },
     );
   }

@@ -6,13 +6,12 @@ import 'package:mydonationapp/constants.dart';
 import 'package:mydonationapp/main.dart';
 import 'package:mydonationapp/profile_list_item.dart';
 import 'package:mydonationapp/models/user.dart' as firebaseuser;
-// import 'package:mydonationapp/shared/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:mydonationapp/services/auth.dart';
-import 'package:mydonationapp/authenticate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:url_launcher/url_launcher.dart';
+import 'package:mydonationapp/services/imagecapture.dart';
+import 'package:mydonationapp/globals.dart';
 
 class User extends StatelessWidget {
   // This widget is the root of your application.
@@ -61,8 +60,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: <Widget>[
                 CircularProfileAvatar(
                   fuser == null ? "" : fuser.img,
-                  onTap: () {
-                    print(fuser.img);
+                  onTap: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ImageCapture()));
                   },
                   // radius: kSpacingUnit.w * 5,
                 ),
