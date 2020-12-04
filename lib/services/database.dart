@@ -29,13 +29,16 @@ class DatabaseService {
 
   Future<bool> checkuservalid(String email) async {
     QuerySnapshot qs = await userCollection.get();
-    bool val = false;
+    Future<bool> val = Future.value(false);
+    print("To check : " + email);
     qs.docs.forEach((element) {
-      if (element.data().containsValue(email)) {
-        val = true;
+      print(element.get('email').toString());
+      if (element.get('email').toString() == email) {
+        print(element.get('email').toString());
+        val = Future.value(true);
       }
     });
-    return val;
+    return await val;
   }
 
   Future<dynamic> checktype(String email, String toCompare) async {

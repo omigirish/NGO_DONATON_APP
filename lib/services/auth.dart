@@ -89,12 +89,13 @@ class AuthService {
           accessToken: googleauth.accessToken, idToken: googleauth.idToken);
       auth.UserCredential result = await _auth.signInWithCredential(credential);
       auth.User user = result.user;
-      auth.User fireuser;
       DatabaseService db = DatabaseService(uid: user.uid);
       if (type == null) {
         bool val = await db.checkuservalid(user.email);
+        print("Data from db login : " + val.toString());
         if (val == false) {
-          user.delete();
+          print("Entered false...");
+          await signOut();
           return null;
         }
       } else {

@@ -114,7 +114,9 @@ class _BodyState extends State<Body> {
                                     builder: (context) => HomePage()));
                           } else {
                             print("Problem in signing in");
-                            loading = false;
+                            setState(() {
+                              loading = false;
+                            });
                           }
                         },
                         child: Icon(
