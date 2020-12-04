@@ -1,5 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'FadeAnimation.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/widgets.dart';
 
 class Addnew extends StatefulWidget {
   @override
@@ -127,17 +132,25 @@ class _AddnewState extends State<Addnew> {
                     ),
                     FadeAnimation(
                       1,
-                      Container(
-                        height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 60),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Color.fromRGBO(49, 39, 79, 1),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Add Donation: " + nos.toInt().toString(),
-                            style: TextStyle(color: Colors.white),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ImageCapture()));
+                        },
+                        child: Container(
+                          height: 50,
+                          margin: EdgeInsets.symmetric(horizontal: 60),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Color.fromRGBO(49, 39, 79, 1),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Add Donation: " + nos.toInt().toString(),
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
@@ -149,6 +162,130 @@ class _AddnewState extends State<Addnew> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ImageCapture extends StatefulWidget {
+  createState() => _ImageCaptureState();
+}
+
+class _ImageCaptureState extends State<ImageCapture> {
+  /// Active image file
+  File _imageFile;
+
+  /// Cropper plugin
+  Future<void> _cropImage() async {
+    File cropped = await ImageCropper.cropImage(
+        sourcePath: _imageFile.path,
+        // ratioX: 1.0,
+        // ratioY: 1.0,
+        // maxWidth: 512,
+        // maxHeight: 512,
+        toolbarColor: Colors.purple,
+        toolbarWidgetColor: Colors.white,
+        toolbarTitle: 'Crop It');
+
+    setState(() {
+      _imageFile = cropped ?? _imageFile;
+    });
+  }
+
+  /// Select an image via gallery or camera
+  Future<void> _pickImage(ImageSource source) async {
+    File selected = await ImagePicker.pickImage(source: source);
+
+    setState(() {
+      _imageFile = selected;
+    });
+  }
+
+  /// Remove image
+  void _clear() {
+    setState(() => _imageFile = null);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // Select an image from the camera or gallery
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.photo_camera),
+              onPressed: () => _pickImage(ImageSource.camera),
+            ),
+            IconButton(
+              icon: Icon(Icons.photo_library),
+              onPressed: () => _pickImage(ImageSource.gallery),
+            ),
+          ],
+        ),
+      ),
+
+      // Preview the image and crop it
+      body: ListView(
+        children: <Widget>[
+          if (_imageFile != null) ...[
+            Image.file(_imageFile),
+            Row(
+              children: <Widget>[
+                FlatButton(
+                  child: Icon(Icons.crop),
+                  onPressed: _cropImage,
+                ),
+                FlatButton(
+                  child: Icon(Icons.refresh),
+                  onPressed: _clear,
+                ),
+              ],
+            ),
+            Uploader(file: _imageFile)
+          ]
+        ],
+      ),
+    );
+  }
+}
+
+class Uploader extends StatefulWidget {
+  final File file;
+  Uploader({Key key, this.file}) : super(key: key);
+  createState() => _UploaderState();
+}
+
+class _UploaderState extends State<Uploader> {
+  final FirebaseStorage _storage =
+      FirebaseStorage.instanceFor(bucket: 'gs://donationapp-89333.appspot.com');
+
+  UploadTask _uploadTask;
+
+  /// Starts an upload task
+  void _startUpload() async {
+    /// Unique file name for the file
+    String fileName = DateTime.now().toString();
+    String filePath = 'images/${fileName}.png';
+    _uploadTask = _storage.ref().child(filePath).putFile(widget.file);
+    print(' THis is File name ..........images/${fileName}.png');
+    var ref = _storage.ref().child("images/" + fileName + ".png");
+    Future.delayed(
+      Duration(seconds: 5),
+      () async {
+        var url = await ref.getDownloadURL();
+        print(url);
+      },
+    );
+  }
+// donationapp-89333.appspot.com/images/2020-12-04 23:12:58.304680.png
+
+  @override
+  Widget build(BuildContext context) {
+    // Allows user to decide when to start the upload
+    return FlatButton.icon(
+      label: Text('Upload to Firebase'),
+      icon: Icon(Icons.cloud_upload),
+      onPressed: _startUpload,
     );
   }
 }

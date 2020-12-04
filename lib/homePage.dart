@@ -30,42 +30,44 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black87,
-        onTap: onTabTapped,
-        currentIndex: _currentIndex,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.purple,
-        unselectedItemColor: Colors.white,
-        elevation: 0,
-        iconSize: 32,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.plus_square),
-            label: "Heart",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.bell_o),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.search),
-            label: "Signal",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.signal),
-            label: "Notification",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.user),
-            label: "Profile",
-          ),
-        ],
+    return Container(
+      child: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.black87,
+          onTap: onTabTapped,
+          currentIndex: _currentIndex,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.purple,
+          unselectedItemColor: Colors.white,
+          elevation: 0,
+          iconSize: 32,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(LineAwesomeIcons.plus_square),
+              label: "Heart",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(LineAwesomeIcons.bell_o),
+              label: "Search",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(LineAwesomeIcons.search),
+              label: "Signal",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(LineAwesomeIcons.signal),
+              label: "Notification",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(LineAwesomeIcons.user),
+              label: "Profile",
+            ),
+          ],
+        ),
+        body: _children[_currentIndex],
       ),
-      body: _children[_currentIndex],
     );
   }
 }
