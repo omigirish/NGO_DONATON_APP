@@ -1,10 +1,11 @@
-import 'package:mydonationapp/screens/explore.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:mydonationapp/addnew.dart';
 // import 'package:mydonationapp/screens/profile.dart';
 import 'package:mydonationapp/items_page.dart';
+import 'package:mydonationapp/itemspage2.dart';
+import 'package:mydonationapp/notificationspage.dart';
 import 'package:mydonationapp/user.dart';
-import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,10 +15,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 2;
   List<Widget> _children = [
-    Container(),
-    Explore(),
+    Addnew(),
+    Notifications(),
+    Itemspage2(),
     Items(),
-    User(),
     User(),
   ];
 
@@ -43,7 +44,7 @@ class _HomePageState extends State<HomePage> {
         iconSize: 32,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.user),
+            icon: Icon(LineAwesomeIcons.plus_square),
             label: "Heart",
           ),
           BottomNavigationBarItem(
@@ -59,7 +60,7 @@ class _HomePageState extends State<HomePage> {
             label: "Notification",
           ),
           BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.heart_o),
+            icon: Icon(LineAwesomeIcons.user),
             label: "Profile",
           ),
         ],

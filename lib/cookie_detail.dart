@@ -93,12 +93,6 @@ class CookieDetail extends StatelessWidget {
                       color: Colors.white),
                 ))))
       ]),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Color(0xFFF17532),
-        child: Icon(Icons.fastfood),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

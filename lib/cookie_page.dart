@@ -5,11 +5,12 @@ class CookiePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFCFAF8),
+      backgroundColor: Color(0xFF212121),
       body: ListView(
         children: <Widget>[
           SizedBox(height: 15.0),
           Container(
+              // color: Colors.purple,
               padding: EdgeInsets.only(right: 15.0),
               width: MediaQuery.of(context).size.width - 30.0,
               height: MediaQuery.of(context).size.height - 50.0,

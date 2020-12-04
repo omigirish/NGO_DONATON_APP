@@ -12,28 +12,27 @@ class _ItemsState extends State<Items> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black87,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF212121),
         elevation: 0.0,
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFF545D68)),
-          onPressed: () {},
-        ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back, color: Color(0xFF545D68)),
+        //   onPressed: () {},
+        // ),
         title: Text('Donations',
             style: TextStyle(
-                fontFamily: 'Varela',
-                fontSize: 20.0,
-                color: Color(0xFF545D68))),
+                fontFamily: 'Varela', fontSize: 20.0, color: Colors.white)),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications_none, color: Color(0xFF545D68)),
+            icon: Icon(Icons.search, color: Color(0xFF545D68)),
             onPressed: () {},
           ),
         ],
@@ -44,6 +43,7 @@ class _ItemsState extends State<Items> with SingleTickerProviderStateMixin {
           SizedBox(height: 15.0),
           Text('Categories',
               style: TextStyle(
+                  color: Colors.white,
                   fontFamily: 'Varela',
                   fontSize: 42.0,
                   fontWeight: FontWeight.bold)),
@@ -51,38 +51,31 @@ class _ItemsState extends State<Items> with SingleTickerProviderStateMixin {
           TabBar(
               controller: _tabController,
               indicatorColor: Colors.transparent,
-              labelColor: Color(0xFFC88D67),
+              // labelColor: Color(0xFFC88D67),
+              labelColor: Colors.purple,
               isScrollable: true,
               labelPadding: EdgeInsets.only(right: 45.0),
               unselectedLabelColor: Color(0xFFCDCDCD),
               tabs: [
                 Tab(
-                  child: Text('Cookies',
+                  child: Text('Listed By You',
                       style: TextStyle(
                         fontFamily: 'Varela',
                         fontSize: 21.0,
                       )),
                 ),
                 Tab(
-                  child: Text('Cookie cake',
+                  child: Text('Requests',
                       style: TextStyle(
                         fontFamily: 'Varela',
                         fontSize: 21.0,
                       )),
                 ),
-                Tab(
-                  child: Text('Ice cream',
-                      style: TextStyle(
-                        fontFamily: 'Varela',
-                        fontSize: 21.0,
-                      )),
-                )
               ]),
           Container(
               height: MediaQuery.of(context).size.height - 50.0,
               width: double.infinity,
               child: TabBarView(controller: _tabController, children: [
-                CookiePage(),
                 CookiePage(),
                 CookiePage(),
               ]))

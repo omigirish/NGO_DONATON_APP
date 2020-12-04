@@ -65,10 +65,10 @@ class _BodyState extends State<Body> {
                         value: true,
                         textOn: '  Donor ',
                         textOff: 'NGO   ',
-                        colorOn: Colors.deepPurple[300],
+                        colorOn: Colors.deepPurple[400],
                         colorOff: Colors.deepPurple,
                         iconOn: FontAwesomeIcons.gift,
-                        iconOff: Icons.remove_circle_outline,
+                        iconOff: FontAwesomeIcons.signLanguage,
                         textSize: 18.0,
                         onChanged: (bool state) {
                           //Use it to manage the different states
