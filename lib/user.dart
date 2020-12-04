@@ -10,7 +10,8 @@ import 'package:mydonationapp/models/user.dart' as firebaseuser;
 import 'package:provider/provider.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:mydonationapp/services/auth.dart';
-// import 'package:mydonationapp/authenticate.dart';
+import 'package:mydonationapp/authenticate.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:url_launcher/url_launcher.dart';
 
 class User extends StatelessWidget {
@@ -43,6 +44,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final fuser = Provider.of<firebaseuser.User>(context);
+    final dbusers = Provider.of<QuerySnapshot>(context);
+    final myuser = dbusers.docs.firstWhere((element) {
+      return element.get('email') == fuser.email;
+    });
     ScreenUtil.init(context, height: 896, width: 414, allowFontScaling: true);
 
     var profileInfo = Expanded(
@@ -104,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             child: Center(
               child: Text(
-                'Upgrade to PRO',
+                'Certified ' + myuser.get('type'),
                 style: kButtonTextStyle,
               ),
             ),
