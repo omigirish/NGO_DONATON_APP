@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:mydonationapp/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mydonationapp/services/database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthService {
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
@@ -47,14 +50,17 @@ class AuthService {
   }
 
   //register with email password
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(
+      String email, String password, bool type) async {
     try {
       auth.UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       auth.User user = result.user;
 
       //create a new document for the user
-      await DatabaseService(uid: user.uid).updateUserData(email: user.email);
+      String newtype = type == true ? "donor" : "ngo";
+      await DatabaseService(uid: user.uid)
+          .updateUserData(email: user.email, type: newtype);
       return _userFromFirebaseUser(user);
     } catch (e) {
       return null;
@@ -75,7 +81,7 @@ class AuthService {
   }
 
   //signin with google
-  Future googleSignIn() async {
+  Future googleSignIn(bool type) async {
     try {
       GoogleSignInAccount googleuser = await _googleSignIn.signIn();
       GoogleSignInAuthentication googleauth = await googleuser.authentication;
@@ -83,12 +89,31 @@ class AuthService {
           accessToken: googleauth.accessToken, idToken: googleauth.idToken);
       auth.UserCredential result = await _auth.signInWithCredential(credential);
       auth.User user = result.user;
-      print(user);
-      await DatabaseService(uid: user.uid).updateUserData(
-          email: user.email,
-          name: user.displayName,
-          phone: user.phoneNumber,
-          img: user.photoURL);
+      DatabaseService db = DatabaseService(uid: user.uid);
+      if (type == null) {
+        bool val = await db.checkuservalid(user.email);
+        print("Data from db login : " + val.toString());
+        if (val == false) {
+          print("Entered false...");
+          await signOut();
+          return null;
+        }
+      } else {
+        String newtype = type == true ? "donor" : "ngo";
+        dynamic val = await db.checktype(user.email, newtype);
+        print("value from db is " + val.toString());
+        if (val == null) {
+          DatabaseService(uid: user.uid).updateUserData(
+              email: user.email,
+              name: user.displayName,
+              phone: user.phoneNumber,
+              img: user.photoURL,
+              type: newtype);
+        } else if (val == false) {
+          await signOut();
+          return null;
+        }
+      }
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);

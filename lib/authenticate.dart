@@ -21,9 +21,6 @@ class _LoginState extends State<Authenticate> {
       return WelcomeScreen();
     } else {
       // print(user);
-      for (var doc in dbusers.docs) {
-        print(doc.data());
-      }
       return HomePage();
     }
   }

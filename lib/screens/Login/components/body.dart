@@ -105,7 +105,7 @@ class _BodyState extends State<Body> {
                           setState(() {
                             loading = true;
                           });
-                          dynamic result = await _auth.googleSignIn();
+                          dynamic result = await _auth.googleSignIn(null);
                           if (result != null) {
                             print(result.uid);
                             Navigator.push(
@@ -114,7 +114,9 @@ class _BodyState extends State<Body> {
                                     builder: (context) => HomePage()));
                           } else {
                             print("Problem in signing in");
-                            loading = false;
+                            setState(() {
+                              loading = false;
+                            });
                           }
                         },
                         child: Icon(
