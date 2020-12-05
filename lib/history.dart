@@ -1,145 +1,65 @@
-import 'package:mydonationapp/foodlist.dart';
 import 'package:flutter/material.dart';
 
-class Itemspage2 extends StatefulWidget {
+class History extends StatefulWidget {
   @override
-  _Itemspage2State createState() => _Itemspage2State();
+  _HistoryState createState() => _HistoryState();
 }
 
-class _Itemspage2State extends State<Itemspage2>
-    with SingleTickerProviderStateMixin {
+class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   TabController tabController;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(vsync: this, length: 2);
+    tabController = TabController(vsync: this, length: 4);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: Color(0xFFF9EFEB),
         backgroundColor: Colors.black87,
         body: ListView(
           children: <Widget>[
             Stack(
               children: <Widget>[
                 Container(
-                  height: 250.0,
+                  height: 160.0,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        // colors: [Color(0x000000), Color(0xBB923CB5)],
-                        colors: [
-                          Colors.purple[500], //Color(0xBB923CB5)
-                          Color(0x21212),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomCenter),
-                    borderRadius:
-                        BorderRadius.only(bottomRight: Radius.circular(75.0)),
-                    // color: Color(0xFFFD7465)),
-                    // color: Colors.grey[900],
-                  ),
+                      gradient: LinearGradient(
+                          // colors: [Color(0x000000), Color(0xBB923CB5)],
+                          colors: [
+                            Colors.purple[500], //Color(0xBB923CB5)
+                            Color(0x21212),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomCenter),
+                      borderRadius:
+                          BorderRadius.only(bottomRight: Radius.circular(75.0)),
+                      color: Color(0xFFFD7465)),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 35.0, left: 15.0),
                   child: Text(
-                    'Good Afternoon!',
+                    'One for All',
                     style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 30.0,
+                        fontFamily: 'yellowTail',
+                        fontSize: 40.0,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 75.0, left: 15.0),
+                  padding: EdgeInsets.only(top: 95.0, left: 15.0),
                   child: Text(
-                    'Choose your favorite!',
+                    'Donation History',
                     style: TextStyle(
                         fontFamily: 'Montserrat',
-                        fontSize: 30.0,
+                        fontSize: 28.0,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 160.0, left: 15.0, right: 35.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(25.0),
-                          bottomLeft: Radius.circular(5.0),
-                          topLeft: Radius.circular(5.0),
-                        )),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 14.0),
-                        hintText: 'Search for an item',
-                        hintStyle:
-                            TextStyle(fontFamily: 'Montserrat', fontSize: 14.0),
-                        prefixIcon: Icon(Icons.search, color: Colors.grey),
-                      ),
-                    ),
-                  ),
-                )
               ],
-            ),
-            TabBar(
-              controller: tabController,
-              indicatorColor: Colors.purple, //Color(0xFFFE8A7E)
-              indicatorSize: TabBarIndicatorSize.label,
-              indicatorWeight: 4.0,
-              isScrollable: true,
-              labelColor: Colors.purple, //Color(0xFF440206)
-              unselectedLabelColor: Colors.white, //Color(0xFF440206)
-              tabs: <Widget>[
-                Tab(
-                  child: Text(
-                    'Listed By You',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 15.0,
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Text(
-                    'NGO Requests',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 15.0,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10.0),
-            Container(
-              height: MediaQuery.of(context).size.height -
-                  MediaQuery.of(context).size.height * 0.7,
-              child: TabBarView(
-                controller: tabController,
-                children: <Widget>[
-                  new FoodList(),
-                  new FoodList(),
-                ],
-              ),
-            ),
-            SizedBox(height: 10.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0),
-              child: Text(
-                'RECOMMEND',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Montserrat',
-                  fontSize: 15.0,
-                ),
-              ),
             ),
             _listItem(
                 'assets/steak.png',
@@ -150,6 +70,24 @@ class _Itemspage2State extends State<Itemspage2>
                 2412,
                 '2-3per'),
             SizedBox(height: 10.0),
+            _listItem(
+                'assets/steak.png',
+                'Strawberry cupcake',
+                'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
+                '\$18.0',
+                134,
+                2412,
+                '2-3per'),
+            SizedBox(height: 20.0),
+            _listItem(
+                'assets/steak.png',
+                'Strawberry cupcake',
+                'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
+                '\$18.0',
+                134,
+                2412,
+                '2-3per'),
+            SizedBox(height: 20.0),
             _listItem(
                 'assets/steak.png',
                 'Strawberry cupcake',
@@ -189,7 +127,7 @@ class _Itemspage2State extends State<Itemspage2>
                 //       blurRadius: 3.0)
                 // ],
               ),
-              child: Text('Helloworld'),
+              // child: Text('Helloworld'),
             ),
           ),
           Positioned(

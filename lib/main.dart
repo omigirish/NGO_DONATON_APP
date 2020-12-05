@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
       providers: [
         StreamProvider<User>(create: (_) => AuthService().user),
         StreamProvider<QuerySnapshot>(create: (_) => DatabaseService().users),
-        // Provider<GlobalData>(create: (_) => GlobalData()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

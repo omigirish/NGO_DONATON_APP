@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mydonationapp/addnew.dart';
 // import 'package:mydonationapp/screens/profile.dart';
-import 'package:mydonationapp/items_page.dart';
-import 'package:mydonationapp/itemspage2.dart';
+import 'package:mydonationapp/history.dart';
+import 'package:mydonationapp/donationsListings.dart';
 import 'package:mydonationapp/notificationspage.dart';
 import 'package:mydonationapp/user.dart';
 
@@ -17,8 +17,8 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _children = [
     Addnew(),
     Notifications(),
-    Itemspage2(),
-    Items(),
+    Donations(),
+    History(),
     User(),
   ];
 
@@ -46,19 +46,19 @@ class _HomePageState extends State<HomePage> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(LineAwesomeIcons.plus_square),
-              label: "Heart",
+              label: "Add",
             ),
             BottomNavigationBarItem(
               icon: Icon(LineAwesomeIcons.bell_o),
-              label: "Search",
+              label: "Notifications",
             ),
             BottomNavigationBarItem(
               icon: Icon(LineAwesomeIcons.search),
-              label: "Signal",
+              label: "Search",
             ),
             BottomNavigationBarItem(
-              icon: Icon(LineAwesomeIcons.signal),
-              label: "Notification",
+              icon: Icon(LineAwesomeIcons.history),
+              label: "History",
             ),
             BottomNavigationBarItem(
               icon: Icon(LineAwesomeIcons.user),

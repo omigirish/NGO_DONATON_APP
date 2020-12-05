@@ -3,6 +3,7 @@ import 'FadeAnimation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mydonationapp/services/imagecapture.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mydonationapp/globals.dart' as global;
 
 class Addnew extends StatefulWidget {
   @override
@@ -187,6 +188,7 @@ class _AddnewState extends State<Addnew> {
                       1,
                       GestureDetector(
                         onTap: () {
+                          global.calledfrom = "addnew";
                           Navigator.push(
                               context,
                               MaterialPageRoute(

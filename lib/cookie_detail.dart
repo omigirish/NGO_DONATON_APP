@@ -7,8 +7,9 @@ class CookieDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black87,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black87,
         elevation: 0.0,
         centerTitle: true,
         leading: IconButton(
@@ -17,7 +18,7 @@ class CookieDetail extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: Text('Pickup',
+        title: Text('Item Details',
             style: TextStyle(
                 fontFamily: 'Varela',
                 fontSize: 20.0,
@@ -43,7 +44,7 @@ class CookieDetail extends StatelessWidget {
         SizedBox(height: 15.0),
         Hero(
             tag: assetPath,
-            child: Image.asset(assetPath,
+            child: Image.file(assetPath,
                 height: 150.0, width: 100.0, fit: BoxFit.contain)),
         SizedBox(height: 20.0),
         Center(

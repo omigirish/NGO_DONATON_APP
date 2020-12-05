@@ -11,7 +11,7 @@ import 'package:flutter/widgets.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mydonationapp/globals.dart' as global;
 import 'package:mydonationapp/shared/loading.dart';
-import 'package:mydonationapp/foodlist.dart';
+import 'package:mydonationapp/cookie_detail.dart';
 
 class ImageCapture extends StatefulWidget {
   createState() => _ImageCaptureState();
@@ -133,7 +133,7 @@ class _ImageCaptureState extends State<ImageCapture> {
                     padding: const EdgeInsets.all(20.0),
                     child: Image.file(
                       _imageFile,
-                      height: 250,
+                      height: 350,
                     ),
                   ),
                   Row(
@@ -154,9 +154,36 @@ class _ImageCaptureState extends State<ImageCapture> {
                       ),
                     ],
                   ),
-                  FoodList().buildFoodCard(
-                      context, _imageFile.path, "Towels", 100, 100, true),
-                  // Uploader(file: _imageFile)
+                  global.calledfrom == "addnew"
+                      ?
+                      // FoodList().buildFoodCard(
+                      //     context, _imageFile.path, "Towels", 100, 100, true),
+                      // Uploader(file: _imageFile)
+                      Container(
+                          margin: EdgeInsets.fromLTRB(60, 10, 60, 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Color.fromRGBO(49, 39, 79, 1),
+                          ),
+                          child: FlatButton.icon(
+                            label: Text(
+                              'Get Preview',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            icon: Icon(
+                              Icons.post_add,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => CookieDetail(
+                                      assetPath: _imageFile,
+                                      cookieprice: "Qty: " + 10.toString(),
+                                      cookiename: "Towels")));
+                            },
+                          ),
+                        )
+                      : Text("File Loaded"),
                   Container(
                     margin: EdgeInsets.fromLTRB(60, 10, 60, 10),
                     decoration: BoxDecoration(
@@ -165,7 +192,7 @@ class _ImageCaptureState extends State<ImageCapture> {
                     ),
                     child: FlatButton.icon(
                       label: Text(
-                        'List the Item',
+                        'Upload',
                         style: TextStyle(color: Colors.white),
                       ),
                       icon: Icon(
@@ -186,11 +213,10 @@ class _ImageCaptureState extends State<ImageCapture> {
                         Navigator.pop(context);
                         // Navigator.push(context,
                         //     MaterialPageRoute(builder: (context) => HomePage()));
-                        ;
                       },
                     ),
                   ),
-                ]
+                ],
               ],
             ),
           );

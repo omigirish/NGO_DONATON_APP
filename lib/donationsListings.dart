@@ -1,42 +1,46 @@
+import 'package:mydonationapp/foodlist.dart';
 import 'package:flutter/material.dart';
 
-class Notifications extends StatefulWidget {
+class Donations extends StatefulWidget {
   @override
-  _NotificationsState createState() => _NotificationsState();
+  _DonationsState createState() => _DonationsState();
 }
 
-class _NotificationsState extends State<Notifications>
+class _DonationsState extends State<Donations>
     with SingleTickerProviderStateMixin {
   TabController tabController;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(vsync: this, length: 4);
+    tabController = TabController(vsync: this, length: 2);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        // backgroundColor: Color(0xFFF9EFEB),
         backgroundColor: Colors.black87,
         body: ListView(
           children: <Widget>[
             Stack(
               children: <Widget>[
                 Container(
-                  height: 230.0,
+                  height: 250.0,
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          // colors: [Color(0x000000), Color(0xBB923CB5)],
-                          colors: [
-                            Colors.purple[500], //Color(0xBB923CB5)
-                            Color(0x21212),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomCenter),
-                      borderRadius:
-                          BorderRadius.only(bottomRight: Radius.circular(75.0)),
-                      color: Color(0xFFFD7465)),
+                    gradient: LinearGradient(
+                        // colors: [Color(0x000000), Color(0xBB923CB5)],
+                        colors: [
+                          Colors.purple[500], //Color(0xBB923CB5)
+                          Color(0x21212),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomCenter),
+                    borderRadius:
+                        BorderRadius.only(bottomRight: Radius.circular(75.0)),
+                    // color: Color(0xFFFD7465)),
+                    // color: Colors.grey[900],
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 35.0, left: 15.0),
@@ -52,7 +56,7 @@ class _NotificationsState extends State<Notifications>
                 Padding(
                   padding: EdgeInsets.only(top: 95.0, left: 15.0),
                   child: Text(
-                    'Notifications',
+                    'Donation Listings',
                     style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 28.0,
@@ -74,7 +78,7 @@ class _NotificationsState extends State<Notifications>
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.only(top: 14.0),
-                        hintText: 'Search in Notifications',
+                        hintText: 'Search for an item',
                         hintStyle:
                             TextStyle(fontFamily: 'Montserrat', fontSize: 14.0),
                         prefixIcon: Icon(Icons.search, color: Colors.grey),
@@ -83,6 +87,59 @@ class _NotificationsState extends State<Notifications>
                   ),
                 )
               ],
+            ),
+            TabBar(
+              controller: tabController,
+              indicatorColor: Colors.purple, //Color(0xFFFE8A7E)
+              indicatorSize: TabBarIndicatorSize.label,
+              indicatorWeight: 4.0,
+              isScrollable: true,
+              labelColor: Colors.purple, //Color(0xFF440206)
+              unselectedLabelColor: Colors.white, //Color(0xFF440206)
+              tabs: <Widget>[
+                Tab(
+                  child: Text(
+                    'Listed By You',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'NGO Requests',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10.0),
+            Container(
+              height: MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).size.height * 0.7,
+              child: TabBarView(
+                controller: tabController,
+                children: <Widget>[
+                  new FoodList(),
+                  new FoodList(),
+                ],
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Text(
+                'RECOMMEND',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Montserrat',
+                  fontSize: 15.0,
+                ),
+              ),
             ),
             _listItem(
                 'assets/steak.png',
@@ -93,24 +150,6 @@ class _NotificationsState extends State<Notifications>
                 2412,
                 '2-3per'),
             SizedBox(height: 10.0),
-            _listItem(
-                'assets/steak.png',
-                'Strawberry cupcake',
-                'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
-                '\$18.0',
-                134,
-                2412,
-                '2-3per'),
-            SizedBox(height: 20.0),
-            _listItem(
-                'assets/steak.png',
-                'Strawberry cupcake',
-                'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
-                '\$18.0',
-                134,
-                2412,
-                '2-3per'),
-            SizedBox(height: 20.0),
             _listItem(
                 'assets/steak.png',
                 'Strawberry cupcake',
@@ -150,7 +189,7 @@ class _NotificationsState extends State<Notifications>
                 //       blurRadius: 3.0)
                 // ],
               ),
-              // child: Text('Helloworld'),
+              child: Text('Helloworld'),
             ),
           ),
           Positioned(
