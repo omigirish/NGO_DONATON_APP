@@ -223,6 +223,7 @@ class _ImageCaptureState extends State<ImageCapture> {
                             ])
                           });
                         }
+                        global.getdata();
                         setState(() {
                           loading = false;
                         });

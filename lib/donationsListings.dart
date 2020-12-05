@@ -15,6 +15,7 @@ class _DonationsState extends State<Donations>
 
   @override
   void initState() {
+    global.getdata();
     super.initState();
     tabController = TabController(vsync: this, length: 2);
   }
@@ -23,6 +24,7 @@ class _DonationsState extends State<Donations>
   Widget build(BuildContext context) {
     donorList = []; //Donot Remove at any cost.....!!!!!
     for (var item in global.items) {
+      print(item);
       donorList.add(_buildDonationCard(context, item['itemcategory'],
           item['itemname'], int.parse(item['itemcount']), global.username));
     }
