@@ -10,7 +10,7 @@ import 'package:mydonationapp/models/user.dart' as firebaseuser;
 import 'package:provider/provider.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:mydonationapp/services/auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mydonationapp/services/imagecapture.dart';
 import 'package:mydonationapp/globals.dart' as global;
 
@@ -113,7 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             child: Center(
               child: Text(
-                global.type,
+                "CERTIFIED " + global.type.toUpperCase(),
                 style: kButtonTextStyle,
               ),
             ),

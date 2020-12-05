@@ -12,6 +12,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mydonationapp/globals.dart' as global;
 import 'package:mydonationapp/shared/loading.dart';
 import 'package:mydonationapp/cookie_detail.dart';
+import 'package:mydonationapp/homePage.dart';
 
 class ImageCapture extends StatefulWidget {
   createState() => _ImageCaptureState();
@@ -204,13 +205,13 @@ class _ImageCaptureState extends State<ImageCapture> {
                           loading = true;
                         });
                         global.imgurl = await _startUpload(_imageFile);
+                        await global.userinst.update({'img': global.imgurl});
                         setState(() {
                           loading = false;
                         });
-                        // Navigator.of(context, rootNavigator: true)
-                        //     .pushReplacement(MaterialPageRoute(
-                        //         builder: (context) => new HomePage()));
-                        Navigator.pop(context);
+                        Navigator.of(context, rootNavigator: true)
+                            .pushReplacement(MaterialPageRoute(
+                                builder: (context) => new HomePage()));
                         // Navigator.push(context,
                         //     MaterialPageRoute(builder: (context) => HomePage()));
                       },
