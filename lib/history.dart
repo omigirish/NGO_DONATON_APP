@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mydonationapp/globals.dart' as global;
 
 class History extends StatefulWidget {
   @override
@@ -7,7 +8,6 @@ class History extends StatefulWidget {
 
 class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   TabController tabController;
-
   @override
   void initState() {
     super.initState();
@@ -70,33 +70,6 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                 2412,
                 '2-3per'),
             SizedBox(height: 10.0),
-            _listItem(
-                'assets/steak.png',
-                'Strawberry cupcake',
-                'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
-                '\$18.0',
-                134,
-                2412,
-                '2-3per'),
-            SizedBox(height: 20.0),
-            _listItem(
-                'assets/steak.png',
-                'Strawberry cupcake',
-                'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
-                '\$18.0',
-                134,
-                2412,
-                '2-3per'),
-            SizedBox(height: 20.0),
-            _listItem(
-                'assets/steak.png',
-                'Strawberry cupcake',
-                'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
-                '\$18.0',
-                134,
-                2412,
-                '2-3per'),
-            SizedBox(height: 20.0)
           ],
         ));
   }

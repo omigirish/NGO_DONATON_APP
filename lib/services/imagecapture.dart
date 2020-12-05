@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -204,8 +205,24 @@ class _ImageCaptureState extends State<ImageCapture> {
                         setState(() {
                           loading = true;
                         });
-                        global.imgurl = await _startUpload(_imageFile);
-                        await global.userinst.update({'img': global.imgurl});
+                        if (global.calledfrom == 'user') {
+                          global.imgurl = await _startUpload(_imageFile);
+                          await global.userinst.update({'img': global.imgurl});
+                        } else {
+                          print("from add new");
+                          global.itemphoto = await _startUpload(_imageFile);
+                          await global.userinst.update({
+                            'items': FieldValue.arrayUnion([
+                              {
+                                'itemname': global.itemname,
+                                'itempickup': global.itempickup,
+                                'itemcount': global.itemcount,
+                                'itemcategory': global.itemcategory,
+                                'itemphoto': global.itemphoto
+                              }
+                            ])
+                          });
+                        }
                         setState(() {
                           loading = false;
                         });
