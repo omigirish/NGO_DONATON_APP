@@ -27,7 +27,6 @@ class _DonationsState extends State<Donations>
     donorList = []; //Donot Remove at any cost.....!!!!!
     if (global.items.length != 0) {
       for (var item in global.items) {
-        print(item);
         donorList.add(_buildDonationCard(context, item['itemcategory'],
             item['itemname'], int.parse(item['itemcount']), global.username));
       }
