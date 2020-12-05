@@ -4,11 +4,14 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
-import 'package:mydonationapp/models/user.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:mydonationapp/homePage.dart';
+// import 'package:mydonationapp/items_page.dart';
+// import 'package:provider/provider.dart';
+// import 'package:mydonationapp/models/user.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mydonationapp/globals.dart' as global;
 import 'package:mydonationapp/shared/loading.dart';
+import 'package:mydonationapp/foodlist.dart';
 
 class ImageCapture extends StatefulWidget {
   createState() => _ImageCaptureState();
@@ -42,11 +45,10 @@ class _ImageCaptureState extends State<ImageCapture> {
   Future<String> _startUpload(file) async {
     /// Unique file name for the file
     String fileName = DateTime.now().toString();
-    String filePath = 'images/${fileName}.png';
+    String filePath = 'images/${fileName}';
     await _storage.ref().child(filePath).putFile(file);
-    print(' THis is File name ..........images/${fileName}.png');
-    var ref =
-        await Future.value(_storage.ref().child("images/" + fileName + ".png"));
+    print(' THis is File name ..........images/${fileName}');
+    var ref = await Future.value(_storage.ref().child("images/" + fileName));
     return await ref.getDownloadURL();
   }
 
@@ -67,60 +69,130 @@ class _ImageCaptureState extends State<ImageCapture> {
   @override
   Widget build(BuildContext context) {
     // final globaldata = Provider.of<GlobalData>(context);
-    return Scaffold(
-      // Select an image from the camera or gallery
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.photo_camera),
-              onPressed: () => _pickImage(ImageSource.camera),
+    return loading == true
+        ? Center(child: Loading())
+        : Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.black87,
+              elevation: 0.0,
+              centerTitle: true,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              title: Text('Upload Item Photo',
+                  style: TextStyle(
+                      fontFamily: 'Varela',
+                      fontSize: 20.0,
+                      color: Colors.white)),
+              actions: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 18, 15, 0),
+                  child: Text(
+                    "Skip",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                  ),
+                ),
+              ],
             ),
-            IconButton(
-              icon: Icon(Icons.photo_library),
-              onPressed: () => _pickImage(ImageSource.gallery),
-            ),
-          ],
-        ),
-      ),
+            backgroundColor: Colors.black87,
 
-      // Preview the image and crop it
-      body: loading == true
-          ? Center(child: CircularProgressIndicator())
-          : ListView(
+            // Select an image from the camera or gallery
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white,
+              backgroundColor: Colors.black87,
+              items: [
+                BottomNavigationBarItem(
+                  label: "Camera",
+                  icon: GestureDetector(
+                      child: Icon(Icons.photo_camera),
+                      onTap: () {
+                        _pickImage(ImageSource.camera);
+                      }),
+                ),
+                BottomNavigationBarItem(
+                  label: "Gallery",
+                  icon: GestureDetector(
+                      child: Icon(Icons.photo_library),
+                      onTap: () {
+                        _pickImage(ImageSource.gallery);
+                      }),
+                ),
+              ],
+            ),
+
+            // Preview the image and crop it
+            body: ListView(
               children: <Widget>[
                 if (_imageFile != null) ...[
-                  Image.file(_imageFile),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Image.file(
+                      _imageFile,
+                      height: 250,
+                    ),
+                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       FlatButton(
-                        child: Icon(Icons.crop),
+                        child: Icon(Icons.crop, color: Colors.white),
                         onPressed: _cropImage,
+                        color: Color.fromRGBO(49, 39, 79, 1),
                       ),
                       FlatButton(
-                        child: Icon(Icons.refresh),
+                        child: Icon(
+                          Icons.refresh,
+                          color: Colors.white,
+                        ),
+                        color: Color.fromRGBO(49, 39, 79, 1),
                         onPressed: _clear,
                       ),
                     ],
                   ),
+                  FoodList().buildFoodCard(
+                      context, _imageFile.path, "Towels", 100, 100, true),
                   // Uploader(file: _imageFile)
-                  FlatButton.icon(
-                    label: Text('Upload to Firebase'),
-                    icon: Icon(Icons.cloud_upload),
-                    onPressed: () async {
-                      setState(() {
-                        loading = true;
-                      });
-                      global.imgurl = await _startUpload(_imageFile);
-                      setState(() {
-                        loading = false;
-                      });
-                      Navigator.pop(context);
-                    },
+                  Container(
+                    margin: EdgeInsets.fromLTRB(60, 10, 60, 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Color.fromRGBO(49, 39, 79, 1),
+                    ),
+                    child: FlatButton.icon(
+                      label: Text(
+                        'List the Item',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      icon: Icon(
+                        Icons.cloud_upload,
+                        color: Colors.white,
+                      ),
+                      onPressed: () async {
+                        setState(() {
+                          loading = true;
+                        });
+                        global.imgurl = await _startUpload(_imageFile);
+                        setState(() {
+                          loading = false;
+                        });
+                        // Navigator.of(context, rootNavigator: true)
+                        //     .pushReplacement(MaterialPageRoute(
+                        //         builder: (context) => new HomePage()));
+                        Navigator.pop(context);
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) => HomePage()));
+                        ;
+                      },
+                    ),
                   ),
                 ]
               ],
             ),
-    );
+          );
   }
 }

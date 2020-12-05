@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'FadeAnimation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mydonationapp/services/imagecapture.dart';
+import 'package:flutter/cupertino.dart';
 
 class Addnew extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _AddnewState extends State<Addnew> {
   double nos = 1;
   @override
   Widget build(BuildContext context) {
+    var x = ["Food", "Clothes", "Toys", "Sanitation", "Electronics", "Other"];
     return Scaffold(
       resizeToAvoidBottomInset: false,
       // backgroundColor: Color(0xff21254A),
@@ -40,9 +42,6 @@ class _AddnewState extends State<Addnew> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
@@ -59,9 +58,6 @@ class _AddnewState extends State<Addnew> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
                     ),
                     FadeAnimation(
                       1,
@@ -83,6 +79,8 @@ class _AddnewState extends State<Addnew> {
                                 ),
                               ),
                               child: TextField(
+                                style: TextStyle(color: Colors.white),
+                                cursorColor: Colors.purple,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Item Name",
@@ -100,6 +98,8 @@ class _AddnewState extends State<Addnew> {
                                 ),
                               ),
                               child: TextField(
+                                style: TextStyle(color: Colors.white),
+                                cursorColor: Colors.purple,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: "Pickup Address",
@@ -113,10 +113,13 @@ class _AddnewState extends State<Addnew> {
                     SizedBox(
                       height: 20.0,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("How Many Items will you donate?",
-                          style: TextStyle(color: Colors.white)),
+                    FadeAnimation(
+                      1,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Choose Item Count & Category",
+                            style: TextStyle(color: Colors.grey)),
+                      ),
                     ),
                     FadeAnimation(
                       1,
@@ -125,11 +128,59 @@ class _AddnewState extends State<Addnew> {
                         max: 100,
                         divisions: 20,
                         activeColor: Colors.purple,
+                        inactiveColor: Colors.deepPurple[300],
                         label: nos.toInt().toString(),
                         value: nos,
                         onChanged: (newnos) {
                           setState(() => {nos = newnos});
                         },
+                      ),
+                    ),
+                    FadeAnimation(
+                      1,
+                      Container(
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        height: 70,
+                        child: CupertinoPicker(
+                          magnification: 1.3,
+                          useMagnifier: true,
+                          looping: true,
+                          itemExtent: 35,
+                          backgroundColor: Colors.grey[900],
+                          onSelectedItemChanged: (int l) {
+                            setState(
+                              () {
+                                print(x[l]);
+                              },
+                            );
+                          },
+                          children: <Widget>[
+                            Text(
+                              "---- Food ----",
+                              style: TextStyle(color: Colors.purple[400]),
+                            ),
+                            Text(
+                              "---- Clothes ----",
+                              style: TextStyle(color: Colors.purple[400]),
+                            ),
+                            Text(
+                              "---- Toys ----",
+                              style: TextStyle(color: Colors.purple[400]),
+                            ),
+                            Text(
+                              "-- Sanitation --",
+                              style: TextStyle(color: Colors.purple[400]),
+                            ),
+                            Text(
+                              "-- Electronics --",
+                              style: TextStyle(color: Colors.purple[400]),
+                            ),
+                            Text(
+                              "---- Other ----",
+                              style: TextStyle(color: Colors.purple[400]),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     FadeAnimation(

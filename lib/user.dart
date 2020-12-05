@@ -6,7 +6,7 @@ import 'package:mydonationapp/constants.dart';
 import 'package:mydonationapp/main.dart';
 import 'package:mydonationapp/profile_list_item.dart';
 import 'package:mydonationapp/models/user.dart' as firebaseuser;
-import 'package:mydonationapp/services/database.dart';
+// import 'package:mydonationapp/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:mydonationapp/services/auth.dart';
