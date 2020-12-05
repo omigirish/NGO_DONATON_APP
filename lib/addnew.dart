@@ -87,6 +87,9 @@ class _AddnewState extends State<Addnew> {
                                   hintText: "Item Name",
                                   hintStyle: TextStyle(color: Colors.grey),
                                 ),
+                                onChanged: (value) {
+                                  global.itemname = value;
+                                },
                               ),
                             ),
                             Container(
@@ -105,6 +108,9 @@ class _AddnewState extends State<Addnew> {
                                     border: InputBorder.none,
                                     hintText: "Pickup Address",
                                     hintStyle: TextStyle(color: Colors.grey)),
+                                onChanged: (value) {
+                                  global.itempickup = value;
+                                },
                               ),
                             )
                           ],
@@ -133,7 +139,10 @@ class _AddnewState extends State<Addnew> {
                         label: nos.toInt().toString(),
                         value: nos,
                         onChanged: (newnos) {
-                          setState(() => {nos = newnos});
+                          setState(() {
+                            nos = newnos;
+                          });
+                          global.itemcount = newnos;
                         },
                       ),
                     ),
@@ -149,11 +158,7 @@ class _AddnewState extends State<Addnew> {
                           itemExtent: 35,
                           backgroundColor: Colors.grey[900],
                           onSelectedItemChanged: (int l) {
-                            setState(
-                              () {
-                                print(x[l]);
-                              },
-                            );
+                            global.itemcategory = x[l];
                           },
                           children: <Widget>[
                             Text(
