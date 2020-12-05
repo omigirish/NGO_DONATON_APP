@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Stack(
               children: <Widget>[
                 CircularProfileAvatar(
-                  global.userdata == null ? "" : imgurl,
+                  global.imgurl,
                   onTap: () async {
                     global.calledfrom = "user";
                     await Navigator.of(context, rootNavigator: true)
@@ -113,9 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             child: Center(
               child: Text(
-                global.userdata == null
-                    ? ""
-                    : "Certified " + global.userdata.get('type'),
+                global.type,
                 style: kButtonTextStyle,
               ),
             ),

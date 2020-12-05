@@ -114,13 +114,7 @@ class AuthService {
           return null;
         }
       }
-      DocumentReference userinst =
-          FirebaseFirestore.instance.collection('users').doc(user.uid);
-      DocumentSnapshot userdata = await userinst.get();
-
-      global.userinst = userinst;
-      global.userdata = userdata;
-      global.uid = user.uid;
+      global.imgurl = user.photoURL;
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);
