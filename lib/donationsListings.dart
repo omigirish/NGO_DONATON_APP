@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mydonationapp/cookie_detail.dart';
 import 'package:mydonationapp/globals.dart' as global;
@@ -23,16 +25,20 @@ class _DonationsState extends State<Donations>
   @override
   Widget build(BuildContext context) {
     donorList = []; //Donot Remove at any cost.....!!!!!
-    for (var item in global.items) {
-      print(item);
-      donorList.add(_buildDonationCard(
-          context,
-          item['itemcategory'],
-          item['itemname'],
-          int.parse(item['itemcount']),
-          global.username,
-          item['itemphoto']));
+    if (global.items.length != 0) {
+      for (var item in global.items) {
+        donorList.add(_buildDonationCard(
+            context,
+            item['itemcategory'],
+            item['itemname'],
+            int.parse(item['itemcount']),
+            global.username,
+            item['itemphoto']));
+      }
     }
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {});
+    });
 
     return Scaffold(
       // backgroundColor: Color(0xFFF9EFEB),
