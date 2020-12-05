@@ -1,6 +1,6 @@
-import 'package:mydonationapp/foodlist.dart';
 import 'package:flutter/material.dart';
 import 'package:mydonationapp/cookie_detail.dart';
+import 'package:mydonationapp/globals.dart' as global;
 
 class Donations extends StatefulWidget {
   @override
@@ -22,13 +22,10 @@ class _DonationsState extends State<Donations>
   @override
   Widget build(BuildContext context) {
     donorList = []; //Donot Remove at any cost.....!!!!!
-
-    donorList.add(
-        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
-    donorList.add(
-        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
-    donorList.add(
-        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
+    for (var item in global.items) {
+      donorList.add(_buildDonationCard(context, item['itemcategory'],
+          item['itemname'], int.parse(item['itemcount']), global.username));
+    }
 
     return Scaffold(
         // backgroundColor: Color(0xFFF9EFEB),

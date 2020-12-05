@@ -142,7 +142,7 @@ class _AddnewState extends State<Addnew> {
                           setState(() {
                             nos = newnos;
                           });
-                          global.itemcount = newnos;
+                          global.itemcount = newnos.toString();
                         },
                       ),
                     ),
