@@ -21,7 +21,8 @@ class _DonationsState extends State<Donations>
 
   @override
   Widget build(BuildContext context) {
-    donorList = [];
+    donorList = []; //Donot Remove at any cost.....!!!!!
+
     donorList.add(
         _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
     donorList.add(
@@ -112,7 +113,8 @@ class _DonationsState extends State<Donations>
                   child: Text(
                     'Listed By You',
                     style: TextStyle(
-                      fontFamily: 'Montserrat',
+                      fontFamily: 'Varela',
+                      fontWeight: FontWeight.bold,
                       fontSize: 15.0,
                     ),
                   ),
@@ -121,7 +123,8 @@ class _DonationsState extends State<Donations>
                   child: Text(
                     'NGO Requests',
                     style: TextStyle(
-                      fontFamily: 'Montserrat',
+                      fontFamily: 'Varela',
+                      fontWeight: FontWeight.bold,
                       fontSize: 15.0,
                     ),
                   ),
@@ -338,11 +341,7 @@ _buildDonationCard(BuildContext context, String category, String itemName,
       child: Container(
         height: 100,
         decoration: BoxDecoration(
-          color: Colors.grey[900],
-          gradient: LinearGradient(
-              colors: [Colors.white, Colors.purple],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(7.0),
         ),
         child: Column(
@@ -354,7 +353,7 @@ _buildDonationCard(BuildContext context, String category, String itemName,
                   padding: EdgeInsets.only(left: 18.0, right: 15.0, top: 15.0),
                   child: Icon(
                     Icons.food_bank_rounded,
-                    color: Colors.purple[800],
+                    color: Colors.grey[900],
                     size: 100,
                   ),
                 ),
@@ -366,8 +365,9 @@ _buildDonationCard(BuildContext context, String category, String itemName,
               child: Text(
                 itemName,
                 style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    color: Color(0xFF440206),
+                    fontFamily: "Varela",
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                     fontSize: 22.0),
               ),
             ),
@@ -378,6 +378,7 @@ _buildDonationCard(BuildContext context, String category, String itemName,
                 'Qty: ' + qty.toString(),
                 style: TextStyle(
                     fontSize: 18,
+                    fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',
                     color: Colors.purple),
               ),
@@ -395,7 +396,7 @@ _buildDonationCard(BuildContext context, String category, String itemName,
                       style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontSize: 12.0,
-                          color: Colors.grey),
+                          color: Colors.white),
                     )
                   ],
                 ))
