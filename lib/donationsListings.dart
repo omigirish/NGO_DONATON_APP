@@ -30,6 +30,14 @@ class _DonationsState extends State<Donations>
         _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
     donorList.add(
         _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
+    donorList.add(
+        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
+    donorList.add(
+        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
+    donorList.add(
+        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
+    donorList.add(
+        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
 
     return Scaffold(
       // backgroundColor: Color(0xFFF9EFEB),
@@ -132,50 +140,21 @@ class _DonationsState extends State<Donations>
           ),
           SizedBox(height: 10.0),
           Container(
-            height: MediaQuery.of(context).size.height -
-                MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height,
             child: TabBarView(
               controller: tabController,
               children: <Widget>[
-                ListView(
-                  children: donorList,
-                  scrollDirection: Axis.horizontal,
-                ),
+                GridView.count(
+                    crossAxisCount: 2,
+                    primary: false,
+                    crossAxisSpacing: 0.0,
+                    mainAxisSpacing: 15.0,
+                    childAspectRatio: 0.9,
+                    children: donorList),
                 ListView(children: ngoList),
               ],
             ),
           ),
-          // SizedBox(height: 10.0),
-          // Padding(
-          //   padding: const EdgeInsets.only(left: 15.0),
-          //   child: Text(
-          //     'RECOMMEND',
-          //     style: TextStyle(
-          //       color: Colors.white,
-          //       fontFamily: 'Varela',
-          //       fontWeight: FontWeight.bold,
-          //       fontSize: 15.0,
-          //     ),
-          //   ),
-          // ),
-          // _listItem(
-          //     'assets/steak.png',
-          //     'Chocolate lemon cup cake',
-          //     'The sour and sweetness of the lemon neutralizes the sweetness of the cream',
-          //     '\$18.0',
-          //     134,
-          //     2412,
-          //     '2-3per'),
-          // SizedBox(height: 10.0),
-          // _listItem(
-          //     'assets/steak.png',
-          //     'Strawberry cupcake',
-          //     'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
-          //     '\$18.0',
-          //     134,
-          //     2412,
-          //     '2-3per'),
-          // SizedBox(height: 20.0)
         ],
       ),
     );
@@ -326,7 +305,7 @@ class _DonationsState extends State<Donations>
 _buildDonationCard(BuildContext context, String category, String itemName,
     int qty, String name) {
   return Padding(
-    padding: EdgeInsets.only(top: 8.0, left: 10.0, bottom: 10.0),
+    padding: EdgeInsets.only(top: 8.0, left: 15.0, bottom: 10.0, right: 15),
     child: GestureDetector(
       onTap: () => {
         Navigator.of(context).push(
@@ -350,18 +329,18 @@ _buildDonationCard(BuildContext context, String category, String itemName,
             Stack(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: 18.0, right: 15.0, top: 5.0),
+                  padding: EdgeInsets.only(left: 28.0, right: 15.0, top: 5.0),
                   child: Icon(
                     Icons.food_bank_rounded,
                     color: Colors.grey[900],
-                    size: 100,
+                    size: 110,
                   ),
                 ),
               ],
             ),
             Container(
               width: 125.0,
-              padding: EdgeInsets.only(left: 10.0),
+              padding: EdgeInsets.only(left: 20.0),
               child: Text(
                 itemName,
                 style: TextStyle(
@@ -373,19 +352,19 @@ _buildDonationCard(BuildContext context, String category, String itemName,
             ),
             SizedBox(height: 5.0),
             Padding(
-              padding: EdgeInsets.only(left: 10.0),
+              padding: EdgeInsets.only(left: 20.0),
               child: Text(
                 'Qty: ' + qty.toString(),
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
+                    fontFamily: 'Varela',
                     color: Colors.purple),
               ),
             ),
             SizedBox(height: 10.0),
             Padding(
-                padding: EdgeInsets.only(left: 4.0),
+                padding: EdgeInsets.only(left: 18.0),
                 child: Row(
                   children: <Widget>[
                     Icon(Icons.account_box,
@@ -394,8 +373,8 @@ _buildDonationCard(BuildContext context, String category, String itemName,
                     Text(
                       name,
                       style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 12.0,
+                          fontFamily: 'Varela',
+                          fontSize: 13.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
                     )
