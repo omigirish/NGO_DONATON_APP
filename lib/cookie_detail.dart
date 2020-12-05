@@ -43,9 +43,13 @@ class CookieDetail extends StatelessWidget {
         ),
         SizedBox(height: 15.0),
         Hero(
-            tag: assetPath,
-            child: Image.file(assetPath,
-                height: 150.0, width: 100.0, fit: BoxFit.contain)),
+          tag: assetPath,
+          child: assetPath.runtimeType == String
+              ? Image.asset(assetPath,
+                  height: 150.0, width: 100.0, fit: BoxFit.contain)
+              : Image.file(assetPath,
+                  height: 150.0, width: 100.0, fit: BoxFit.contain),
+        ),
         SizedBox(height: 20.0),
         Center(
           child: Text(cookieprice,

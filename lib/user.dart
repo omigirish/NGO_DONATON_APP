@@ -58,9 +58,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Stack(
               children: <Widget>[
                 CircularProfileAvatar(
-                  global.imgurl,
+                  global.userdata == null ? "" : imgurl,
+                  animateFromOldImageOnUrlChange: true,
                   onTap: () async {
-                    global.calledfrom = "user";
+                    // global.calledfrom = "user";
                     await Navigator.of(context, rootNavigator: true)
                         .pushReplacement(MaterialPageRoute(
                             builder: (context) => ImageCapture()));
@@ -113,7 +114,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             child: Center(
               child: Text(
-                global.type,
+                global.userdata == null
+                    ? ""
+                    : "Certified " + global.userdata.get('type'),
                 style: kButtonTextStyle,
               ),
             ),

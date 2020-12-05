@@ -86,9 +86,9 @@ class _NotificationsState extends State<Notifications>
             ),
             _listItem(
                 'assets/steak.png',
-                'Chocolate lemon cup cake',
-                'The sour and sweetness of the lemon neutralizes the sweetness of the cream',
-                '\$18.0',
+                'Nathani Trust',
+                'Request: We Need Smartphones to help Needy Students in Lockdown to study',
+                'Qty: 10',
                 134,
                 2412,
                 '2-3per'),
@@ -143,14 +143,7 @@ class _NotificationsState extends State<Notifications>
               decoration: BoxDecoration(
                 color: Color(0xFFF9EFEB),
                 borderRadius: BorderRadius.circular(5.0),
-                // boxShadow: [
-                //   BoxShadow(
-                //       color: Colors.grey.withOpacity(0.3),
-                //       spreadRadius: 3.0,
-                //       blurRadius: 3.0)
-                // ],
               ),
-              // child: Text('Helloworld'),
             ),
           ),
           Positioned(
