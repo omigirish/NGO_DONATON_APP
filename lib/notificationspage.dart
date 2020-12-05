@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 
 class Notifications extends StatefulWidget {
   @override
@@ -85,7 +86,7 @@ class _NotificationsState extends State<Notifications>
               ],
             ),
             _listItem(
-                'assets/steak.png',
+                'https://firebasestorage.googleapis.com/v0/b/donationapp-89333.appspot.com/o/images%2F2020-12-05%2020%3A54%3A58.958832?alt=media&token=2cb5a166-c8e3-4270-ae55-0cc4e563f138',
                 'Nathani Trust',
                 'Request: We Need Smartphones to help Needy Students in Lockdown to study',
                 'Qty: 10',
@@ -124,24 +125,24 @@ class _NotificationsState extends State<Notifications>
         ));
   }
 
-  _listItem(String imgPath, String foodName, String desc, String price,
+  _listItem(String imgurl, String username, String desc, String price,
       int likes, int calCount, String serving) {
     return Padding(
       padding: EdgeInsets.only(left: 15.0, top: 15.0),
       child: Stack(
         children: <Widget>[
           Container(
-            height: 170.0,
+            height: 145.0,
             width: MediaQuery.of(context).size.width,
           ),
           Positioned(
             left: 15.0,
             top: 30.0,
             child: Container(
-              height: 125.0,
+              height: 100.0,
               width: MediaQuery.of(context).size.width - 15.0,
               decoration: BoxDecoration(
-                color: Color(0xFFF9EFEB),
+                color: Colors.purple[50],
                 borderRadius: BorderRadius.circular(5.0),
               ),
             ),
@@ -150,10 +151,10 @@ class _NotificationsState extends State<Notifications>
               left: 95.0,
               top: 64.0,
               child: Container(
-                height: 105.0,
+                height: 80.0,
                 width: MediaQuery.of(context).size.width - 15.0,
                 decoration: BoxDecoration(
-                    color: Color(0xFFF9EFEB),
+                    color: Colors.purple[50],
                     borderRadius: BorderRadius.circular(5.0),
                     boxShadow: [
                       BoxShadow(
@@ -167,45 +168,36 @@ class _NotificationsState extends State<Notifications>
                     padding: EdgeInsets.only(bottom: 10.0, left: 10.0),
                     child: Row(
                       children: <Widget>[
-                        Icon(Icons.favorite,
-                            color: Color(0xFFF75A4C), size: 15.0),
+                        SizedBox(width: 25.0),
+                        Icon(Icons.thumb_up,
+                            color: Colors.green[700], size: 15.0),
                         SizedBox(width: 5.0),
                         Text(
-                          likes.toString(),
+                          "Accept Request",
                           style: TextStyle(
                               fontFamily: 'Montserrat',
                               fontSize: 12.0,
-                              color: Colors.grey),
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[700]),
                         ),
                         SizedBox(width: 25.0),
-                        Icon(Icons.account_box,
-                            color: Color(0xFFF75A4C), size: 15.0),
+                        Icon(Icons.cancel, color: Colors.red, size: 15.0),
                         SizedBox(width: 5.0),
                         Text(
-                          calCount.toString() + 'cal',
+                          "Reject",
                           style: TextStyle(
+                              fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat',
                               fontSize: 12.0,
-                              color: Colors.grey),
+                              color: Colors.red),
                         ),
-                        SizedBox(width: 25.0),
-                        Icon(Icons.play_circle_outline,
-                            color: Color(0xFFF75A4C), size: 15.0),
-                        SizedBox(width: 5.0),
-                        Text(
-                          serving,
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 12.0,
-                              color: Colors.grey),
-                        )
                       ],
                     ),
                   ),
                 ),
               )),
           Container(
-            height: 125.0,
+            height: 105.0,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
@@ -215,26 +207,31 @@ class _NotificationsState extends State<Notifications>
               padding: EdgeInsets.all(8.0),
               child: Row(
                 children: <Widget>[
-                  Image.asset(imgPath, fit: BoxFit.cover),
+                  CircularProfileAvatar(
+                    imgurl,
+                    animateFromOldImageOnUrlChange: true,
+                    radius: 45,
+                  ),
                   SizedBox(width: 10.0),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(height: 10.0),
                       Text(
-                        foodName,
+                        username,
                         style: TextStyle(
+                            fontWeight: FontWeight.bold,
                             color: Color(0xFF563734),
                             fontFamily: 'Montserrat',
                             fontSize: 15.0),
                       ),
                       SizedBox(height: 5.0),
                       Container(
-                        width: 175.0,
+                        width: 260.0,
                         child: Text(
                           desc,
                           style: TextStyle(
-                              color: Color(0xFFB2A9A9),
+                              color: Colors.black87,
                               fontFamily: 'Montserrat',
                               fontSize: 11.0),
                         ),
@@ -243,7 +240,8 @@ class _NotificationsState extends State<Notifications>
                       Text(
                         price.toString(),
                         style: TextStyle(
-                            color: Color(0xFFF76053),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.purple,
                             fontFamily: 'Montserrat',
                             fontSize: 15.0),
                       )
