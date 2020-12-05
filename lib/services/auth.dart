@@ -126,6 +126,7 @@ class AuthService {
     try {
       await _auth.signOut();
       await _googleSignIn.signOut();
+      global.cleardata();
     } catch (e) {
       print(e.toString());
       return null;

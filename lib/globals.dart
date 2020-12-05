@@ -11,7 +11,7 @@ String itemcount = "";
 String itemcategory = "";
 String itemphoto = "";
 
-var items;
+var items = [];
 
 DocumentReference userinst;
 DocumentSnapshot userdata;
@@ -21,6 +21,27 @@ getdata() async {
   userdata = await userinst.get();
   imgurl = userdata.get('img');
   type = userdata.get('type');
-  items = userdata.get('items');
+  try {
+    items = userdata.get('items');
+  } catch (e) {
+    print("No items for this account");
+  }
   username = userdata.get('name');
+}
+
+cleardata() {
+  imgurl = "";
+  uid = "";
+  username = "";
+  type = "";
+
+  itemname = "";
+  itempickup = "";
+  itemcount = "";
+  itemcategory = "";
+  itemphoto = "";
+
+  items = [];
+
+  calledfrom = "";
 }
