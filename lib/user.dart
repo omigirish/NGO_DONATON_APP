@@ -6,12 +6,13 @@ import 'package:mydonationapp/constants.dart';
 import 'package:mydonationapp/main.dart';
 import 'package:mydonationapp/profile_list_item.dart';
 import 'package:mydonationapp/models/user.dart' as firebaseuser;
+import 'package:mydonationapp/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:mydonationapp/services/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mydonationapp/services/imagecapture.dart';
-import 'package:mydonationapp/globals.dart';
+import 'package:mydonationapp/globals.dart' as global;
 
 class User extends StatelessWidget {
   // This widget is the root of your application.
@@ -39,14 +40,24 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final AuthService _auth = AuthService();
-
   @override
   Widget build(BuildContext context) {
     final fuser = Provider.of<firebaseuser.User>(context);
     final dbusers = Provider.of<QuerySnapshot>(context);
-    final myuser = dbusers.docs.firstWhere((element) {
-      return element.get('email') == fuser.email;
+    String imgurl = global.imgurl;
+    setState(() {
+      print(imgurl);
     });
+    // final globaldata = Provider.of<GlobalData>(context);
+    // print(globaldata.imgurl);
+    final myuser = dbusers.docs.firstWhere(
+      (element) {
+        return element.get('email') == fuser.email;
+      },
+      orElse: () {
+        return null;
+      },
+    );
     ScreenUtil.init(context, height: 896, width: 414, allowFontScaling: true);
 
     var profileInfo = Expanded(
@@ -59,12 +70,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Stack(
               children: <Widget>[
                 CircularProfileAvatar(
-                  fuser == null ? "" : fuser.img,
+                  myuser == null
+                      ? ""
+                      : (myuser.get('img') == null ? "" : myuser.get('img')),
                   onTap: () async {
-                    Navigator.push(
+                    await Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ImageCapture()));
+                    print(global.imgurl);
+                    setState(() async {
+                      imgurl = global.imgurl;
+                      await FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(fuser.uid)
+                          .update({"img": imgurl});
+                      ;
+                    });
                   },
                   // radius: kSpacingUnit.w * 5,
                 ),
@@ -111,7 +133,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             child: Center(
               child: Text(
-                'Certified ' + myuser.get('type'),
+                myuser == null
+                    ? ""
+                    : (myuser.get('img') == null
+                        ? ""
+                        : 'Certified ' + myuser.get('type')),
                 style: kButtonTextStyle,
               ),
             ),

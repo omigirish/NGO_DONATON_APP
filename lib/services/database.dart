@@ -14,13 +14,15 @@ class DatabaseService {
       String type,
       String phone,
       String img}) async {
-    return await userCollection.doc(uid).set({
-      'name': name,
-      'email': email,
-      'type': type,
-      'phone': phone,
-      'img': img,
-    });
+    return await userCollection.doc(uid).set(
+      {
+        'name': name,
+        'email': email,
+        'type': type,
+        'phone': phone,
+        'img': img,
+      },
+    );
   }
 
   Stream<QuerySnapshot> get users {

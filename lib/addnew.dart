@@ -113,6 +113,11 @@ class _AddnewState extends State<Addnew> {
                     SizedBox(
                       height: 20.0,
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("How Many Items will you donate?",
+                          style: TextStyle(color: Colors.white)),
+                    ),
                     FadeAnimation(
                       1,
                       Slider(

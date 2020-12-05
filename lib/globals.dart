@@ -1,3 +1,1 @@
-class Global {
-  String imgurl;
-}
+String imgurl = "Mohnish";

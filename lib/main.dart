@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:mydonationapp/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:mydonationapp/models/user.dart';
+import 'package:mydonationapp/globals.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       providers: [
         StreamProvider<User>(create: (_) => AuthService().user),
         StreamProvider<QuerySnapshot>(create: (_) => DatabaseService().users),
+        // Provider<GlobalData>(create: (_) => GlobalData()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
