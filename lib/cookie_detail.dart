@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CookieDetail extends StatelessWidget {
-  final assetPath, cookieprice, cookiename;
+  final assetPath, cookieprice, cookiename, imgurl;
 
-  CookieDetail({this.assetPath, this.cookieprice, this.cookiename});
+  CookieDetail(
+      {this.assetPath, this.cookieprice, this.cookiename, this.imgurl});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,12 +44,25 @@ class CookieDetail extends StatelessWidget {
         ),
         SizedBox(height: 15.0),
         Hero(
-          tag: assetPath,
-          child: assetPath.runtimeType == String
-              ? Image.asset(assetPath,
-                  height: 150.0, width: 100.0, fit: BoxFit.contain)
-              : Image.file(assetPath,
-                  height: 150.0, width: 100.0, fit: BoxFit.contain),
+          tag: assetPath == null ? imgurl : assetPath,
+          child: imgurl == null
+              ? assetPath.runtimeType == String
+                  ? Image.asset(assetPath,
+                      height: 150.0, width: 100.0, fit: BoxFit.contain)
+                  : Image.file(assetPath,
+                      height: 150.0, width: 100.0, fit: BoxFit.contain)
+              : Image.network(imgurl,
+                  loadingBuilder: (context, child, progress) {
+                  return progress == null
+                      ? child
+                      : Container(
+                          height: 50,
+                          margin: EdgeInsets.symmetric(horizontal: 170),
+                          child: CircularProgressIndicator(
+                            strokeWidth: 4,
+                          ),
+                        );
+                }, height: 150.0, width: 100.0, fit: BoxFit.contain),
         ),
         SizedBox(height: 20.0),
         Center(

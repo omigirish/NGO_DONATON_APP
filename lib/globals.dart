@@ -2,11 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 String imgurl;
 String uid;
+String username;
 String type;
 
 String itemname = "";
 String itempickup = "";
-double itemcount = 0;
+String itemcount = "";
 String itemcategory = "";
 String itemphoto = "";
 
@@ -21,4 +22,5 @@ getdata() async {
   imgurl = userdata.get('img');
   type = userdata.get('type');
   items = userdata.get('items');
+  username = userdata.get('name');
 }

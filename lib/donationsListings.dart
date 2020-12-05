@@ -1,4 +1,3 @@
-import 'package:mydonationapp/foodlist.dart';
 import 'package:flutter/material.dart';
 import 'package:mydonationapp/cookie_detail.dart';
 import 'package:mydonationapp/globals.dart' as global;
@@ -16,6 +15,7 @@ class _DonationsState extends State<Donations>
 
   @override
   void initState() {
+    global.getdata();
     super.initState();
     tabController = TabController(vsync: this, length: 2);
   }
@@ -23,21 +23,16 @@ class _DonationsState extends State<Donations>
   @override
   Widget build(BuildContext context) {
     donorList = []; //Donot Remove at any cost.....!!!!!
-    // global.items.forEach((item) {donorList.add(
-    //     _buildDonationCard(context, item.itemcategory, item.itemname, item.itemcount, "Girish Salunke"));});
-
-    donorList.add(
-        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
-    donorList.add(
-        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
-    donorList.add(
-        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
-    donorList.add(
-        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
-    donorList.add(
-        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
-    donorList.add(
-        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
+    for (var item in global.items) {
+      print(item);
+      donorList.add(_buildDonationCard(
+          context,
+          item['itemcategory'],
+          item['itemname'],
+          int.parse(item['itemcount']),
+          global.username,
+          item['itemphoto']));
+    }
 
     return Scaffold(
       // backgroundColor: Color(0xFFF9EFEB),
@@ -303,7 +298,7 @@ class _DonationsState extends State<Donations>
 }
 
 _buildDonationCard(BuildContext context, String category, String itemName,
-    int qty, String name) {
+    int qty, String name, String imgurl) {
   return Padding(
     padding: EdgeInsets.only(top: 8.0, left: 15.0, bottom: 10.0, right: 15),
     child: GestureDetector(
@@ -311,8 +306,7 @@ _buildDonationCard(BuildContext context, String category, String itemName,
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => CookieDetail(
-                assetPath:
-                    "https://firebasestorage.googleapis.com/v0/b/donationapp-89333.appspot.com/o/images%2F2020-12-05%2020%3A54%3A58.958832?alt=media&token=2cb5a166-c8e3-4270-ae55-0cc4e563f138",
+                imgurl: imgurl,
                 cookieprice: "Qty: " + qty.toString(),
                 cookiename: itemName),
           ),
