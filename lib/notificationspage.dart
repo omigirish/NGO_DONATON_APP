@@ -85,48 +85,39 @@ class _NotificationsState extends State<Notifications>
                 )
               ],
             ),
-            _listItem(
-                'https://firebasestorage.googleapis.com/v0/b/donationapp-89333.appspot.com/o/images%2F2020-12-05%2020%3A54%3A58.958832?alt=media&token=2cb5a166-c8e3-4270-ae55-0cc4e563f138',
-                'Nathani Trust',
-                'Request: We Need Smartphones to help Needy Students in Lockdown to study',
-                'Qty: 10',
-                134,
-                2412,
-                '2-3per'),
+            _pushnotification(
+              'https://firebasestorage.googleapis.com/v0/b/donationapp-89333.appspot.com/o/images%2F2020-12-05%2020%3A54%3A58.958832?alt=media&token=2cb5a166-c8e3-4270-ae55-0cc4e563f138',
+              'Nathani Trust',
+              'Request: We Need Smartphones to help Needy Students in Lockdown to study',
+              'Qty: 10',
+            ),
             SizedBox(height: 10.0),
-            _listItem(
-                'assets/steak.png',
-                'Strawberry cupcake',
-                'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
-                '\$18.0',
-                134,
-                2412,
-                '2-3per'),
+            _pushnotification(
+              'assets/steak.png',
+              'Strawberry cupcake',
+              'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
+              '\$18.0',
+            ),
             SizedBox(height: 20.0),
-            _listItem(
-                'assets/steak.png',
-                'Strawberry cupcake',
-                'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
-                '\$18.0',
-                134,
-                2412,
-                '2-3per'),
+            _pushnotification(
+              'assets/steak.png',
+              'Strawberry cupcake',
+              'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
+              '\$18.0',
+            ),
             SizedBox(height: 20.0),
-            _listItem(
-                'assets/steak.png',
-                'Strawberry cupcake',
-                'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
-                '\$18.0',
-                134,
-                2412,
-                '2-3per'),
+            _pushnotification(
+              'assets/steak.png',
+              'Strawberry cupcake',
+              'Rich in taste, dense in taste, with a bit of bitterness in chocolate, it is a great...',
+              '\$18.0',
+            ),
             SizedBox(height: 20.0)
           ],
         ));
   }
 
-  _listItem(String imgurl, String username, String desc, String price,
-      int likes, int calCount, String serving) {
+  _pushnotification(String imgurl, String username, String desc, String price) {
     return Padding(
       padding: EdgeInsets.only(left: 15.0, top: 15.0),
       child: Stack(
@@ -172,24 +163,34 @@ class _NotificationsState extends State<Notifications>
                         Icon(Icons.thumb_up,
                             color: Colors.green[700], size: 15.0),
                         SizedBox(width: 5.0),
-                        Text(
-                          "Accept Request",
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green[700]),
+                        GestureDetector(
+                          onTap: () {
+                            print("Accepted");
+                          },
+                          child: Text(
+                            "Accept Request",
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green[700]),
+                          ),
                         ),
                         SizedBox(width: 25.0),
                         Icon(Icons.cancel, color: Colors.red, size: 15.0),
                         SizedBox(width: 5.0),
-                        Text(
-                          "Reject",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Montserrat',
-                              fontSize: 12.0,
-                              color: Colors.red),
+                        GestureDetector(
+                          onTap: () {
+                            print("Rejected");
+                          },
+                          child: Text(
+                            "Reject",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat',
+                                fontSize: 12.0,
+                                color: Colors.red),
+                          ),
                         ),
                       ],
                     ),

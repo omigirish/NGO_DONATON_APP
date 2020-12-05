@@ -1,5 +1,6 @@
 import 'package:mydonationapp/foodlist.dart';
 import 'package:flutter/material.dart';
+import 'package:mydonationapp/cookie_detail.dart';
 
 class Donations extends StatefulWidget {
   @override
@@ -8,6 +9,8 @@ class Donations extends StatefulWidget {
 
 class _DonationsState extends State<Donations>
     with SingleTickerProviderStateMixin {
+  List<Widget> donorList = [];
+  List<Widget> ngoList = [];
   TabController tabController;
 
   @override
@@ -18,6 +21,14 @@ class _DonationsState extends State<Donations>
 
   @override
   Widget build(BuildContext context) {
+    donorList = [];
+    donorList.add(
+        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
+    donorList.add(
+        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
+    donorList.add(
+        _buildDonationCard(context, "Food", 'Rice', 100, "Girish Salunke"));
+
     return Scaffold(
         // backgroundColor: Color(0xFFF9EFEB),
         backgroundColor: Colors.black87,
@@ -124,8 +135,11 @@ class _DonationsState extends State<Donations>
               child: TabBarView(
                 controller: tabController,
                 children: <Widget>[
-                  new FoodList(),
-                  new FoodList(),
+                  ListView(
+                    children: donorList,
+                    scrollDirection: Axis.horizontal,
+                  ),
+                  ListView(children: ngoList),
                 ],
               ),
             ),
@@ -303,4 +317,91 @@ class _DonationsState extends State<Donations>
       ),
     );
   }
+}
+
+_buildDonationCard(BuildContext context, String category, String itemName,
+    int qty, String name) {
+  return Padding(
+    padding: EdgeInsets.only(top: 8.0, left: 10.0, bottom: 10.0),
+    child: GestureDetector(
+      onTap: () => {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CookieDetail(
+                assetPath:
+                    "https://firebasestorage.googleapis.com/v0/b/donationapp-89333.appspot.com/o/images%2F2020-12-05%2020%3A54%3A58.958832?alt=media&token=2cb5a166-c8e3-4270-ae55-0cc4e563f138",
+                cookieprice: "Qty: " + qty.toString(),
+                cookiename: itemName),
+          ),
+        ),
+      },
+      child: Container(
+        height: 100,
+        decoration: BoxDecoration(
+          color: Colors.grey[900],
+          gradient: LinearGradient(
+              colors: [Colors.white, Colors.purple],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight),
+          borderRadius: BorderRadius.circular(7.0),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: 18.0, right: 15.0, top: 15.0),
+                  child: Icon(
+                    Icons.food_bank_rounded,
+                    color: Colors.purple[800],
+                    size: 100,
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              width: 125.0,
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text(
+                itemName,
+                style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Color(0xFF440206),
+                    fontSize: 22.0),
+              ),
+            ),
+            SizedBox(height: 5.0),
+            Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text(
+                'Qty: ' + qty.toString(),
+                style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Montserrat',
+                    color: Colors.purple),
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Padding(
+                padding: EdgeInsets.only(left: 4.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.account_box,
+                        color: Color(0xFFF75A4C), size: 15.0),
+                    SizedBox(width: 5.0),
+                    Text(
+                      name,
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 12.0,
+                          color: Colors.grey),
+                    )
+                  ],
+                ))
+          ],
+        ),
+      ),
+    ),
+  );
 }
