@@ -4,11 +4,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
-import 'package:mydonationapp/models/user.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mydonationapp/globals.dart' as global;
-import 'package:mydonationapp/shared/loading.dart';
 
 class ImageCapture extends StatefulWidget {
   createState() => _ImageCaptureState();
@@ -112,6 +108,7 @@ class _ImageCaptureState extends State<ImageCapture> {
                         loading = true;
                       });
                       global.imgurl = await _startUpload(_imageFile);
+                      await global.userinst.update({"img": global.imgurl});
                       setState(() {
                         loading = false;
                       });

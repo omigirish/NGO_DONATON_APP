@@ -5,6 +5,7 @@ import 'package:mydonationapp/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mydonationapp/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mydonationapp/globals.dart' as global;
 
 class AuthService {
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
@@ -27,7 +28,6 @@ class AuthService {
     } else {
       return null;
     }
-    ;
   }
 
   //auth change user stream
@@ -114,6 +114,13 @@ class AuthService {
           return null;
         }
       }
+      DocumentReference userinst =
+          FirebaseFirestore.instance.collection('users').doc(user.uid);
+      DocumentSnapshot userdata = await userinst.get();
+
+      global.userinst = userinst;
+      global.userdata = userdata;
+      global.uid = user.uid;
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);

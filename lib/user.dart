@@ -40,24 +40,12 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     final fuser = Provider.of<firebaseuser.User>(context);
-    final dbusers = Provider.of<QuerySnapshot>(context);
     String imgurl = global.imgurl;
-    setState(() {
-      print(imgurl);
-    });
-    // final globaldata = Provider.of<GlobalData>(context);
-    // print(globaldata.imgurl);
-    final myuser = dbusers.docs.firstWhere(
-      (element) {
-        return element.get('email') == fuser.email;
-      },
-      orElse: () {
-        return null;
-      },
-    );
+
     ScreenUtil.init(context, height: 896, width: 414, allowFontScaling: true);
 
     var profileInfo = Expanded(
@@ -70,22 +58,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Stack(
               children: <Widget>[
                 CircularProfileAvatar(
-                  myuser == null
-                      ? ""
-                      : (myuser.get('img') == null ? "" : myuser.get('img')),
+                  global.userdata == null ? "" : imgurl,
                   onTap: () async {
                     await Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ImageCapture()));
-                    print(global.imgurl);
-                    setState(() async {
+                    setState(() {
                       imgurl = global.imgurl;
-                      await FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(fuser.uid)
-                          .update({"img": imgurl});
-                      ;
                     });
                   },
                   // radius: kSpacingUnit.w * 5,
@@ -133,11 +113,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             child: Center(
               child: Text(
-                myuser == null
+                global.userdata == null
                     ? ""
-                    : (myuser.get('img') == null
-                        ? ""
-                        : 'Certified ' + myuser.get('type')),
+                    : "Certified " + global.userdata.get('type'),
                 style: kButtonTextStyle,
               ),
             ),
