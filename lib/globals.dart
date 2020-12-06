@@ -13,7 +13,7 @@ String itemphoto = "";
 
 var items = [];
 var ngoitemlist = [];
-// var ngoitems = [];
+var donoritemlist = [];
 
 DocumentReference userinst;
 DocumentSnapshot userdata;
@@ -44,6 +44,19 @@ getngodata() async {
     }
   }
   ngoitemlist = ngoitems;
+}
+
+getdonations() async {
+  List donoritems = new List();
+  ngodata = await ngoinst.where('type', isEqualTo: 'donor').get();
+  for (var data in ngodata.docs) {
+    try {
+      if (data.data()['items'] != null) donoritems.add(data.data()['items']);
+    } catch (e) {
+      // print(e);
+    }
+  }
+  donoritemlist = donoritems;
 }
 
 cleardata() {

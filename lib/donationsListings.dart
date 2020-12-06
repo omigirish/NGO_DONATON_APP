@@ -19,6 +19,7 @@ class _DonationsState extends State<Donations>
   @override
   void initState() {
     global.getdata();
+    global.getdonations();
     super.initState();
     tabController = TabController(vsync: this, length: 2);
   }
@@ -40,20 +41,35 @@ class _DonationsState extends State<Donations>
       }
     }
 
-    for (var items in global.ngoitemlist) {
-      for (var item in items) {
-        ngoList.add(_buildDonationCard(
-            context,
-            item['itemcategory'],
-            item['itemname'],
-            int.parse(item['itemcount']),
-            item['ngoname'] == null ? "" : item['ngoname'],
-            item['itemphoto']));
+    if (global.type == 'donor') {
+      for (var items in global.ngoitemlist) {
+        for (var item in items) {
+          ngoList.add(_buildDonationCard(
+              context,
+              item['itemcategory'],
+              item['itemname'],
+              int.parse(item['itemcount']),
+              item['ngoname'] == null ? "" : item['ngoname'],
+              item['itemphoto']));
+        }
+      }
+    } else {
+      for (var items in global.donoritemlist) {
+        for (var item in items) {
+          ngoList.add(_buildDonationCard(
+              context,
+              item['itemcategory'],
+              item['itemname'],
+              int.parse(item['itemcount']),
+              item['ngoname'] == null ? "" : item['ngoname'],
+              item['itemphoto']));
+        }
       }
     }
 
     Future.delayed(Duration(seconds: 1), () async {
       global.getngodata();
+      global.getdonations();
       ngoList.clear();
       setState(() {});
     });
@@ -147,7 +163,7 @@ class _DonationsState extends State<Donations>
               ),
               Tab(
                 child: Text(
-                  'NGO Requests',
+                  global.type == 'donor' ? 'NGO Requests' : 'List of Donors',
                   style: TextStyle(
                     fontFamily: 'Varela',
                     fontWeight: FontWeight.bold,
