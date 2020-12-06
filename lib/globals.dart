@@ -7,14 +7,18 @@ String type;
 
 String itemname = "";
 String itempickup = "";
-String itemcount = "";
-int itemcategory = -1;
+String itemcount = "1";
+int itemcategory = 0;
 String itemphoto = "";
 
 var items = [];
+var ngoitemlist = [];
+// var ngoitems = [];
 
 DocumentReference userinst;
 DocumentSnapshot userdata;
+CollectionReference ngoinst;
+QuerySnapshot ngodata;
 String calledfrom = "";
 
 getdata() async {
@@ -29,6 +33,19 @@ getdata() async {
   username = userdata.get('name');
 }
 
+getngodata() async {
+  List ngoitems = new List();
+  ngodata = await ngoinst.where('type', isEqualTo: 'ngo').get();
+  for (var data in ngodata.docs) {
+    try {
+      if (data.data()['items'] != null) ngoitems.add(data.data()['items']);
+    } catch (e) {
+      // print(e);
+    }
+  }
+  ngoitemlist = ngoitems;
+}
+
 cleardata() {
   imgurl = "";
   uid = "";
@@ -37,11 +54,12 @@ cleardata() {
 
   itemname = "";
   itempickup = "";
-  itemcount = "";
-  itemcategory = -1;
+  itemcount = "1";
+  itemcategory = 0;
   itemphoto = "";
 
   items = [];
+  // ngoitems = [];
 
   calledfrom = "";
 }

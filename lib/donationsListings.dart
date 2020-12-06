@@ -16,7 +16,6 @@ class _DonationsState extends State<Donations>
   List<Widget> donorList = [];
   List<Widget> ngoList = [];
   TabController tabController;
-
   @override
   void initState() {
     global.getdata();
@@ -27,6 +26,8 @@ class _DonationsState extends State<Donations>
   @override
   Widget build(BuildContext context) {
     donorList = []; //Donot Remove at any cost.....!!!!!
+    ngoList = [];
+
     if (global.items.length != 0) {
       for (var item in global.items) {
         donorList.add(_buildDonationCard(
@@ -38,7 +39,34 @@ class _DonationsState extends State<Donations>
             item['itemphoto']));
       }
     }
-    Future.delayed(Duration(seconds: 1), () {
+
+    for (var items in global.ngoitemlist) {
+      for (var item in items) {
+        ngoList.add(_buildDonationCard(
+            context,
+            item['itemcategory'],
+            item['itemname'],
+            int.parse(item['itemcount']),
+            global.username,
+            item['itemphoto']));
+      }
+    }
+
+    // if (global.ngoitems.length != 0) {
+    //   for (var item in global.ngoitems) {
+    //     try {
+    //       print(item);
+    //       ngoList.add(
+    //           _buildDonationCard(context, 1, 'maggi', 20, global.username, ""));
+    //     } catch (e) {
+    //       print(e);
+    //     }
+    //   }
+    // }
+
+    Future.delayed(Duration(seconds: 1), () async {
+      global.getngodata();
+      ngoList.clear();
       setState(() {});
     });
 
@@ -154,7 +182,13 @@ class _DonationsState extends State<Donations>
                     mainAxisSpacing: 15.0,
                     childAspectRatio: 0.9,
                     children: donorList),
-                ListView(children: ngoList),
+                GridView.count(
+                    crossAxisCount: 2,
+                    primary: false,
+                    crossAxisSpacing: 0.0,
+                    mainAxisSpacing: 15.0,
+                    childAspectRatio: 0.9,
+                    children: ngoList),
               ],
             ),
           ),
