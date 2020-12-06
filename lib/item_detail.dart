@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mydonationapp/globals.dart' as global;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ItemDetail extends StatefulWidget {
-  final assetPath, qty, cookiename, imgurl, username, mssg;
+  final assetPath, qty, cookiename, imgurl, username, mssg, uid;
 
   ItemDetail(
       {this.assetPath,
@@ -10,7 +11,8 @@ class ItemDetail extends StatefulWidget {
       this.cookiename,
       this.imgurl,
       this.username,
-      this.mssg});
+      this.mssg,
+      this.uid});
 
   @override
   _ItemDetailState createState() => _ItemDetailState();
@@ -137,8 +139,15 @@ class _ItemDetailState extends State<ItemDetail> {
             child: MaterialButton(
           onPressed: disabled
               ? null
-              : () {
-                  print("I was pressed");
+              : () async {
+                  await global.requestinst.doc().set({
+                    'uid': global.uid,
+                    'ngouid': widget.uid,
+                    'ngoname': widget.username,
+                    'quantity': widget.qty,
+                    'message': widget.mssg,
+                    'status': 'pending'
+                  });
                 },
           child: Container(
               width: MediaQuery.of(context).size.width - 50.0,

@@ -37,7 +37,8 @@ class _DonationsState extends State<Donations>
             item['itemname'],
             int.parse(item['itemcount']),
             global.username,
-            item['itemphoto']));
+            item['itemphoto'],
+            item['uid']));
       }
     }
 
@@ -50,7 +51,8 @@ class _DonationsState extends State<Donations>
               item['itemname'],
               int.parse(item['itemcount']),
               item['ngoname'] == null ? "" : item['ngoname'],
-              item['itemphoto']));
+              item['itemphoto'],
+              item['uid']));
         }
       }
     } else {
@@ -62,7 +64,8 @@ class _DonationsState extends State<Donations>
               item['itemname'],
               int.parse(item['itemcount']),
               item['ngoname'] == null ? "" : item['ngoname'],
-              item['itemphoto']));
+              item['itemphoto'],
+              item['uid']));
         }
       }
     }
@@ -175,7 +178,7 @@ class _DonationsState extends State<Donations>
           ),
           SizedBox(height: 10.0),
           Container(
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height - 370,
             child: TabBarView(
               controller: tabController,
               children: <Widget>[
@@ -202,7 +205,7 @@ class _DonationsState extends State<Donations>
   }
 
   _buildDonationCard(BuildContext context, int category, String itemName,
-      int qty, String name, String imgurl) {
+      int qty, String name, String imgurl, String uid) {
     List<dynamic> iconlist = [
       Icons.food_bank_rounded,
       Icons.checkroom,
@@ -220,11 +223,13 @@ class _DonationsState extends State<Donations>
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => ItemDetail(
-                  imgurl: imgurl,
-                  qty: qty,
-                  cookiename: itemName,
-                  username: name,
-                  mssg: "Andheri West"),
+                imgurl: imgurl,
+                qty: qty,
+                cookiename: itemName,
+                username: name,
+                mssg: "Andheri West",
+                uid: uid,
+              ),
             ),
           ),
         },

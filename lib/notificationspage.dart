@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
+import 'package:mydonationapp/globals.dart' as global;
 
 class Notifications extends StatefulWidget {
   @override
@@ -21,27 +23,28 @@ class _NotificationsState extends State<Notifications>
   @override
   Widget build(BuildContext context) {
     notilist = []; // Never Remive this line
+    global.requestlist.forEach((data) async {
+      notilist.add(_pushnotification(
+        data['img'],
+        data['ngoname'],
+        'Request: ' + data['message'],
+        'Qty: ' + data['quantity'].toString(),
+      ));
+    });
 
-    notilist.add(_pushnotification(
-      'https://firebasestorage.googleapis.com/v0/b/donationapp-89333.appspot.com/o/images%2F2020-12-06%2015%3A51%3A43.829036?alt=media&token=66112a12-5495-46cf-8065-a009ee98cb41',
-      'Salunke Trust',
-      'Request: We Need Smartphones to help Needy Students in Lockdown to study',
-      'Qty: 50',
-    ));
+    // notilist.add(_pushnotification(
+    //   'https://lh3.googleusercontent.com/a-/AOh14Gh2wZV5hAUJ4rJbc4Yb3_xb4oGiF3F8zjGOVbqQsPo=s96-c',
+    //   'Nathani Trust',
+    //   'Request: We Need Smartphones to help Needy Students in Lockdown to study',
+    //   'Qty: 10',
+    // ));
 
-    notilist.add(_pushnotification(
-      'https://lh3.googleusercontent.com/a-/AOh14Gh2wZV5hAUJ4rJbc4Yb3_xb4oGiF3F8zjGOVbqQsPo=s96-c',
-      'Nathani Trust',
-      'Request: We Need Smartphones to help Needy Students in Lockdown to study',
-      'Qty: 10',
-    ));
-
-    notilist.add(_pushnotification(
-      'https://firebasestorage.googleapis.com/v0/b/donationapp-89333.appspot.com/o/images%2F2020-12-05%2020%3A54%3A58.958832?alt=media&token=2cb5a166-c8e3-4270-ae55-0cc4e563f138',
-      'Soni Trust',
-      'Request: We Need Smartphones to help Needy Students in Lockdown to study',
-      'Qty: 10',
-    ));
+    // notilist.add(_pushnotification(
+    //   'https://firebasestorage.googleapis.com/v0/b/donationapp-89333.appspot.com/o/images%2F2020-12-05%2020%3A54%3A58.958832?alt=media&token=2cb5a166-c8e3-4270-ae55-0cc4e563f138',
+    //   'Soni Trust',
+    //   'Request: We Need Smartphones to help Needy Students in Lockdown to study',
+    //   'Qty: 10',
+    // ));
     return Scaffold(
         backgroundColor: Colors.black87,
         body: ListView(
