@@ -26,8 +26,12 @@ class _LoginState extends State<Authenticate> {
       DocumentReference userinst =
           FirebaseFirestore.instance.collection('users').doc(user.uid);
       global.userinst = userinst;
+      CollectionReference ngoinst =
+          FirebaseFirestore.instance.collection('users');
+      global.ngoinst = ngoinst;
       global.uid = user.uid;
       global.getdata();
+      // global.getngodata();
       return HomePage();
     }
   }
