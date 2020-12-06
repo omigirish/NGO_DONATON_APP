@@ -35,6 +35,10 @@ class _NotificationsState extends State<Notifications>
         'Qty: ' + data['quantity'].toString(),
       ));
     });
+    Future.delayed(Duration(seconds: 1), () async {
+      global.getrequests();
+      setState(() {});
+    });
 
     // notilist.add(_pushnotification(
     //   'https://lh3.googleusercontent.com/a-/AOh14Gh2wZV5hAUJ4rJbc4Yb3_xb4oGiF3F8zjGOVbqQsPo=s96-c',
