@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mydonationapp/globals.dart' as global;
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 
 class History extends StatefulWidget {
   @override
@@ -61,56 +62,46 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                 ),
               ],
             ),
-            _listItem(
-                'assets/steak.png',
-                'Chocolate lemon cup cake',
-                'The sour and sweetness of the lemon neutralizes the sweetness of the cream',
-                '\$18.0',
-                134,
-                2412,
-                '2-3per'),
+            _pushnotification(
+              'https://firebasestorage.googleapis.com/v0/b/donationapp-89333.appspot.com/o/images%2F2020-12-06%2015%3A51%3A43.829036?alt=media&token=66112a12-5495-46cf-8065-a009ee98cb41',
+              'Salunke Trust',
+              'Request: We Need Smartphones to help Needy Students in Lockdown to study',
+              'Qty: 50',
+            ),
             SizedBox(height: 10.0),
           ],
         ));
   }
 
-  _listItem(String imgPath, String foodName, String desc, String price,
-      int likes, int calCount, String serving) {
+  _pushnotification(String imgurl, String username, String desc, String price) {
     return Padding(
       padding: EdgeInsets.only(left: 15.0, top: 15.0),
       child: Stack(
         children: <Widget>[
           Container(
-            height: 170.0,
+            height: 145.0,
             width: MediaQuery.of(context).size.width,
           ),
           Positioned(
             left: 15.0,
             top: 30.0,
             child: Container(
-              height: 125.0,
+              height: 100.0,
               width: MediaQuery.of(context).size.width - 15.0,
               decoration: BoxDecoration(
-                color: Color(0xFFF9EFEB),
+                color: Colors.purple[50],
                 borderRadius: BorderRadius.circular(5.0),
-                // boxShadow: [
-                //   BoxShadow(
-                //       color: Colors.grey.withOpacity(0.3),
-                //       spreadRadius: 3.0,
-                //       blurRadius: 3.0)
-                // ],
               ),
-              // child: Text('Helloworld'),
             ),
           ),
           Positioned(
               left: 95.0,
               top: 64.0,
               child: Container(
-                height: 105.0,
+                height: 80.0,
                 width: MediaQuery.of(context).size.width - 15.0,
                 decoration: BoxDecoration(
-                    color: Color(0xFFF9EFEB),
+                    color: Colors.purple[50],
                     borderRadius: BorderRadius.circular(5.0),
                     boxShadow: [
                       BoxShadow(
@@ -124,45 +115,46 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                     padding: EdgeInsets.only(bottom: 10.0, left: 10.0),
                     child: Row(
                       children: <Widget>[
-                        Icon(Icons.favorite,
-                            color: Color(0xFFF75A4C), size: 15.0),
+                        SizedBox(width: 25.0),
+                        Icon(Icons.thumb_up,
+                            color: Colors.green[700], size: 15.0),
                         SizedBox(width: 5.0),
-                        Text(
-                          likes.toString(),
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 12.0,
-                              color: Colors.grey),
+                        GestureDetector(
+                          onTap: () {
+                            print("Accepted");
+                          },
+                          child: Text(
+                            "Accept Request",
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green[700]),
+                          ),
                         ),
                         SizedBox(width: 25.0),
-                        Icon(Icons.account_box,
-                            color: Color(0xFFF75A4C), size: 15.0),
+                        Icon(Icons.cancel, color: Colors.red, size: 15.0),
                         SizedBox(width: 5.0),
-                        Text(
-                          calCount.toString() + 'cal',
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 12.0,
-                              color: Colors.grey),
+                        GestureDetector(
+                          onTap: () {
+                            print("Rejected");
+                          },
+                          child: Text(
+                            "Reject",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat',
+                                fontSize: 12.0,
+                                color: Colors.red),
+                          ),
                         ),
-                        SizedBox(width: 25.0),
-                        Icon(Icons.play_circle_outline,
-                            color: Color(0xFFF75A4C), size: 15.0),
-                        SizedBox(width: 5.0),
-                        Text(
-                          serving,
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 12.0,
-                              color: Colors.grey),
-                        )
                       ],
                     ),
                   ),
                 ),
               )),
           Container(
-            height: 125.0,
+            height: 115.0,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
@@ -172,26 +164,31 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
               padding: EdgeInsets.all(8.0),
               child: Row(
                 children: <Widget>[
-                  Image.asset(imgPath, fit: BoxFit.cover),
+                  CircularProfileAvatar(
+                    imgurl,
+                    animateFromOldImageOnUrlChange: true,
+                    radius: 45,
+                  ),
                   SizedBox(width: 10.0),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(height: 10.0),
                       Text(
-                        foodName,
+                        username,
                         style: TextStyle(
+                            fontWeight: FontWeight.bold,
                             color: Color(0xFF563734),
                             fontFamily: 'Montserrat',
                             fontSize: 15.0),
                       ),
                       SizedBox(height: 5.0),
                       Container(
-                        width: 175.0,
+                        width: 260.0,
                         child: Text(
                           desc,
                           style: TextStyle(
-                              color: Color(0xFFB2A9A9),
+                              color: Colors.black87,
                               fontFamily: 'Montserrat',
                               fontSize: 11.0),
                         ),
@@ -200,7 +197,8 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                       Text(
                         price.toString(),
                         style: TextStyle(
-                            color: Color(0xFFF76053),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.purple,
                             fontFamily: 'Montserrat',
                             fontSize: 15.0),
                       )

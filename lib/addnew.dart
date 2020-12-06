@@ -11,6 +11,7 @@ class Addnew extends StatefulWidget {
 }
 
 class _AddnewState extends State<Addnew> {
+  bool isdonor = global.type == "donor" ? true : false;
   double nos = 1;
   @override
   Widget build(BuildContext context) {
@@ -50,15 +51,25 @@ class _AddnewState extends State<Addnew> {
                   children: <Widget>[
                     FadeAnimation(
                       1,
-                      Text(
-                        "Donate for Good",
-                        style: TextStyle(
-                          fontSize: 45,
-                          fontFamily: "yellowtail",
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      isdonor
+                          ? Text(
+                              "Donate for Good",
+                              style: TextStyle(
+                                fontSize: 45,
+                                fontFamily: "yellowtail",
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          : Text(
+                              "Request Donation",
+                              style: TextStyle(
+                                fontSize: 45,
+                                fontFamily: "yellowtail",
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                     ),
                     FadeAnimation(
                       1,
