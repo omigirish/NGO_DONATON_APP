@@ -220,7 +220,8 @@ class _ImageCaptureState extends State<ImageCapture> {
                                 'itempickup': global.itempickup,
                                 'itemcount': global.itemcount,
                                 'itemcategory': global.itemcategory,
-                                'itemphoto': global.itemphoto
+                                'itemphoto': global.itemphoto,
+                                'ngoname': global.username,
                               }
                             ])
                           });

@@ -47,22 +47,10 @@ class _DonationsState extends State<Donations>
             item['itemcategory'],
             item['itemname'],
             int.parse(item['itemcount']),
-            global.username,
+            item['ngoname'] == null ? "" : item['ngoname'],
             item['itemphoto']));
       }
     }
-
-    // if (global.ngoitems.length != 0) {
-    //   for (var item in global.ngoitems) {
-    //     try {
-    //       print(item);
-    //       ngoList.add(
-    //           _buildDonationCard(context, 1, 'maggi', 20, global.username, ""));
-    //     } catch (e) {
-    //       print(e);
-    //     }
-    //   }
-    // }
 
     Future.delayed(Duration(seconds: 1), () async {
       global.getngodata();
