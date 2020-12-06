@@ -58,129 +58,135 @@ class _DonationsState extends State<Donations>
       setState(() {});
     });
 
-    return Scaffold(
-      // backgroundColor: Color(0xFFF9EFEB),
-      backgroundColor: Colors.black87,
-      body: ListView(
-        children: <Widget>[
-          Stack(
-            children: <Widget>[
-              Container(
-                height: 220.0,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      // colors: [Color(0x000000), Color(0xBB923CB5)],
-                      colors: [
-                        Colors.purple[500], //Color(0xBB923CB5)
-                        Color(0x21212),
-                      ], begin: Alignment.topLeft, end: Alignment.bottomCenter),
-                  borderRadius:
-                      BorderRadius.only(bottomRight: Radius.circular(75.0)),
-                  // color: Color(0xFFFD7465)),
-                  // color: Colors.grey[900],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 35.0, left: 15.0),
-                child: Text(
-                  'One for All',
-                  style: TextStyle(
-                      fontFamily: 'yellowTail',
-                      fontSize: 40.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 95.0, left: 15.0),
-                child: Text(
-                  'Donation Listings',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 28.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 160.0, left: 15.0, right: 35.0),
-                child: Container(
+    return Container(
+      child: Scaffold(
+        // backgroundColor: Color(0xFFF9EFEB),
+        backgroundColor: Colors.black87,
+        body: ListView(
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Container(
+                  height: 220.0,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(25.0),
-                        bottomLeft: Radius.circular(5.0),
-                        topLeft: Radius.circular(5.0),
-                      )),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(top: 14.0),
-                      hintText: 'Search for an item',
-                      hintStyle:
-                          TextStyle(fontFamily: 'Montserrat', fontSize: 14.0),
-                      prefixIcon: Icon(Icons.search, color: Colors.grey),
+                    gradient: LinearGradient(
+                        // colors: [Color(0x000000), Color(0xBB923CB5)],
+                        colors: [
+                          Colors.purple[500], //Color(0xBB923CB5)
+                          Color(0x21212),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomCenter),
+                    borderRadius:
+                        BorderRadius.only(bottomRight: Radius.circular(75.0)),
+                    // color: Color(0xFFFD7465)),
+                    // color: Colors.grey[900],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 35.0, left: 15.0),
+                  child: Text(
+                    'One for All',
+                    style: TextStyle(
+                        fontFamily: 'yellowTail',
+                        fontSize: 40.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 95.0, left: 15.0),
+                  child: Text(
+                    'Donation Listings',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 28.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 160.0, left: 15.0, right: 35.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(25.0),
+                          bottomLeft: Radius.circular(5.0),
+                          topLeft: Radius.circular(5.0),
+                        )),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(top: 14.0),
+                        hintText: 'Search for an item',
+                        hintStyle:
+                            TextStyle(fontFamily: 'Montserrat', fontSize: 14.0),
+                        prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            TabBar(
+              controller: tabController,
+              indicatorColor: Colors.purple, //Color(0xFFFE8A7E)
+              indicatorSize: TabBarIndicatorSize.label,
+              indicatorWeight: 4.0,
+              isScrollable: true,
+              labelColor: Colors.purple, //Color(0xFF440206)
+              unselectedLabelColor: Colors.white, //Color(0xFF440206)
+              tabs: <Widget>[
+                Tab(
+                  child: Text(
+                    'Listed By You',
+                    style: TextStyle(
+                      fontFamily: 'Varela',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.0,
                     ),
                   ),
                 ),
-              )
-            ],
-          ),
-          TabBar(
-            controller: tabController,
-            indicatorColor: Colors.purple, //Color(0xFFFE8A7E)
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorWeight: 4.0,
-            isScrollable: true,
-            labelColor: Colors.purple, //Color(0xFF440206)
-            unselectedLabelColor: Colors.white, //Color(0xFF440206)
-            tabs: <Widget>[
-              Tab(
-                child: Text(
-                  'Listed By You',
-                  style: TextStyle(
-                    fontFamily: 'Varela',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15.0,
+                Tab(
+                  child: Text(
+                    'NGO Requests',
+                    style: TextStyle(
+                      fontFamily: 'Varela',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.0,
+                    ),
                   ),
                 ),
-              ),
-              Tab(
-                child: Text(
-                  'NGO Requests',
-                  style: TextStyle(
-                    fontFamily: 'Varela',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15.0,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10.0),
-          Container(
-            height: MediaQuery.of(context).size.height,
-            child: TabBarView(
-              controller: tabController,
-              children: <Widget>[
-                GridView.count(
-                    crossAxisCount: 2,
-                    primary: false,
-                    crossAxisSpacing: 0.0,
-                    mainAxisSpacing: 15.0,
-                    childAspectRatio: 0.9,
-                    children: donorList),
-                GridView.count(
-                    crossAxisCount: 2,
-                    primary: false,
-                    crossAxisSpacing: 0.0,
-                    mainAxisSpacing: 15.0,
-                    childAspectRatio: 0.9,
-                    children: ngoList),
               ],
             ),
-          ),
-        ],
+            SizedBox(height: 10.0),
+            Container(
+              height: donorList.length > ngoList.length
+                  ? donorList.length * 150.0
+                  : ngoList.length * 150.0,
+              child: TabBarView(
+                controller: tabController,
+                children: <Widget>[
+                  GridView.count(
+                      crossAxisCount: 2,
+                      primary: false,
+                      crossAxisSpacing: 0.0,
+                      mainAxisSpacing: 15.0,
+                      childAspectRatio: 0.9,
+                      children: donorList),
+                  GridView.count(
+                      crossAxisCount: 2,
+                      primary: false,
+                      crossAxisSpacing: 0.0,
+                      mainAxisSpacing: 15.0,
+                      childAspectRatio: 0.9,
+                      children: ngoList),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
