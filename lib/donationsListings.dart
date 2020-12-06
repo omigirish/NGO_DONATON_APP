@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
-import 'package:mydonationapp/cookie_detail.dart';
+import 'package:mydonationapp/item_detail.dart';
 import 'package:mydonationapp/globals.dart' as global;
 
 class Donations extends StatefulWidget {
@@ -163,237 +163,98 @@ class _DonationsState extends State<Donations>
     );
   }
 
-  _listItem(String imgPath, String foodName, String desc, String price,
-      int likes, int calCount, String serving) {
+  _buildDonationCard(BuildContext context, int category, String itemName,
+      int qty, String name, String imgurl) {
+    List<dynamic> iconlist = [
+      Icons.food_bank_rounded,
+      Icons.checkroom,
+      LineAwesomeIcons.gamepad,
+      LineAwesomeIcons.medkit,
+      Icons.electrical_services_rounded,
+      LineAwesomeIcons.book,
+      LineAwesomeIcons.gift,
+    ];
+
     return Padding(
-      padding: EdgeInsets.only(left: 15.0, top: 15.0),
-      child: Stack(
-        children: <Widget>[
-          Container(
-            height: 170.0,
-            width: MediaQuery.of(context).size.width,
-          ),
-          Positioned(
-            left: 15.0,
-            top: 30.0,
-            child: Container(
-              height: 125.0,
-              width: MediaQuery.of(context).size.width - 15.0,
-              decoration: BoxDecoration(
-                color: Color(0xFFF9EFEB),
-                borderRadius: BorderRadius.circular(5.0),
-                // boxShadow: [
-                //   BoxShadow(
-                //       color: Colors.grey.withOpacity(0.3),
-                //       spreadRadius: 3.0,
-                //       blurRadius: 3.0)
-                // ],
-              ),
-              child: Text('Helloworld'),
+      padding: EdgeInsets.only(top: 8.0, left: 15.0, bottom: 10.0, right: 15),
+      child: GestureDetector(
+        onTap: () => {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ItemDetail(
+                  imgurl: imgurl,
+                  qty: qty,
+                  cookiename: itemName,
+                  username: name,
+                  mssg: "Andheri West"),
             ),
           ),
-          Positioned(
-              left: 95.0,
-              top: 64.0,
-              child: Container(
-                height: 105.0,
-                width: MediaQuery.of(context).size.width - 15.0,
-                decoration: BoxDecoration(
-                    color: Color(0xFFF9EFEB),
-                    borderRadius: BorderRadius.circular(5.0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 3.0,
-                          blurRadius: 3.0)
-                    ]),
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 10.0, left: 10.0),
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.favorite,
-                            color: Color(0xFFF75A4C), size: 15.0),
-                        SizedBox(width: 5.0),
-                        Text(
-                          likes.toString(),
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 12.0,
-                              color: Colors.grey),
-                        ),
-                        SizedBox(width: 25.0),
-                        Icon(Icons.account_box,
-                            color: Color(0xFFF75A4C), size: 15.0),
-                        SizedBox(width: 5.0),
-                        Text(
-                          calCount.toString() + 'cal',
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 12.0,
-                              color: Colors.grey),
-                        ),
-                        SizedBox(width: 25.0),
-                        Icon(Icons.play_circle_outline,
-                            color: Color(0xFFF75A4C), size: 15.0),
-                        SizedBox(width: 5.0),
-                        Text(
-                          serving,
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 12.0,
-                              color: Colors.grey),
-                        )
-                      ],
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(7.0),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: 28.0, right: 15.0, top: 5.0),
+                    child: Icon(
+                      iconlist[category],
+                      color: Colors.grey[900],
+                      size: 110,
                     ),
                   ),
-                ),
-              )),
-          Container(
-            height: 125.0,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: Colors.white,
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: <Widget>[
-                  Image.asset(imgPath, fit: BoxFit.cover),
-                  SizedBox(width: 10.0),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 10.0),
-                      Text(
-                        foodName,
-                        style: TextStyle(
-                            color: Color(0xFF563734),
-                            fontFamily: 'Montserrat',
-                            fontSize: 15.0),
-                      ),
-                      SizedBox(height: 5.0),
-                      Container(
-                        width: 175.0,
-                        child: Text(
-                          desc,
-                          style: TextStyle(
-                              color: Color(0xFFB2A9A9),
-                              fontFamily: 'Montserrat',
-                              fontSize: 11.0),
-                        ),
-                      ),
-                      SizedBox(height: 10.0),
-                      Text(
-                        price.toString(),
-                        style: TextStyle(
-                            color: Color(0xFFF76053),
-                            fontFamily: 'Montserrat',
-                            fontSize: 15.0),
-                      )
-                    ],
-                  )
                 ],
               ),
-            ),
-          )
-        ],
+              Container(
+                width: 125.0,
+                padding: EdgeInsets.only(left: 20.0),
+                child: Text(
+                  itemName,
+                  style: TextStyle(
+                      fontFamily: "Varela",
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.0),
+                ),
+              ),
+              SizedBox(height: 5.0),
+              Padding(
+                padding: EdgeInsets.only(left: 20.0),
+                child: Text(
+                  'Qty: ' + qty.toString(),
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Varela',
+                      color: Colors.purple),
+                ),
+              ),
+              SizedBox(height: 10.0),
+              Padding(
+                  padding: EdgeInsets.only(left: 18.0),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.account_box, color: Colors.purple, size: 15.0),
+                      SizedBox(width: 5.0),
+                      Text(
+                        name,
+                        style: TextStyle(
+                            fontFamily: 'Varela',
+                            fontSize: 13.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      )
+                    ],
+                  ))
+            ],
+          ),
+        ),
       ),
     );
   }
-}
-
-_buildDonationCard(BuildContext context, int category, String itemName, int qty,
-    String name, String imgurl) {
-  List<dynamic> iconlist = [
-    Icons.food_bank_rounded,
-    Icons.checkroom,
-    LineAwesomeIcons.gamepad,
-    LineAwesomeIcons.medkit,
-    Icons.electrical_services_rounded,
-    LineAwesomeIcons.gift
-  ];
-
-  return Padding(
-    padding: EdgeInsets.only(top: 8.0, left: 15.0, bottom: 10.0, right: 15),
-    child: GestureDetector(
-      onTap: () => {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CookieDetail(
-                imgurl: imgurl,
-                cookieprice: "Qty: " + qty.toString(),
-                cookiename: itemName),
-          ),
-        ),
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(7.0),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(left: 28.0, right: 15.0, top: 5.0),
-                  child: Icon(
-                    iconlist[category],
-                    color: Colors.grey[900],
-                    size: 110,
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              width: 125.0,
-              padding: EdgeInsets.only(left: 20.0),
-              child: Text(
-                itemName,
-                style: TextStyle(
-                    fontFamily: "Varela",
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0),
-              ),
-            ),
-            SizedBox(height: 5.0),
-            Padding(
-              padding: EdgeInsets.only(left: 20.0),
-              child: Text(
-                'Qty: ' + qty.toString(),
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Varela',
-                    color: Colors.purple),
-              ),
-            ),
-            SizedBox(height: 10.0),
-            Padding(
-                padding: EdgeInsets.only(left: 18.0),
-                child: Row(
-                  children: <Widget>[
-                    Icon(Icons.account_box,
-                        color: Color(0xFFF75A4C), size: 15.0),
-                    SizedBox(width: 5.0),
-                    Text(
-                      name,
-                      style: TextStyle(
-                          fontFamily: 'Varela',
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    )
-                  ],
-                ))
-          ],
-        ),
-      ),
-    ),
-  );
 }

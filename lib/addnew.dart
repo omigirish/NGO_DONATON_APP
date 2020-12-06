@@ -182,6 +182,10 @@ class _AddnewState extends State<Addnew> {
                               style: TextStyle(color: Colors.purple[400]),
                             ),
                             Text(
+                              "---- Books ----",
+                              style: TextStyle(color: Colors.purple[400]),
+                            ),
+                            Text(
                               "---- Other ----",
                               style: TextStyle(color: Colors.purple[400]),
                             ),

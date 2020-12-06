@@ -12,7 +12,7 @@ import 'package:flutter/widgets.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mydonationapp/globals.dart' as global;
 import 'package:mydonationapp/shared/loading.dart';
-import 'package:mydonationapp/cookie_detail.dart';
+import 'package:mydonationapp/item_detail.dart';
 import 'package:mydonationapp/homePage.dart';
 
 class ImageCapture extends StatefulWidget {
@@ -178,10 +178,12 @@ class _ImageCaptureState extends State<ImageCapture> {
                             ),
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => CookieDetail(
-                                      assetPath: _imageFile,
-                                      cookieprice: "Qty: " + 10.toString(),
-                                      cookiename: "Towels")));
+                                  builder: (context) => ItemDetail(
+                                      qty: 10,
+                                      cookiename: "Vanilla",
+                                      username: global.username,
+                                      mssg: "Andheri West",
+                                      assetPath: _imageFile)));
                             },
                           ),
                         )
