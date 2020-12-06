@@ -14,8 +14,10 @@ String itemphoto = "";
 var items = [];
 var ngoitemlist = [];
 var donoritemlist = [];
+var requestlist = [];
 
 DocumentReference userinst;
+CollectionReference requestinst;
 DocumentSnapshot userdata;
 CollectionReference ngoinst;
 QuerySnapshot ngodata;
@@ -57,6 +59,24 @@ getdonations() async {
     }
   }
   donoritemlist = donoritems;
+}
+
+getrequests() async {
+  List requests = new List();
+  var data = await requestinst.where('ngouid', isEqualTo: uid).get();
+  for (var d in data.docs) {
+    DocumentSnapshot tmp = await ngoinst.doc(d['uid']).get();
+    requests.add({
+      'ngoname': d['ngoname'],
+      'message': d['message'],
+      'ngouid': d['ngouid'],
+      'uid': d['uid'],
+      'quantity': d['quantity'],
+      'status': d['status'],
+      'img': tmp['img'],
+    });
+  }
+  requestlist = requests;
 }
 
 cleardata() {

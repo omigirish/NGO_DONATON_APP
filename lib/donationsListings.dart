@@ -38,7 +38,8 @@ class _DonationsState extends State<Donations>
             int.parse(item['itemcount']),
             global.username,
             item['itemphoto'],
-            item['itempickup']));
+            item['itempickup'],
+            item['uid']));
       }
     }
 
@@ -52,7 +53,8 @@ class _DonationsState extends State<Donations>
               int.parse(item['itemcount']),
               item['ngoname'] == null ? "" : item['ngoname'],
               item['itemphoto'],
-              item['itempickup']));
+              item['itempickup'],
+              item['uid']));
         }
       }
     } else {
@@ -65,7 +67,8 @@ class _DonationsState extends State<Donations>
               int.parse(item['itemcount']),
               item['ngoname'] == null ? "" : item['ngoname'],
               item['itemphoto'],
-              item["itempickup"]));
+              item["itempickup"],
+              item['uid']));
         }
       }
     }
@@ -205,7 +208,7 @@ class _DonationsState extends State<Donations>
   }
 
   _buildDonationCard(BuildContext context, int category, String itemName,
-      int qty, String name, String imgurl, String itemmssg) {
+      int qty, String name, String imgurl, String itemmssg, String uid) {
     List<dynamic> iconlist = [
       Icons.food_bank_rounded,
       Icons.checkroom,
@@ -227,7 +230,8 @@ class _DonationsState extends State<Donations>
                   qty: qty.toString(),
                   cookiename: itemName,
                   username: name,
-                  mssg: itemmssg),
+                  mssg: itemmssg,
+                  uid: uid),
             ),
           ),
         },

@@ -246,6 +246,7 @@ class _ImageCaptureState extends State<ImageCapture> {
                                     'itemcategory': global.itemcategory,
                                     'itemphoto': global.itemphoto,
                                     'ngoname': global.username,
+                                    'uid': global.uid
                                   }
                                 ])
                               });

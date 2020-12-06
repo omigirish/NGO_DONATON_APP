@@ -2,9 +2,10 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mydonationapp/globals.dart' as global;
 import 'package:mydonationapp/homePage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ItemDetail extends StatefulWidget {
-  final assetPath, qty, cookiename, imgurl, username, mssg;
+  final assetPath, qty, cookiename, imgurl, username, mssg, uid;
 
   ItemDetail(
       {this.assetPath,
@@ -12,7 +13,8 @@ class ItemDetail extends StatefulWidget {
       this.cookiename,
       this.imgurl,
       this.username,
-      this.mssg});
+      this.mssg,
+      this.uid});
 
   @override
   _ItemDetailState createState() => _ItemDetailState();
@@ -165,7 +167,16 @@ class _ItemDetailState extends State<ItemDetail> {
                         tittle: "Confirm Request",
                         desc: 'Are you sure you Want to Send this Request?',
                         btnCancelOnPress: () {},
-                        btnOkOnPress: () {},
+                        btnOkOnPress: () async {
+                          await global.requestinst.doc().set({
+                            'uid': global.uid,
+                            'ngouid': widget.uid,
+                            'ngoname': widget.username,
+                            'quantity': widget.qty,
+                            'message': widget.mssg,
+                            'status': 'pending'
+                          });
+                        },
                       )..show();
                     },
               child: Container(
