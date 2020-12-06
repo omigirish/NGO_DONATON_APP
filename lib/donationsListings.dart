@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mydonationapp/cookie_detail.dart';
 import 'package:mydonationapp/globals.dart' as global;
 
@@ -303,8 +305,17 @@ class _DonationsState extends State<Donations>
   }
 }
 
-_buildDonationCard(BuildContext context, String category, String itemName,
-    int qty, String name, String imgurl) {
+_buildDonationCard(BuildContext context, int category, String itemName, int qty,
+    String name, String imgurl) {
+  List<dynamic> iconlist = [
+    Icons.food_bank_rounded,
+    Icons.checkroom,
+    LineAwesomeIcons.gamepad,
+    LineAwesomeIcons.medkit,
+    Icons.electrical_services_rounded,
+    LineAwesomeIcons.gift
+  ];
+
   return Padding(
     padding: EdgeInsets.only(top: 8.0, left: 15.0, bottom: 10.0, right: 15),
     child: GestureDetector(
@@ -331,7 +342,7 @@ _buildDonationCard(BuildContext context, String category, String itemName,
                 Padding(
                   padding: EdgeInsets.only(left: 28.0, right: 15.0, top: 5.0),
                   child: Icon(
-                    Icons.food_bank_rounded,
+                    iconlist[category],
                     color: Colors.grey[900],
                     size: 110,
                   ),

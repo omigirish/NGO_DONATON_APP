@@ -198,7 +198,7 @@ class _NotificationsState extends State<Notifications>
                 ),
               )),
           Container(
-            height: 105.0,
+            height: 115.0,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),

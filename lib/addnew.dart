@@ -158,7 +158,7 @@ class _AddnewState extends State<Addnew> {
                           itemExtent: 35,
                           backgroundColor: Colors.grey[900],
                           onSelectedItemChanged: (int l) {
-                            global.itemcategory = x[l];
+                            global.itemcategory = l;
                           },
                           children: <Widget>[
                             Text(

@@ -8,7 +8,7 @@ String type;
 String itemname = "";
 String itempickup = "";
 String itemcount = "";
-String itemcategory = "";
+int itemcategory = -1;
 String itemphoto = "";
 
 var items = [];
@@ -38,7 +38,7 @@ cleardata() {
   itemname = "";
   itempickup = "";
   itemcount = "";
-  itemcategory = "";
+  itemcategory = -1;
   itemphoto = "";
 
   items = [];
