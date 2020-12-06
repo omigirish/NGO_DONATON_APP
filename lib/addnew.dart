@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mydonationapp/services/imagecapture.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mydonationapp/globals.dart' as global;
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class Addnew extends StatefulWidget {
   @override
@@ -117,7 +118,9 @@ class _AddnewState extends State<Addnew> {
                                 cursorColor: Colors.purple,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "Pickup Address",
+                                    hintText: global.type == 'donor'
+                                        ? "PickUp Address"
+                                        : "Message to Donors",
                                     hintStyle: TextStyle(color: Colors.grey)),
                                 onChanged: (value) {
                                   global.itempickup = value;
@@ -206,14 +209,28 @@ class _AddnewState extends State<Addnew> {
                     ),
                     FadeAnimation(
                       1,
-                      GestureDetector(
-                        onTap: () {
-                          global.calledfrom = "addnew";
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ImageCapture()));
-                        },
+                      MaterialButton(
+                        onPressed: global.itemname == "" ||
+                                global.itempickup == "" ||
+                                global.itemcount == 0
+                            ? () {
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.ERROR,
+                                  animType: AnimType.BOTTOMSLIDE,
+                                  tittle: 'Invalid Entries',
+                                  desc:
+                                      'Make Sure you Enter both fields correctly & ItemCount is not 0',
+                                  btnCancelOnPress: () {},
+                                )..show();
+                              }
+                            : () {
+                                global.calledfrom = "addnew";
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ImageCapture()));
+                              },
                         child: Container(
                           height: 50,
                           margin: EdgeInsets.symmetric(horizontal: 60),

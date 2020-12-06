@@ -5,6 +5,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
+// import 'package:mydonationapp/addnew.dart';
 // import 'package:mydonationapp/homePage.dart';
 // import 'package:mydonationapp/items_page.dart';
 // import 'package:provider/provider.dart';
@@ -14,6 +15,7 @@ import 'package:mydonationapp/globals.dart' as global;
 import 'package:mydonationapp/shared/loading.dart';
 import 'package:mydonationapp/item_detail.dart';
 import 'package:mydonationapp/homePage.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class ImageCapture extends StatefulWidget {
   createState() => _ImageCaptureState();
@@ -110,17 +112,23 @@ class _ImageCaptureState extends State<ImageCapture> {
               items: [
                 BottomNavigationBarItem(
                   label: "Camera",
-                  icon: GestureDetector(
-                      child: Icon(Icons.photo_camera),
-                      onTap: () {
+                  icon: MaterialButton(
+                      child: Icon(
+                        Icons.photo_camera,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
                         _pickImage(ImageSource.camera);
                       }),
                 ),
                 BottomNavigationBarItem(
                   label: "Gallery",
-                  icon: GestureDetector(
-                      child: Icon(Icons.photo_library),
-                      onTap: () {
+                  icon: MaterialButton(
+                      child: Icon(
+                        Icons.photo_library,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
                         _pickImage(ImageSource.gallery);
                       }),
                 ),
@@ -179,10 +187,10 @@ class _ImageCaptureState extends State<ImageCapture> {
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => ItemDetail(
-                                      qty: 10,
-                                      cookiename: "Vanilla",
+                                      qty: global.itemcount,
+                                      cookiename: global.itemname,
                                       username: global.username,
-                                      mssg: "Andheri West",
+                                      mssg: global.itempickup,
                                       assetPath: _imageFile)));
                             },
                           ),
@@ -207,34 +215,56 @@ class _ImageCaptureState extends State<ImageCapture> {
                         setState(() {
                           loading = true;
                         });
-                        if (global.calledfrom == 'user') {
-                          global.imgurl = await _startUpload(_imageFile);
-                          await global.userinst.update({'img': global.imgurl});
-                        } else {
-                          print("from add new");
-                          global.itemphoto = await _startUpload(_imageFile);
-                          await global.userinst.update({
-                            'items': FieldValue.arrayUnion([
-                              {
-                                'itemname': global.itemname,
-                                'itempickup': global.itempickup,
-                                'itemcount': global.itemcount,
-                                'itemcategory': global.itemcategory,
-                                'itemphoto': global.itemphoto,
-                                'ngoname': global.username,
-                              }
-                            ])
-                          });
-                        }
-                        global.getdata();
-                        setState(() {
-                          loading = false;
-                        });
-                        Navigator.of(context, rootNavigator: true)
-                            .pushReplacement(MaterialPageRoute(
-                                builder: (context) => new HomePage()));
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (context) => HomePage()));
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.WARNING,
+                          animType: AnimType.BOTTOMSLIDE,
+                          tittle: 'Confirm Upload',
+                          desc: 'Once Uploaded the change will be permanent!',
+                          btnCancelOnPress: () {
+                            setState(() {
+                              loading = false;
+                            });
+                            Navigator.of(context, rootNavigator: true)
+                                .pushReplacement(MaterialPageRoute(
+                                    builder: (context) => new HomePage()));
+                          },
+                          btnOkOnPress: () async {
+                            if (global.calledfrom == 'user') {
+                              global.imgurl = await _startUpload(_imageFile);
+                              await global.userinst
+                                  .update({'img': global.imgurl});
+                            } else {
+                              print("from add new");
+                              global.itemphoto = await _startUpload(_imageFile);
+                              await global.userinst.update({
+                                'items': FieldValue.arrayUnion([
+                                  {
+                                    'itemname': global.itemname,
+                                    'itempickup': global.itempickup,
+                                    'itemcount': global.itemcount,
+                                    'itemcategory': global.itemcategory,
+                                    'itemphoto': global.itemphoto,
+                                    'ngoname': global.username,
+                                  }
+                                ])
+                              });
+
+                              global.itemname = "";
+                              global.itempickup = "";
+                              global.itemcount = "0";
+                              global.itemcategory = 0;
+                              global.itemphoto = "";
+                            }
+                            global.getdata();
+                            setState(() {
+                              loading = false;
+                            });
+                            Navigator.of(context, rootNavigator: true)
+                                .pushReplacement(MaterialPageRoute(
+                                    builder: (context) => new HomePage()));
+                          },
+                        )..show();
                       },
                     ),
                   ),

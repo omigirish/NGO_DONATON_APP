@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Notifications extends StatefulWidget {
   @override
@@ -42,6 +46,7 @@ class _NotificationsState extends State<Notifications>
       'Request: We Need Smartphones to help Needy Students in Lockdown to study',
       'Qty: 10',
     ));
+
     return Scaffold(
         backgroundColor: Colors.black87,
         body: ListView(
@@ -116,6 +121,33 @@ class _NotificationsState extends State<Notifications>
   }
 
   _pushnotification(String imgurl, String username, String desc, String price) {
+    void makeCall(String number) async {
+      var url = 'tel:$number';
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw "Could Not Place Call";
+      }
+    }
+
+    void email(String emailId) async {
+      var url = 'mailto:${emailId}?subject=Request%20for%20Donation';
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw "Could Not Send email";
+      }
+    }
+
+    void message(String number) async {
+      var url = 'sms:${number}?body=Request%20for%20Donation';
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw "Could Not Send email";
+      }
+    }
+
     return Padding(
       padding: EdgeInsets.only(left: 15.0, top: 15.0),
       child: Stack(
@@ -206,10 +238,79 @@ class _NotificationsState extends State<Notifications>
               padding: EdgeInsets.all(8.0),
               child: Row(
                 children: <Widget>[
-                  CircularProfileAvatar(
-                    imgurl,
-                    animateFromOldImageOnUrlChange: true,
-                    radius: 45,
+                  GestureDetector(
+                    child: CircularProfileAvatar(
+                      imgurl,
+                      animateFromOldImageOnUrlChange: true,
+                      radius: 45,
+                      onTap: () {
+                        AwesomeDialog(
+                          // btnOkColor: Colors.purple[400],
+                          customHeader: CircularProfileAvatar(imgurl,
+                              animateFromOldImageOnUrlChange: true, radius: 55),
+                          context: context,
+                          animType: AnimType.SCALE,
+                          // dialogType: DialogType.INFO,
+                          body: Column(
+                            children: [
+                              Text(
+                                "Contact",
+                                style: TextStyle(
+                                    fontFamily: "Varela", fontSize: 20),
+                              ),
+                              Text(
+                                username,
+                                style: TextStyle(
+                                    fontFamily: "Varela",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(
+                                        FontAwesomeIcons.phoneAlt,
+                                        color: Colors.green[700],
+                                        size: 32,
+                                      ),
+                                      onPressed: () {
+                                        makeCall("9136091244");
+                                      },
+                                    ),
+                                    SizedBox(width: 15),
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.message,
+                                        color: Colors.amber,
+                                        size: 38,
+                                      ),
+                                      onPressed: () {
+                                        message("9136091244");
+                                      },
+                                    ),
+                                    SizedBox(width: 15),
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.email,
+                                        color: Colors.red,
+                                        size: 38,
+                                      ),
+                                      onPressed: () {
+                                        email("omigirish1999@gmail.com");
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          btnOkOnPress: () {},
+                        )..show();
+                      },
+                    ),
                   ),
                   SizedBox(width: 10.0),
                   Column(
@@ -231,7 +332,7 @@ class _NotificationsState extends State<Notifications>
                           desc,
                           style: TextStyle(
                               color: Colors.black87,
-                              fontFamily: 'Montserrat',
+                              fontFamily: 'Varela',
                               fontSize: 11.0),
                         ),
                       ),
