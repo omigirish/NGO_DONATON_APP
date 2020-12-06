@@ -30,10 +30,14 @@ class _NotificationsState extends State<Notifications>
     global.requestlist.forEach((data) async {
       notilist.add(_pushnotification(
         data['img'],
-        data['ngoname'],
-        'I would like to Donate ' + data['message'],
+        data['username'],
+        'I would like to Donate ' + data['itemname'],
         'Qty: ' + data['quantity'].toString(),
       ));
+    });
+    Future.delayed(Duration(seconds: 1), () async {
+      global.getrequests();
+      setState(() {});
     });
 
     // notilist.add(_pushnotification(

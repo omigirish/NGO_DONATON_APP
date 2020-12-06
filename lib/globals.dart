@@ -74,6 +74,10 @@ getrequests() async {
       'quantity': d['quantity'],
       'status': d['status'],
       'img': tmp['img'],
+      'username': tmp['name'],
+      'email': tmp['email'],
+      'phone': tmp['phone'],
+      'itemname': d['itemname'],
     });
   }
   requestlist = requests;

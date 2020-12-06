@@ -174,7 +174,8 @@ class _ItemDetailState extends State<ItemDetail> {
                             'ngoname': widget.username,
                             'quantity': widget.qty,
                             'message': widget.mssg,
-                            'status': 'pending'
+                            'status': 'pending',
+                            'itemname': widget.cookiename,
                           });
                         },
                       )..show();
