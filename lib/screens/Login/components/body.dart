@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mydonationapp/screens/Login/components/background.dart';
 import 'package:mydonationapp/screens/Signup/signup_screen.dart';
@@ -107,7 +108,9 @@ class _BodyState extends State<Body> {
                             loading = true;
                           });
                           print(global.authid);
-                          global.userinst.update({'authid': global.authid});
+                          global.userinst.update({
+                            'authid': FieldValue.arrayUnion([global.authid])
+                          });
                           dynamic result = await _auth.googleSignIn(null);
                           if (result != null) {
                             print(result.uid);

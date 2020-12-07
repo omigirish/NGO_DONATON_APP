@@ -107,7 +107,10 @@ class _NotificationsState extends State<Notifications>
                 )
               ],
             ),
-            for (Widget notification in notilist) notification,
+            Container(
+                height: MediaQuery.of(context).size.height - 370,
+                child: ListView(children: notilist)),
+            // for (Widget notification in notilist) notification,
             SizedBox(height: 20.0)
           ],
         ));
