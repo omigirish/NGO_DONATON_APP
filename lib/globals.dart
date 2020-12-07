@@ -4,6 +4,7 @@ String imgurl;
 String uid;
 String username;
 String type;
+String authid;
 
 String itemname = "";
 String itempickup = "";
