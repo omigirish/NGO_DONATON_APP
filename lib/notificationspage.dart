@@ -203,10 +203,41 @@ class _NotificationsState extends State<Notifications>
                           onTap: () {
                             AwesomeDialog(
                               context: context,
-                              customHeader: Icon(Icons.comment),
+                              customHeader: Icon(FontAwesomeIcons.comments,
+                                  size: 40, color: Colors.purple),
                               animType: AnimType.BOTTOMSLIDE,
-                              tittle: 'Dialog Title',
-                              desc: 'Dialog description here.............',
+                              tittle: 'sldkblkn',
+                              desc: 'ldfnbkldfbn',
+                              body: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Message",
+                                      style: TextStyle(
+                                          fontFamily: "Varela",
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                  SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 20, left: 10),
+                                    child: TextField(
+                                      maxLines: 2,
+                                      style: TextStyle(color: Colors.black),
+                                      cursorColor: Colors.purple,
+                                      decoration: InputDecoration(
+                                        icon: Icon(Icons.edit),
+                                        hintText:
+                                            "Write an Optional Agreement Message",
+                                        hintStyle:
+                                            TextStyle(color: Colors.grey),
+                                      ),
+                                      onChanged: (value) {
+                                        global.itemname = value;
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
                               btnCancelOnPress: () {},
                               btnOkOnPress: () {},
                             )..show();
@@ -225,7 +256,45 @@ class _NotificationsState extends State<Notifications>
                         SizedBox(width: 5.0),
                         GestureDetector(
                           onTap: () {
-                            print("Rejected");
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.ERROR,
+                              animType: AnimType.BOTTOMSLIDE,
+                              tittle: 'sldkblkn',
+                              desc: 'ldfnbkldfbn',
+                              body: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Message",
+                                      style: TextStyle(
+                                          fontFamily: "Varela",
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                  SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 20, left: 10),
+                                    child: TextField(
+                                      maxLines: 2,
+                                      style: TextStyle(color: Colors.black),
+                                      cursorColor: Colors.purple,
+                                      decoration: InputDecoration(
+                                        icon: Icon(Icons.edit),
+                                        hintText:
+                                            "Write a Optional Rejection Message",
+                                        hintStyle:
+                                            TextStyle(color: Colors.grey),
+                                      ),
+                                      onChanged: (value) {
+                                        global.itemname = value;
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              btnCancelOnPress: () {},
+                              btnOkOnPress: () {},
+                            )..show();
                           },
                           child: Text(
                             "Reject",
