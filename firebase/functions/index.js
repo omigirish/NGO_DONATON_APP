@@ -19,8 +19,8 @@ exports.offerTrigger = functions.firestore.document(
     admin.firestore().collection('users').doc(mssgData.uid).get().then((snapshotsender)=>{
         console.log("Receiver is "+snapshotreceiver.data().name);
         console.log("Sender is "+snapshotsender.data().name);
-        var tokens=[];
-        tokens.push(snapshotreceiver.data().authid);
+        var tokens=snapshotreceiver.data().authid;
+        // tokens.push(snapshotreceiver.data().authid);
         var payload = {
             "notification":{
                 "title": "From " + snapshotsender.data().name,
