@@ -15,6 +15,7 @@ var items = [];
 var ngoitemlist = [];
 var donoritemlist = [];
 var requestlist = [];
+var requestlistuser = [];
 
 DocumentReference userinst;
 CollectionReference requestinst;
@@ -61,11 +62,12 @@ getdonations() async {
   donoritemlist = donoritems;
 }
 
-getrequests() async {
+getrequests(String type) async {
   List requests = new List();
-  var data = await requestinst.where('ngouid', isEqualTo: uid).get();
+  var data = await requestinst.where(type, isEqualTo: uid).get();
   for (var d in data.docs) {
     DocumentSnapshot tmp = await ngoinst.doc(d['uid']).get();
+    DocumentSnapshot pmt = await ngoinst.doc(d['ngouid']).get();
     requests.add({
       'ngoname': d['ngoname'],
       'message': d['message'],
@@ -78,9 +80,15 @@ getrequests() async {
       'email': tmp['email'],
       'phone': tmp['phone'],
       'itemname': d['itemname'],
+      'donorname': pmt['name'],
+      'donorimg': pmt['img'],
     });
   }
-  requestlist = requests;
+  if (type == 'ngouid') {
+    requestlist = requests;
+  } else {
+    requestlistuser = requests;
+  }
 }
 
 cleardata() {

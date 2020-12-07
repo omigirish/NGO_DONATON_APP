@@ -6,7 +6,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:mydonationapp/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:mydonationapp/models/user.dart';
-import 'package:mydonationapp/globals.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
