@@ -59,6 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: <Widget>[
                 CircularProfileAvatar(
                   global.userdata == null ? "" : imgurl,
+                  // radius:50,
                   animateFromOldImageOnUrlChange: true,
                   onTap: () async {
                     global.calledfrom = "user";
@@ -69,7 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       imgurl = global.imgurl;
                     });
                   },
-                  radius: kSpacingUnit.w * 7,
+                  // radius: kSpacingUnit.w * 7,
                 ),
                 Align(
                   alignment: Alignment.bottomRight,

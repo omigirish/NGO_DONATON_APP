@@ -40,7 +40,7 @@ class _TransactionsState extends State<Transactions>
             Stack(
               children: <Widget>[
                 Container(
-                  height: 160.0,
+                  height: 230.0,
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                           // colors: [Color(0x000000), Color(0xBB923CB5)],
@@ -76,9 +76,33 @@ class _TransactionsState extends State<Transactions>
                         fontWeight: FontWeight.bold),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(top: 160.0, left: 15.0, right: 35.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(25.0),
+                          bottomLeft: Radius.circular(5.0),
+                          topLeft: Radius.circular(5.0),
+                        )),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(top: 14.0),
+                        hintText: 'Search in Notifications',
+                        hintStyle:
+                            TextStyle(fontFamily: 'Montserrat', fontSize: 14.0),
+                        prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
-            for (var item in historylist) item,
+            Container(
+                height: MediaQuery.of(context).size.height - 370,
+                child: ListView(children: historylist)),
             SizedBox(height: 10.0),
           ],
         ));
@@ -96,10 +120,10 @@ class _TransactionsState extends State<Transactions>
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: status == "pending"
-                  ? Colors.yellow[100]
+                  ? Colors.yellow[50]
                   : status == "rejected"
-                      ? Colors.red[100]
-                      : Colors.green[100],
+                      ? Colors.red[50]
+                      : Colors.teal[50],
             ),
             child: Padding(
               padding: EdgeInsets.all(8.0),
