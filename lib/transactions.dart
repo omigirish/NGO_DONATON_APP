@@ -96,7 +96,7 @@ class _TransactionsState extends State<Transactions>
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: status == "pending"
-                  ? Colors.yellow[100]
+                  ? Colors.white
                   : status == "rejected"
                       ? Colors.red[100]
                       : Colors.green[100],

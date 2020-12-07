@@ -109,7 +109,7 @@ class _ItemDetailState extends State<ItemDetail> {
             child: Container(
               width: MediaQuery.of(context).size.width - 50.0,
               child: Text(
-                "Pickup Address\n" + widget.mssg,
+                widget.mssg,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: 'Varela', fontSize: 16.0, color: Colors.white),
@@ -121,7 +121,7 @@ class _ItemDetailState extends State<ItemDetail> {
               ? Center()
               : Padding(
                   padding: const EdgeInsets.only(left: 25),
-                  child: Text("How many do you need?",
+                  child: Text("",
                       style:
                           TextStyle(color: Colors.white, fontFamily: "Varela")),
                 ),

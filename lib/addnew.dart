@@ -119,7 +119,7 @@ class _AddnewState extends State<Addnew> {
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: global.type == 'donor'
-                                        ? "PickUp Address"
+                                        ? "Item details & Pickup"
                                         : "Message to Donors",
                                     hintStyle: TextStyle(color: Colors.grey)),
                                 onChanged: (value) {

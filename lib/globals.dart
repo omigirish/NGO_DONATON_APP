@@ -67,6 +67,7 @@ getrequests(String type) async {
   List requests = new List();
   var data = await requestinst.where(type, isEqualTo: uid).get();
   for (var d in data.docs) {
+    // print(d.reference.path.split("/")[1]);
     DocumentSnapshot tmp = await ngoinst.doc(d['uid']).get();
     DocumentSnapshot pmt = await ngoinst.doc(d['ngouid']).get();
     requests.add({
@@ -83,6 +84,8 @@ getrequests(String type) async {
       'itemname': d['itemname'],
       'donorname': pmt['name'],
       'donorimg': pmt['img'],
+      'reqid': d.reference.path.split("/")[1],
+      'reqref': d.reference,
     });
   }
   if (type == 'ngouid') {
