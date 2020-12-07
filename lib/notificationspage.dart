@@ -153,7 +153,7 @@ class _NotificationsState extends State<Notifications>
             left: 15.0,
             top: 30.0,
             child: Container(
-              height: 100.0,
+              height: 92.0,
               width: MediaQuery.of(context).size.width - 15.0,
               decoration: BoxDecoration(
                 color: Colors.purple[50],
@@ -163,7 +163,7 @@ class _NotificationsState extends State<Notifications>
           ),
           Positioned(
               left: 95.0,
-              top: 64.0,
+              top: 56.0,
               child: Container(
                 height: 80.0,
                 width: MediaQuery.of(context).size.width - 15.0,
@@ -298,7 +298,7 @@ class _NotificationsState extends State<Notifications>
                 ),
               )),
           Container(
-            height: 115.0,
+            height: 105.0,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
@@ -312,7 +312,7 @@ class _NotificationsState extends State<Notifications>
                     child: CircularProfileAvatar(
                       imgurl,
                       animateFromOldImageOnUrlChange: true,
-                      radius: 45,
+                      radius: 40,
                       onTap: () {
                         AwesomeDialog(
                           // btnOkColor: Colors.purple[400],
