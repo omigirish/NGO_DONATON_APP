@@ -69,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       imgurl = global.imgurl;
                     });
                   },
-                  // radius: kSpacingUnit.w * 5,
+                  radius: kSpacingUnit.w * 7,
                 ),
                 Align(
                   alignment: Alignment.bottomRight,

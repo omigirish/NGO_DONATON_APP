@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mydonationapp/globals.dart' as global;
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 
-class History extends StatefulWidget {
+class Transactions extends StatefulWidget {
   @override
-  _HistoryState createState() => _HistoryState();
+  _TransactionsState createState() => _TransactionsState();
 }
 
-class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
+class _TransactionsState extends State<Transactions>
+    with SingleTickerProviderStateMixin {
   TabController tabController;
   List<Widget> historylist = [];
   @override
@@ -20,7 +21,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     historylist = [];
     global.requestlistuser.forEach((data) {
-      historylist.add(_pushnotification(
+      historylist.add(_transactionlog(
         data['donorimg'],
         data['donorname'],
         data['itemname'],
@@ -67,7 +68,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                 Padding(
                   padding: EdgeInsets.only(top: 95.0, left: 15.0),
                   child: Text(
-                    'Donation History',
+                    'Transactions',
                     style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 28.0,
@@ -83,93 +84,22 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
         ));
   }
 
-  _pushnotification(String imgurl, String username, String desc, String price,
+  _transactionlog(String imgurl, String username, String desc, String price,
       String status) {
     return Padding(
-      padding: EdgeInsets.only(left: 15.0, top: 15.0),
+      padding: EdgeInsets.only(left: 15.0, top: 15.0, right: 15),
       child: Stack(
         children: <Widget>[
           Container(
-            height: 145.0,
-            width: MediaQuery.of(context).size.width,
-          ),
-          Positioned(
-            left: 15.0,
-            top: 30.0,
-            child: Container(
-              height: 100.0,
-              width: MediaQuery.of(context).size.width - 15.0,
-              decoration: BoxDecoration(
-                color: Colors.purple[50],
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
-          ),
-          Positioned(
-              left: 95.0,
-              top: 64.0,
-              child: Container(
-                height: 80.0,
-                width: MediaQuery.of(context).size.width - 15.0,
-                decoration: BoxDecoration(
-                    color: Colors.purple[50],
-                    borderRadius: BorderRadius.circular(5.0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 3.0,
-                          blurRadius: 3.0)
-                    ]),
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 10.0, left: 10.0),
-                    child: Row(
-                      children: <Widget>[
-                        SizedBox(width: 25.0),
-                        Icon(Icons.thumb_up,
-                            color: Colors.green[700], size: 15.0),
-                        SizedBox(width: 5.0),
-                        GestureDetector(
-                          onTap: () {
-                            print("Accepted");
-                          },
-                          child: Text(
-                            status,
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green[700]),
-                          ),
-                        ),
-                        SizedBox(width: 25.0),
-                        Icon(Icons.cancel, color: Colors.red, size: 15.0),
-                        SizedBox(width: 5.0),
-                        GestureDetector(
-                          onTap: () {
-                            print("Rejected");
-                          },
-                          child: Text(
-                            "Reject",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Montserrat',
-                                fontSize: 12.0,
-                                color: Colors.red),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )),
-          Container(
-            height: 115.0,
+            height: 95.0,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: Colors.white,
+              color: status == "pending"
+                  ? Colors.yellow[100]
+                  : status == "rejected"
+                      ? Colors.red[100]
+                      : Colors.green[100],
             ),
             child: Padding(
               padding: EdgeInsets.all(8.0),
@@ -178,7 +108,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                   CircularProfileAvatar(
                     imgurl,
                     animateFromOldImageOnUrlChange: true,
-                    radius: 45,
+                    radius: 35,
                   ),
                   SizedBox(width: 10.0),
                   Column(
@@ -200,11 +130,11 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                           desc,
                           style: TextStyle(
                               color: Colors.black87,
-                              fontFamily: 'Montserrat',
-                              fontSize: 11.0),
+                              fontFamily: 'Varella',
+                              fontSize: 15),
                         ),
                       ),
-                      SizedBox(height: 10.0),
+                      SizedBox(height: 5.0),
                       Text(
                         price.toString(),
                         style: TextStyle(

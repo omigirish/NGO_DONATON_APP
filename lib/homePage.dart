@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mydonationapp/addnew.dart';
 // import 'package:mydonationapp/screens/profile.dart';
-import 'package:mydonationapp/history.dart';
+import 'package:mydonationapp/transactions.dart';
 import 'package:mydonationapp/donationsListings.dart';
 import 'package:mydonationapp/notificationspage.dart';
 import 'package:mydonationapp/user.dart';
@@ -18,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     Addnew(),
     Notifications(),
     Donations(),
-    History(),
+    Transactions(),
     User(),
   ];
 
