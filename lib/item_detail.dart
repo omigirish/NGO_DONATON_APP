@@ -182,7 +182,7 @@ class _ItemDetailState extends State<ItemDetail> {
                             'uid': global.uid,
                             'ngouid': widget.uid,
                             'ngoname': widget.username,
-                            'quantity': widget.qty,
+                            'quantity': orderqty.toString(),
                             'message': widget.mssg,
                             'status': 'pending',
                             'itemname': widget.cookiename,

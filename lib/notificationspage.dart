@@ -31,7 +31,7 @@ class _NotificationsState extends State<Notifications>
       notilist.add(_pushnotification(
         data['img'],
         data['username'],
-        'I would like to Donate ' + data['itemname'],
+        data['itemname'],
         'Qty: ' + data['quantity'].toString(),
       ));
     });
