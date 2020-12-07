@@ -9,6 +9,7 @@ class History extends StatefulWidget {
 
 class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   TabController tabController;
+  List<Widget> historylist = [];
   @override
   void initState() {
     super.initState();
@@ -17,6 +18,20 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    historylist = [];
+    global.requestlistuser.forEach((data) {
+      historylist.add(_pushnotification(
+        data['donorimg'],
+        data['donorname'],
+        data['itemname'],
+        'Qty: ' + data['quantity'],
+        data['status'],
+      ));
+    });
+    Future.delayed(Duration(seconds: 1), () async {
+      global.getrequests('uid');
+      setState(() {});
+    });
     return Scaffold(
         backgroundColor: Colors.black87,
         body: ListView(
@@ -62,18 +77,14 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                 ),
               ],
             ),
-            _pushnotification(
-              'https://firebasestorage.googleapis.com/v0/b/donationapp-89333.appspot.com/o/images%2F2020-12-06%2015%3A51%3A43.829036?alt=media&token=66112a12-5495-46cf-8065-a009ee98cb41',
-              'Salunke Trust',
-              'Request: We Need Smartphones to help Needy Students in Lockdown to study',
-              'Qty: 50',
-            ),
+            for (var item in historylist) item,
             SizedBox(height: 10.0),
           ],
         ));
   }
 
-  _pushnotification(String imgurl, String username, String desc, String price) {
+  _pushnotification(String imgurl, String username, String desc, String price,
+      String status) {
     return Padding(
       padding: EdgeInsets.only(left: 15.0, top: 15.0),
       child: Stack(
@@ -124,7 +135,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                             print("Accepted");
                           },
                           child: Text(
-                            "Accept Request",
+                            status,
                             style: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontSize: 12.0,

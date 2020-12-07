@@ -36,23 +36,10 @@ class _NotificationsState extends State<Notifications>
       ));
     });
     Future.delayed(Duration(seconds: 1), () async {
-      global.getrequests();
+      global.getrequests('ngouid');
       setState(() {});
     });
 
-    // notilist.add(_pushnotification(
-    //   'https://lh3.googleusercontent.com/a-/AOh14Gh2wZV5hAUJ4rJbc4Yb3_xb4oGiF3F8zjGOVbqQsPo=s96-c',
-    //   'Nathani Trust',
-    //   'Request: We Need Smartphones to help Needy Students in Lockdown to study',
-    //   'Qty: 10',
-    // ));
-
-    // notilist.add(_pushnotification(
-    //   'https://firebasestorage.googleapis.com/v0/b/donationapp-89333.appspot.com/o/images%2F2020-12-05%2020%3A54%3A58.958832?alt=media&token=2cb5a166-c8e3-4270-ae55-0cc4e563f138',
-    //   'Soni Trust',
-    //   'Request: We Need Smartphones to help Needy Students in Lockdown to study',
-    //   'Qty: 10',
-    // ));
     return Scaffold(
         backgroundColor: Colors.black87,
         body: ListView(
