@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -201,7 +201,15 @@ class _NotificationsState extends State<Notifications>
                         SizedBox(width: 5.0),
                         GestureDetector(
                           onTap: () {
-                            print("Accepted");
+                            AwesomeDialog(
+                              context: context,
+                              customHeader: Icon(Icons.comment),
+                              animType: AnimType.BOTTOMSLIDE,
+                              tittle: 'Dialog Title',
+                              desc: 'Dialog description here.............',
+                              btnCancelOnPress: () {},
+                              btnOkOnPress: () {},
+                            )..show();
                           },
                           child: Text(
                             "Accept Request",

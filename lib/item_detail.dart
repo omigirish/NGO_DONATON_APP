@@ -26,6 +26,7 @@ class _ItemDetailState extends State<ItemDetail> {
   @override
   Widget build(BuildContext context) {
     bool disabled = widget.username == global.username ? true : false;
+    bool isngo = global.type == "ngo" ? true : false;
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
@@ -116,28 +117,33 @@ class _ItemDetailState extends State<ItemDetail> {
             ),
           ),
           SizedBox(height: 20.0),
-          Padding(
-            padding: const EdgeInsets.only(left: 25),
-            child: Text("How many do you need?",
-                style: TextStyle(color: Colors.white, fontFamily: "Varela")),
-          ),
-          Slider(
-            min: 0,
-            max: double.parse(widget.qty),
-            divisions: int.parse(widget.qty),
-            activeColor: Colors.purple,
-            inactiveColor: Colors.deepPurple[300],
-            label: nos.toInt().toString(),
-            value: nos,
-            onChanged: disabled
-                ? null
-                : (newnos) {
-                    setState(() {
-                      nos = newnos;
-                      orderqty = nos.toInt();
-                    });
-                  },
-          ),
+          disabled
+              ? Center()
+              : Padding(
+                  padding: const EdgeInsets.only(left: 25),
+                  child: Text("How many do you need?",
+                      style:
+                          TextStyle(color: Colors.white, fontFamily: "Varela")),
+                ),
+          disabled
+              ? Center()
+              : Slider(
+                  min: 0,
+                  max: double.parse(widget.qty),
+                  divisions: int.parse(widget.qty),
+                  activeColor: Colors.purple,
+                  inactiveColor: Colors.deepPurple[300],
+                  label: nos.toInt().toString(),
+                  value: nos,
+                  onChanged: disabled
+                      ? null
+                      : (newnos) {
+                          setState(() {
+                            nos = newnos;
+                            orderqty = nos.toInt();
+                          });
+                        },
+                ),
           Center(
             child: MaterialButton(
               onPressed: disabled
@@ -166,7 +172,11 @@ class _ItemDetailState extends State<ItemDetail> {
                         animType: AnimType.BOTTOMSLIDE,
                         tittle: "Confirm Request",
                         desc: 'Are you sure you Want to Send this Request?',
-                        btnCancelOnPress: () {},
+                        btnCancelOnPress: () {
+                          Navigator.of(context, rootNavigator: true)
+                              .pushReplacement(MaterialPageRoute(
+                                  builder: (context) => new HomePage()));
+                        },
                         btnOkOnPress: () async {
                           await global.requestinst.doc().set({
                             'uid': global.uid,
@@ -177,6 +187,9 @@ class _ItemDetailState extends State<ItemDetail> {
                             'status': 'pending',
                             'itemname': widget.cookiename,
                           });
+                          Navigator.of(context, rootNavigator: true)
+                              .pushReplacement(MaterialPageRoute(
+                                  builder: (context) => new HomePage()));
                         },
                       )..show();
                     },
@@ -190,7 +203,11 @@ class _ItemDetailState extends State<ItemDetail> {
                         : Color.fromRGBO(49, 39, 79, 1)), //Color(0xFFF17532)
                 child: Center(
                   child: Text(
-                    disabled ? "Delete" : 'Request Donation',
+                    disabled
+                        ? "Delete"
+                        : isngo
+                            ? "Request Donation"
+                            : 'Donate',
                     style: TextStyle(
                         fontFamily: 'Varela',
                         fontSize: 14.0,

@@ -48,6 +48,7 @@ dependencies:
   camera:
   flutter_picker:
   awesome_dialog:
+  firebase_messaging:
 
 dev_dependencies:
   flutter_test:

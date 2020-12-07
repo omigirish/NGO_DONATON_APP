@@ -7,6 +7,7 @@ import 'package:mydonationapp/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:mydonationapp/models/user.dart';
 import 'package:mydonationapp/globals.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,8 +16,26 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final FirebaseMessaging _messaging = FirebaseMessaging();
+
+//  _messaging.configure(
+//       onMessage: (Map<String, dynamic> message) async {
+//         print("onMessage: $message");
+//         _showItemDialog(message);
+//       },
+//       onBackgroundMessage: myBackgroundMessageHandler,
+//       onLaunch: (Map<String, dynamic> message) async {
+//         print("onLaunch: $message");
+//         _navigateToItemDetail(message);
+//       },
+//       onResume: (Map<String, dynamic> message) async {
+//         print("onResume: $message");
+//         _navigateToItemDetail(message);
+//       },
+//     );
   @override
   Widget build(BuildContext context) {
+    _messaging.getToken().then((token) => print("Token:" + token));
     return MultiProvider(
       providers: [
         StreamProvider<User>(create: (_) => AuthService().user),
