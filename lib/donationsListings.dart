@@ -255,21 +255,22 @@ class _DonationsState extends State<Donations>
                   ),
                 ],
               ),
-              Container(
-                width: 125.0,
-                padding: EdgeInsets.only(left: 20.0),
-                child: Text(
-                  itemName,
-                  style: TextStyle(
-                      fontFamily: "Varela",
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15.0),
+              Center(
+                child: Container(
+                  width: 145.0,
+                  child: Text(
+                    itemName,
+                    style: TextStyle(
+                        fontFamily: "Varela",
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.0),
+                  ),
                 ),
               ),
               SizedBox(height: 5.0),
               Padding(
-                padding: EdgeInsets.only(left: 20.0),
+                padding: EdgeInsets.only(left: 12.0),
                 child: Text(
                   'Qty: ' + qty.toString(),
                   style: TextStyle(
@@ -281,7 +282,7 @@ class _DonationsState extends State<Donations>
               ),
               SizedBox(height: 10.0),
               Padding(
-                  padding: EdgeInsets.only(left: 18.0),
+                  padding: EdgeInsets.only(left: 10.0),
                   child: Row(
                     children: <Widget>[
                       Icon(Icons.account_box, color: Colors.purple, size: 15.0),
