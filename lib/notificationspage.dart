@@ -107,7 +107,10 @@ class _NotificationsState extends State<Notifications>
                 )
               ],
             ),
-            for (Widget notification in notilist) notification,
+            Container(
+                height: MediaQuery.of(context).size.height - 370,
+                child: ListView(children: notilist)),
+            // for (Widget notification in notilist) notification,
             SizedBox(height: 20.0)
           ],
         ));
@@ -153,7 +156,7 @@ class _NotificationsState extends State<Notifications>
             left: 15.0,
             top: 30.0,
             child: Container(
-              height: 100.0,
+              height: 92.0,
               width: MediaQuery.of(context).size.width - 15.0,
               decoration: BoxDecoration(
                 color: Colors.purple[50],
@@ -163,7 +166,7 @@ class _NotificationsState extends State<Notifications>
           ),
           Positioned(
               left: 95.0,
-              top: 64.0,
+              top: 56.0,
               child: Container(
                 height: 80.0,
                 width: MediaQuery.of(context).size.width - 15.0,
@@ -190,10 +193,41 @@ class _NotificationsState extends State<Notifications>
                           onTap: () {
                             AwesomeDialog(
                               context: context,
-                              customHeader: Icon(Icons.comment),
+                              customHeader: Icon(FontAwesomeIcons.comments,
+                                  size: 40, color: Colors.purple),
                               animType: AnimType.BOTTOMSLIDE,
-                              tittle: 'Dialog Title',
-                              desc: 'Dialog description here.............',
+                              tittle: 'sldkblkn',
+                              desc: 'ldfnbkldfbn',
+                              body: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Message",
+                                      style: TextStyle(
+                                          fontFamily: "Varela",
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                  SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 20, left: 10),
+                                    child: TextField(
+                                      maxLines: 2,
+                                      style: TextStyle(color: Colors.black),
+                                      cursorColor: Colors.purple,
+                                      decoration: InputDecoration(
+                                        icon: Icon(Icons.edit),
+                                        hintText:
+                                            "Write an Optional Agreement Message",
+                                        hintStyle:
+                                            TextStyle(color: Colors.grey),
+                                      ),
+                                      onChanged: (value) {
+                                        global.itemname = value;
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
                               btnCancelOnPress: () {},
                               btnOkOnPress: () {},
                             )..show();
@@ -212,7 +246,45 @@ class _NotificationsState extends State<Notifications>
                         SizedBox(width: 5.0),
                         GestureDetector(
                           onTap: () {
-                            print("Rejected");
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.ERROR,
+                              animType: AnimType.BOTTOMSLIDE,
+                              tittle: 'sldkblkn',
+                              desc: 'ldfnbkldfbn',
+                              body: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Message",
+                                      style: TextStyle(
+                                          fontFamily: "Varela",
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)),
+                                  SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 20, left: 10),
+                                    child: TextField(
+                                      maxLines: 2,
+                                      style: TextStyle(color: Colors.black),
+                                      cursorColor: Colors.purple,
+                                      decoration: InputDecoration(
+                                        icon: Icon(Icons.edit),
+                                        hintText:
+                                            "Write a Optional Rejection Message",
+                                        hintStyle:
+                                            TextStyle(color: Colors.grey),
+                                      ),
+                                      onChanged: (value) {
+                                        global.itemname = value;
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              btnCancelOnPress: () {},
+                              btnOkOnPress: () {},
+                            )..show();
                           },
                           child: Text(
                             "Reject",
@@ -229,7 +301,7 @@ class _NotificationsState extends State<Notifications>
                 ),
               )),
           Container(
-            height: 115.0,
+            height: 105.0,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
@@ -243,7 +315,7 @@ class _NotificationsState extends State<Notifications>
                     child: CircularProfileAvatar(
                       imgurl,
                       animateFromOldImageOnUrlChange: true,
-                      radius: 45,
+                      radius: 40,
                       onTap: () {
                         AwesomeDialog(
                           // btnOkColor: Colors.purple[400],
