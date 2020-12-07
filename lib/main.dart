@@ -7,6 +7,7 @@ import 'package:mydonationapp/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:mydonationapp/models/user.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:mydonationapp/globals.dart' as global;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,10 @@ class MyApp extends StatelessWidget {
 //     );
   @override
   Widget build(BuildContext context) {
-    _messaging.getToken().then((token) => print("Token:" + token));
+    _messaging.getToken().then((token) {
+      print("Token:" + token);
+      global.authid = token;
+    });
     return MultiProvider(
       providers: [
         StreamProvider<User>(create: (_) => AuthService().user),

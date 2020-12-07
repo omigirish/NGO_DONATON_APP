@@ -13,6 +13,7 @@ import 'package:mydonationapp/services/auth.dart';
 import 'package:mydonationapp/shared/loading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+import 'package:mydonationapp/globals.dart' as global;
 
 class Body extends StatefulWidget {
   @override
@@ -131,6 +132,7 @@ class _BodyState extends State<Body> {
                           setState(() {
                             loading = true;
                           });
+                          global.userinst.update({'authid': global.authid});
                           dynamic result =
                               await _auth.googleSignIn(currentstate);
                           if (result != null) {
