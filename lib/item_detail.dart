@@ -160,8 +160,14 @@ class _ItemDetailState extends State<ItemDetail> {
                               .pushReplacement(MaterialPageRoute(
                                   builder: (context) => new HomePage()));
                         },
-                        btnOkOnPress: () {
-                          print("Item Deleted");
+                        btnOkOnPress: () async {
+                          for (var item in global.items) {
+                            if (item['itemname'] == widget.cookiename) {
+                              item['itemcount'] = orderqty.toString();
+                              global.userinst.update({'items': global.items});
+                              break;
+                            }
+                          }
                         },
                       )..show();
                     }
