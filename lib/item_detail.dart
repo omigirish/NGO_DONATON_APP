@@ -159,11 +159,11 @@ class _ItemDetailState extends State<ItemDetail> {
                         btnOkOnPress: () async {
                           for (var item in global.items) {
                             if (item['itemname'] == widget.cookiename) {
-                              item['itemcount'] = orderqty.toString();
-                              global.userinst.update({'items': global.items});
+                              global.items.remove(item);
                               break;
                             }
                           }
+                          global.userinst.update({'items': global.items});
                         },
                       )..show();
                     }
