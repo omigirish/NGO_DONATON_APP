@@ -108,9 +108,12 @@ class _BodyState extends State<Body> {
                             loading = true;
                           });
                           print(global.authid);
+<<<<<<< HEAD
                           // global.userinst.update({
                           //   'authid': FieldValue.arrayUnion([global.authid])
                           // });
+=======
+>>>>>>> 89a81e16c917e5e73bf060caede016093047ff57
                           dynamic result = await _auth.googleSignIn(null);
                           if (result != null) {
                             print(result.uid);

@@ -117,7 +117,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             child: Center(
               child: Text(
-                "CERTIFIED " + global.type.toUpperCase(),
+                global.type != null
+                    ? "CERTIFIED " + global.type.toUpperCase()
+                    : "",
                 style: kButtonTextStyle,
               ),
             ),

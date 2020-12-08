@@ -7,14 +7,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ItemDetail extends StatefulWidget {
   final assetPath, qty, cookiename, imgurl, username, mssg, uid;
 
-  ItemDetail(
-      {this.assetPath,
-      this.qty,
-      this.cookiename,
-      this.imgurl,
-      this.username,
-      this.mssg,
-      this.uid});
+  ItemDetail({
+    this.assetPath,
+    this.qty,
+    this.cookiename,
+    this.imgurl,
+    this.username,
+    this.mssg,
+    this.uid,
+  });
 
   @override
   _ItemDetailState createState() => _ItemDetailState();
@@ -23,10 +24,12 @@ class ItemDetail extends StatefulWidget {
 class _ItemDetailState extends State<ItemDetail> {
   double nos = ItemDetail.qty;
   int orderqty = 1;
+  double initqty = 1.0;
   @override
   Widget build(BuildContext context) {
     bool disabled = widget.username == global.username ? true : false;
     bool isngo = global.type == "ngo" ? true : false;
+
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
@@ -125,25 +128,22 @@ class _ItemDetailState extends State<ItemDetail> {
                       style:
                           TextStyle(color: Colors.white, fontFamily: "Varela")),
                 ),
-          disabled
-              ? Center()
-              : Slider(
-                  min: 0,
-                  max: double.parse(widget.qty),
-                  divisions: int.parse(widget.qty),
-                  activeColor: Colors.purple,
-                  inactiveColor: Colors.deepPurple[300],
-                  label: nos.toInt().toString(),
-                  value: nos,
-                  onChanged: disabled
-                      ? null
-                      : (newnos) {
-                          setState(() {
-                            nos = newnos;
-                            orderqty = nos.toInt();
-                          });
-                        },
-                ),
+          Slider(
+            min: 0,
+            max: disabled ? 100.0 : double.parse(widget.qty),
+            divisions: disabled ? 100 : int.parse(widget.qty),
+            activeColor: Colors.purple,
+            inactiveColor: Colors.deepPurple[300],
+            label: nos.toInt().toString(),
+            value: disabled ? initqty : nos,
+            onChanged: (newnos) {
+              setState(() {
+                nos = newnos;
+                initqty = nos;
+                orderqty = nos.toInt();
+              });
+            },
+          ),
           Center(
             child: MaterialButton(
               onPressed: disabled
@@ -186,6 +186,7 @@ class _ItemDetailState extends State<ItemDetail> {
                             'message': widget.mssg,
                             'status': 'pending',
                             'itemname': widget.cookiename,
+                            'datetime': DateTime.now().toString(),
                           });
                           await Navigator.of(context, rootNavigator: true)
                               .pushReplacement(MaterialPageRoute(
@@ -208,6 +209,38 @@ class _ItemDetailState extends State<ItemDetail> {
                         : isngo
                             ? "Request Donation"
                             : 'Donate',
+                    style: TextStyle(
+                        fontFamily: 'Varela',
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: MaterialButton(
+              onPressed: () async {
+                for (var item in global.items) {
+                  if (item['itemname'] == widget.cookiename) {
+                    item['itemcount'] = orderqty.toString();
+                    global.userinst.update({'items': global.items});
+                    break;
+                  }
+                }
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width - 50.0,
+                height: 50.0,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25.0),
+                    color: disabled
+                        ? Colors.purple[900]
+                        : Color.fromRGBO(49, 39, 79, 1)), //Color(0xFFF17532)
+                child: Center(
+                  child: Text(
+                    'update',
                     style: TextStyle(
                         fontFamily: 'Varela',
                         fontSize: 14.0,

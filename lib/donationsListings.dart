@@ -32,14 +32,15 @@ class _DonationsState extends State<Donations>
     if (global.items.length != 0) {
       for (var item in global.items) {
         donorList.add(_buildDonationCard(
-            context,
-            item['itemcategory'],
-            item['itemname'],
-            int.parse(item['itemcount']),
-            global.username,
-            item['itemphoto'],
-            item['itempickup'],
-            item['uid']));
+          context,
+          item['itemcategory'],
+          item['itemname'],
+          int.parse(item['itemcount']),
+          global.username,
+          item['itemphoto'],
+          item['itempickup'],
+          item['uid'],
+        ));
       }
     }
 
