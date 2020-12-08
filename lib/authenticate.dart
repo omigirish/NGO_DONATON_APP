@@ -26,6 +26,9 @@ class _LoginState extends State<Authenticate> {
       DocumentReference userinst =
           FirebaseFirestore.instance.collection('users').doc(user.uid);
       global.userinst = userinst;
+      global.userinst.update({
+        'authid': FieldValue.arrayUnion([global.authid])
+      });
       CollectionReference ngoinst =
           FirebaseFirestore.instance.collection('users');
       global.requestinst = FirebaseFirestore.instance.collection('donors');
