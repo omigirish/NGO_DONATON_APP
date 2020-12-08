@@ -7,29 +7,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ItemDetail extends StatefulWidget {
   final assetPath, qty, cookiename, imgurl, username, mssg, uid;
 
-  ItemDetail({
-    this.assetPath,
-    this.qty,
-    this.cookiename,
-    this.imgurl,
-    this.username,
-    this.mssg,
-    this.uid,
-  });
+  ItemDetail(
+      {this.assetPath,
+      this.qty,
+      this.cookiename,
+      this.imgurl,
+      this.username,
+      this.mssg,
+      this.uid});
 
   @override
   _ItemDetailState createState() => _ItemDetailState();
 }
 
 class _ItemDetailState extends State<ItemDetail> {
-  double nos = ItemDetail.qty;
+  double nos = 1.0;
   int orderqty = 1;
-  double initqty = 1.0;
   @override
   Widget build(BuildContext context) {
     bool disabled = widget.username == global.username ? true : false;
     bool isngo = global.type == "ngo" ? true : false;
-
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
@@ -135,11 +132,10 @@ class _ItemDetailState extends State<ItemDetail> {
             activeColor: Colors.purple,
             inactiveColor: Colors.deepPurple[300],
             label: nos.toInt().toString(),
-            value: disabled ? initqty : nos,
+            value: nos,
             onChanged: (newnos) {
               setState(() {
                 nos = newnos;
-                initqty = nos;
                 orderqty = nos.toInt();
               });
             },
