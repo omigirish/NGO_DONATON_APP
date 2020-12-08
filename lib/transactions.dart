@@ -22,12 +22,12 @@ class _TransactionsState extends State<Transactions>
     historylist = [];
     global.requestlistuser.forEach((data) {
       historylist.add(_transactionlog(
-        data['donorimg'],
-        data['donorname'],
-        data['itemname'],
-        'Qty: ' + data['quantity'],
-        data['status'],
-      ));
+          data['donorimg'],
+          data['donorname'],
+          data['itemname'],
+          'Qty: ' + data['quantity'],
+          data['status'],
+          data['message']));
     });
     Future.delayed(Duration(seconds: 1), () async {
       global.getrequests('uid');
@@ -109,7 +109,7 @@ class _TransactionsState extends State<Transactions>
   }
 
   _transactionlog(String imgurl, String username, String desc, String price,
-      String status) {
+      String status, String message) {
     return Padding(
       padding: EdgeInsets.only(left: 15.0, top: 15.0, right: 15),
       child: Stack(
@@ -140,7 +140,7 @@ class _TransactionsState extends State<Transactions>
                     children: <Widget>[
                       SizedBox(height: 10.0),
                       Text(
-                        username,
+                        desc,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF563734),
@@ -151,7 +151,7 @@ class _TransactionsState extends State<Transactions>
                       Container(
                         width: 260.0,
                         child: Text(
-                          desc,
+                          message,
                           style: TextStyle(
                               color: Colors.black87,
                               fontFamily: 'Varella',

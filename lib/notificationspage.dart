@@ -1,4 +1,5 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -15,7 +16,8 @@ class Notifications extends StatefulWidget {
 class _NotificationsState extends State<Notifications>
     with SingleTickerProviderStateMixin {
   TabController tabController;
-
+  String msg = "";
+  String rejmsg = "";
   List<Widget> notilist = [];
 
   @override
@@ -28,12 +30,17 @@ class _NotificationsState extends State<Notifications>
   Widget build(BuildContext context) {
     notilist = []; // Never Remive this line
     global.requestlist.forEach((data) async {
-      notilist.add(_pushnotification(
-        data['img'],
-        data['username'],
-        'I would like to Donate ' + data['itemname'],
-        'Qty: ' + data['quantity'].toString(),
-      ));
+      if (data['status'] == 'pending') {
+        notilist.add(_pushnotification(
+          data['img'],
+          data['username'],
+          data['itemname'],
+          'Qty: ' + data['quantity'].toString(),
+          data['phone'],
+          data['email'],
+          data['reqref'],
+        ));
+      }
     });
     Future.delayed(Duration(seconds: 1), () async {
       global.getrequests('ngouid');
@@ -116,7 +123,8 @@ class _NotificationsState extends State<Notifications>
         ));
   }
 
-  _pushnotification(String imgurl, String username, String desc, String price) {
+  _pushnotification(String imgurl, String username, String desc, String price,
+      String phone, String emailid, DocumentReference reqref) {
     void makeCall(String number) async {
       var url = 'tel:$number';
       if (await canLaunch(url)) {
@@ -222,14 +230,17 @@ class _NotificationsState extends State<Notifications>
                                             TextStyle(color: Colors.grey),
                                       ),
                                       onChanged: (value) {
-                                        global.itemname = value;
+                                        msg = value;
                                       },
                                     ),
                                   ),
                                 ],
                               ),
                               btnCancelOnPress: () {},
-                              btnOkOnPress: () {},
+                              btnOkOnPress: () {
+                                reqref.update(
+                                    {'message': msg, 'status': 'accepted'});
+                              },
                             )..show();
                           },
                           child: Text(
@@ -276,14 +287,17 @@ class _NotificationsState extends State<Notifications>
                                             TextStyle(color: Colors.grey),
                                       ),
                                       onChanged: (value) {
-                                        global.itemname = value;
+                                        rejmsg = value;
                                       },
                                     ),
                                   ),
                                 ],
                               ),
                               btnCancelOnPress: () {},
-                              btnOkOnPress: () {},
+                              btnOkOnPress: () {
+                                reqref.update(
+                                    {'message': msg, 'status': 'rejected'});
+                              },
                             )..show();
                           },
                           child: Text(
@@ -350,7 +364,7 @@ class _NotificationsState extends State<Notifications>
                                         size: 32,
                                       ),
                                       onPressed: () {
-                                        makeCall("9136091244");
+                                        makeCall(phone);
                                       },
                                     ),
                                     SizedBox(width: 15),
@@ -361,7 +375,7 @@ class _NotificationsState extends State<Notifications>
                                         size: 38,
                                       ),
                                       onPressed: () {
-                                        message("9136091244");
+                                        message(phone);
                                       },
                                     ),
                                     SizedBox(width: 15),
@@ -372,7 +386,7 @@ class _NotificationsState extends State<Notifications>
                                         size: 38,
                                       ),
                                       onPressed: () {
-                                        email("omigirish1999@gmail.com");
+                                        email(emailid);
                                       },
                                     )
                                   ],

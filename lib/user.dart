@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mydonationapp/constants.dart';
+import 'package:mydonationapp/homePage.dart';
 import 'package:mydonationapp/main.dart';
 import 'package:mydonationapp/profile_list_item.dart';
 import 'package:mydonationapp/models/user.dart' as firebaseuser;
@@ -13,6 +14,7 @@ import 'package:mydonationapp/services/auth.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mydonationapp/services/imagecapture.dart';
 import 'package:mydonationapp/globals.dart' as global;
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class User extends StatelessWidget {
   // This widget is the root of your application.
@@ -178,13 +180,62 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Expanded(
                   child: ListView(
                     children: <Widget>[
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.user_shield,
-                        text: 'Privacy',
+                      GestureDetector(
+                        onTap: () {
+                          AwesomeDialog(
+                            context: context,
+                            customHeader: Icon(LineAwesomeIcons.phone,
+                                size: 40, color: Colors.purple),
+                            animType: AnimType.BOTTOMSLIDE,
+                            tittle: 'sldkblkn',
+                            desc: 'ldfnbkldfbn',
+                            body: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Message",
+                                  style: TextStyle(
+                                      fontFamily: "Varela",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 10),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 20, left: 10),
+                                  child: TextField(
+                                    maxLines: 1,
+                                    style: TextStyle(color: Colors.black),
+                                    cursorColor: Colors.purple,
+                                    decoration: InputDecoration(
+                                      icon: Icon(Icons.edit),
+                                      hintText: "Your Number",
+                                      hintStyle: TextStyle(color: Colors.grey),
+                                    ),
+                                    onChanged: (value) {},
+                                  ),
+                                ),
+                              ],
+                            ),
+                            btnCancelOnPress: () {
+                              Navigator.of(context, rootNavigator: true)
+                                  .pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => User(),
+                                ),
+                              );
+                            },
+                            btnOkOnPress: () {},
+                          )..show();
+                        },
+                        child: ProfileListItem(
+                          icon: LineAwesomeIcons.phone,
+                          text: 'Change you Number',
+                        ),
                       ),
                       ProfileListItem(
                         icon: LineAwesomeIcons.history,
-                        text: 'Purchase History',
+                        text: 'change ',
                       ),
                       ProfileListItem(
                         icon: LineAwesomeIcons.question_circle,

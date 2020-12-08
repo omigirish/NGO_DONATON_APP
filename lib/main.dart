@@ -18,25 +18,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   final FirebaseMessaging _messaging = FirebaseMessaging();
 
-//  _messaging.configure(
-//       onMessage: (Map<String, dynamic> message) async {
-//         print("onMessage: $message");
-//         _showItemDialog(message);
-//       },
-//       onBackgroundMessage: myBackgroundMessageHandler,
-//       onLaunch: (Map<String, dynamic> message) async {
-//         print("onLaunch: $message");
-//         _navigateToItemDetail(message);
-//       },
-//       onResume: (Map<String, dynamic> message) async {
-//         print("onResume: $message");
-//         _navigateToItemDetail(message);
-//       },
-//     );
   @override
   Widget build(BuildContext context) {
     _messaging.getToken().then((token) {
-      print("Token:" + token);
       global.authid = token;
     });
     return MultiProvider(

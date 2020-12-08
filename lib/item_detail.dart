@@ -21,7 +21,7 @@ class ItemDetail extends StatefulWidget {
 }
 
 class _ItemDetailState extends State<ItemDetail> {
-  double nos = 1.0;
+  double nos = ItemDetail.qty;
   int orderqty = 1;
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,7 @@ class _ItemDetailState extends State<ItemDetail> {
             child: Container(
               width: MediaQuery.of(context).size.width - 50.0,
               child: Text(
-                "Pickup Address\n" + widget.mssg,
+                widget.mssg,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: 'Varela', fontSize: 16.0, color: Colors.white),
@@ -121,7 +121,7 @@ class _ItemDetailState extends State<ItemDetail> {
               ? Center()
               : Padding(
                   padding: const EdgeInsets.only(left: 25),
-                  child: Text("How many do you need?",
+                  child: Text("",
                       style:
                           TextStyle(color: Colors.white, fontFamily: "Varela")),
                 ),
@@ -182,12 +182,12 @@ class _ItemDetailState extends State<ItemDetail> {
                             'uid': global.uid,
                             'ngouid': widget.uid,
                             'ngoname': widget.username,
-                            'quantity': widget.qty,
+                            'quantity': orderqty.toString(),
                             'message': widget.mssg,
                             'status': 'pending',
                             'itemname': widget.cookiename,
                           });
-                          Navigator.of(context, rootNavigator: true)
+                          await Navigator.of(context, rootNavigator: true)
                               .pushReplacement(MaterialPageRoute(
                                   builder: (context) => new HomePage()));
                         },
