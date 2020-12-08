@@ -1,7 +1,6 @@
 class User {
   final String uid, name, img, phone, email, url;
   final bool type;
-
   User(
       {this.uid,
       this.name,

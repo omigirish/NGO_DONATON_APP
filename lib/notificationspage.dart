@@ -82,7 +82,7 @@ class _NotificationsState extends State<Notifications>
                 Padding(
                   padding: EdgeInsets.only(top: 95.0, left: 15.0),
                   child: Text(
-                    'Notifications',
+                    'New Requests',
                     style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 28.0,
