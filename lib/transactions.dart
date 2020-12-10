@@ -112,7 +112,7 @@ class _TransactionsState extends State<Transactions>
       String status, String message) {
     return Padding(
       padding: EdgeInsets.only(left: 15.0, top: 15.0, right: 15),
-      child: Stack(
+      child: Row(
         children: <Widget>[
           Expanded(
             child: Container(
@@ -124,7 +124,7 @@ class _TransactionsState extends State<Transactions>
                     ? Colors.yellow[50]
                     : status == "rejected"
                         ? Colors.red[50]
-                        : Colors.teal[50],
+                        : Colors.teal[100],
               ),
               child: Padding(
                 padding: EdgeInsets.all(8.0),
@@ -144,7 +144,7 @@ class _TransactionsState extends State<Transactions>
                           desc,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF563734),
+                              color: Colors.black87,
                               fontFamily: 'Montserrat',
                               fontSize: 15.0),
                         ),

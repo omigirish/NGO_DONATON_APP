@@ -296,7 +296,7 @@ class _NotificationsState extends State<Notifications>
                               btnCancelOnPress: () {},
                               btnOkOnPress: () {
                                 reqref.update(
-                                    {'message': msg, 'status': 'rejected'});
+                                    {'message': rejmsg, 'status': 'rejected'});
                               },
                             )..show();
                           },
