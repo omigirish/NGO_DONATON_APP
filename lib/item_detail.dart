@@ -143,30 +143,46 @@ class _ItemDetailState extends State<ItemDetail> {
           Center(
             child: MaterialButton(
               onPressed: disabled
-                  ? () {
-                      AwesomeDialog(
-                        context: context,
-                        dialogType: DialogType.ERROR,
-                        animType: AnimType.BOTTOMSLIDE,
-                        tittle: "Are you Sure ?",
-                        desc:
-                            'The Listing will be Deleted and No longer be Visible to anyone.',
-                        btnCancelOnPress: () {
-                          Navigator.of(context, rootNavigator: true)
-                              .pushReplacement(MaterialPageRoute(
-                                  builder: (context) => new HomePage()));
-                        },
-                        btnOkOnPress: () async {
+                  ? orderqty > 0
+                      ? () async {
                           for (var item in global.items) {
                             if (item['itemname'] == widget.cookiename) {
-                              global.items.remove(item);
+                              item['itemcount'] = orderqty.toString();
+                              global.userinst.update({'items': global.items});
                               break;
                             }
                           }
-                          global.userinst.update({'items': global.items});
-                        },
-                      )..show();
-                    }
+                          Navigator.of(context, rootNavigator: true)
+                              .pushReplacement(MaterialPageRoute(
+                                  builder: (context) => new HomePage()));
+                        }
+                      : () {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.ERROR,
+                            animType: AnimType.BOTTOMSLIDE,
+                            tittle: "Are you Sure ?",
+                            desc:
+                                'The Listing will be Deleted and No longer be Visible to anyone.',
+                            btnCancelOnPress: () {
+                              Navigator.of(context, rootNavigator: true)
+                                  .pushReplacement(MaterialPageRoute(
+                                      builder: (context) => new HomePage()));
+                            },
+                            btnOkOnPress: () async {
+                              for (var item in global.items) {
+                                if (item['itemname'] == widget.cookiename) {
+                                  global.items.remove(item);
+                                  break;
+                                }
+                              }
+                              global.userinst.update({'items': global.items});
+                              Navigator.of(context, rootNavigator: true)
+                                  .pushReplacement(MaterialPageRoute(
+                                      builder: (context) => new HomePage()));
+                            },
+                          )..show();
+                        }
                   : () {
                       AwesomeDialog(
                         context: context,
@@ -207,7 +223,9 @@ class _ItemDetailState extends State<ItemDetail> {
                 child: Center(
                   child: Text(
                     disabled
-                        ? "Delete"
+                        ? orderqty == 0
+                            ? "Delete"
+                            : "Update"
                         : isngo
                             ? "Request Donation"
                             : 'Donate',
@@ -221,38 +239,6 @@ class _ItemDetailState extends State<ItemDetail> {
               ),
             ),
           ),
-          Center(
-            child: MaterialButton(
-              onPressed: () async {
-                for (var item in global.items) {
-                  if (item['itemname'] == widget.cookiename) {
-                    item['itemcount'] = orderqty.toString();
-                    global.userinst.update({'items': global.items});
-                    break;
-                  }
-                }
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width - 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25.0),
-                    color: disabled
-                        ? Colors.purple[900]
-                        : Color.fromRGBO(49, 39, 79, 1)), //Color(0xFFF17532)
-                child: Center(
-                  child: Text(
-                    'update',
-                    style: TextStyle(
-                        fontFamily: 'Varela',
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-          )
         ],
       ),
     );

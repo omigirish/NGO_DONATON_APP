@@ -200,6 +200,18 @@ class _AddnewState extends State<Addnew> {
                               style: TextStyle(color: Colors.purple[400]),
                             ),
                             Text(
+                              "-- Medicines --",
+                              style: TextStyle(color: Colors.purple[400]),
+                            ),
+                            Text(
+                              "-- Stationery --",
+                              style: TextStyle(color: Colors.purple[400]),
+                            ),
+                            Text(
+                              "---- Furniture ----",
+                              style: TextStyle(color: Colors.purple[400]),
+                            ),
+                            Text(
                               "---- Other ----",
                               style: TextStyle(color: Colors.purple[400]),
                             ),

@@ -114,62 +114,64 @@ class _TransactionsState extends State<Transactions>
       padding: EdgeInsets.only(left: 15.0, top: 15.0, right: 15),
       child: Stack(
         children: <Widget>[
-          Container(
-            height: 95.0,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: status == "pending"
-                  ? Colors.yellow[50]
-                  : status == "rejected"
-                      ? Colors.red[50]
-                      : Colors.teal[50],
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: <Widget>[
-                  CircularProfileAvatar(
-                    imgurl,
-                    animateFromOldImageOnUrlChange: true,
-                    radius: 35,
-                  ),
-                  SizedBox(width: 10.0),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 10.0),
-                      Text(
-                        desc,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF563734),
-                            fontFamily: 'Montserrat',
-                            fontSize: 15.0),
-                      ),
-                      SizedBox(height: 5.0),
-                      Container(
-                        width: 260.0,
-                        child: Text(
-                          message,
+          Expanded(
+            child: Container(
+              // height: 95.0,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: status == "pending"
+                    ? Colors.yellow[50]
+                    : status == "rejected"
+                        ? Colors.red[50]
+                        : Colors.teal[50],
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  children: <Widget>[
+                    CircularProfileAvatar(
+                      imgurl,
+                      animateFromOldImageOnUrlChange: true,
+                      radius: 35,
+                    ),
+                    SizedBox(width: 10.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 10.0),
+                        Text(
+                          desc,
                           style: TextStyle(
-                              color: Colors.black87,
-                              fontFamily: 'Varella',
-                              fontSize: 15),
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF563734),
+                              fontFamily: 'Montserrat',
+                              fontSize: 15.0),
                         ),
-                      ),
-                      SizedBox(height: 5.0),
-                      Text(
-                        price.toString(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.purple,
-                            fontFamily: 'Montserrat',
-                            fontSize: 15.0),
-                      )
-                    ],
-                  )
-                ],
+                        SizedBox(height: 5.0),
+                        Container(
+                          width: 260.0,
+                          child: Text(
+                            message,
+                            style: TextStyle(
+                                color: Colors.black87,
+                                fontFamily: 'Varella',
+                                fontSize: 15),
+                          ),
+                        ),
+                        SizedBox(height: 5.0),
+                        Text(
+                          price.toString(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.purple,
+                              fontFamily: 'Montserrat',
+                              fontSize: 15.0),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           )

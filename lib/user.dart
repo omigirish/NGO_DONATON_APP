@@ -223,7 +223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Navigator.of(context, rootNavigator: true)
                                   .pushReplacement(
                                 MaterialPageRoute(
-                                  builder: (context) => User(),
+                                  builder: (context) => HomePage(),
                                 ),
                               );
                             },
@@ -232,12 +232,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                         child: ProfileListItem(
                           icon: LineAwesomeIcons.phone,
-                          text: 'Change you Number',
+                          text: 'Add/Change you Number',
                         ),
                       ),
                       ProfileListItem(
-                        icon: LineAwesomeIcons.history,
-                        text: 'change ',
+                        icon: LineAwesomeIcons.envelope,
+                        text: 'Add/Change Contact Email ',
                       ),
                       ProfileListItem(
                         icon: LineAwesomeIcons.question_circle,
@@ -254,8 +254,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       GestureDetector(
                         onTap: () async {
                           await _auth.signOut();
-                          Navigator.of(context, rootNavigator: true)
-                              .pushReplacement(MaterialPageRoute(
+                          Navigator.of(context, rootNavigator: true).push(
+                              MaterialPageRoute(
                                   builder: (context) => new MyApp()));
                         },
                         child: ProfileListItem(

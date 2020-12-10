@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mydonationapp/item_detail.dart';
@@ -217,11 +218,14 @@ class _DonationsState extends State<Donations>
       LineAwesomeIcons.medkit,
       Icons.electrical_services_rounded,
       LineAwesomeIcons.book,
+      FontAwesomeIcons.heartbeat,
+      FontAwesomeIcons.pencilAlt,
+      FontAwesomeIcons.chair,
       LineAwesomeIcons.gift,
     ];
 
     return Padding(
-      padding: EdgeInsets.only(top: 8.0, left: 15.0, bottom: 10.0, right: 15),
+      padding: EdgeInsets.only(top: 8.0, left: 22.0, bottom: 10.0, right: 22),
       child: GestureDetector(
         onTap: () => {
           Navigator.of(context).push(
@@ -247,11 +251,12 @@ class _DonationsState extends State<Donations>
               Stack(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(left: 28.0, right: 15.0, top: 5.0),
+                    padding: EdgeInsets.only(
+                        left: 28.0, right: 15.0, top: 15.0, bottom: 10),
                     child: Icon(
                       iconlist[category],
                       color: Colors.grey[900],
-                      size: 110,
+                      size: 100,
                     ),
                   ),
                 ],
