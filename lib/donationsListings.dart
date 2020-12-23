@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mydonationapp/item_detail.dart';
 import 'package:mydonationapp/globals.dart' as global;
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 
 class Donations extends StatefulWidget {
   @override
@@ -16,19 +17,21 @@ class _DonationsState extends State<Donations>
     with SingleTickerProviderStateMixin {
   List<Widget> donorList = [];
   List<Widget> ngoList = [];
+  List<Widget> userList = [];
   TabController tabController;
   @override
   void initState() {
     global.getdata();
     global.getdonations();
     super.initState();
-    tabController = TabController(vsync: this, length: 2);
+    tabController = TabController(vsync: this, length: 3);
   }
 
   @override
   Widget build(BuildContext context) {
     donorList = []; //Donot Remove at any cost.....!!!!!
     ngoList = [];
+    userList = [];
 
     if (global.items.length != 0) {
       for (var item in global.items) {
@@ -59,6 +62,7 @@ class _DonationsState extends State<Donations>
               item['uid']));
         }
       }
+      global.getall('ngo');
     } else {
       for (var items in global.donoritemlist) {
         for (var item in items) {
@@ -73,6 +77,13 @@ class _DonationsState extends State<Donations>
               item['uid']));
         }
       }
+      global.getall('donor');
+    }
+
+    if (global.userlist.length != 0) {
+      for (var item in global.userlist) {
+        userList.add(_userlist(item['img'], item['name'], item['email']));
+      }
     }
 
     Future.delayed(Duration(seconds: 1), () async {
@@ -86,11 +97,12 @@ class _DonationsState extends State<Donations>
       // backgroundColor: Color(0xFFF9EFEB),
       backgroundColor: Colors.black87,
       body: ListView(
+        padding: EdgeInsets.all(0),
         children: <Widget>[
           Stack(
             children: <Widget>[
               Container(
-                height: 220.0,
+                height: 250.0,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                       // colors: [Color(0x000000), Color(0xBB923CB5)],
@@ -105,7 +117,7 @@ class _DonationsState extends State<Donations>
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 35.0, left: 15.0),
+                padding: EdgeInsets.only(top: 65.0, left: 15.0),
                 child: Text(
                   'One for All',
                   style: TextStyle(
@@ -116,7 +128,7 @@ class _DonationsState extends State<Donations>
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 95.0, left: 15.0),
+                padding: EdgeInsets.only(top: 125.0, left: 15.0),
                 child: Text(
                   'Donation Listings',
                   style: TextStyle(
@@ -127,7 +139,7 @@ class _DonationsState extends State<Donations>
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 160.0, left: 15.0, right: 35.0),
+                padding: EdgeInsets.only(top: 180.0, left: 15.0, right: 35.0),
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -161,7 +173,7 @@ class _DonationsState extends State<Donations>
             tabs: <Widget>[
               Tab(
                 child: Text(
-                  'Listed By You',
+                  'Your Listings',
                   style: TextStyle(
                     fontFamily: 'Varela',
                     fontWeight: FontWeight.bold,
@@ -171,7 +183,19 @@ class _DonationsState extends State<Donations>
               ),
               Tab(
                 child: Text(
-                  global.type == 'donor' ? 'NGO Requests' : 'Listed by Donors',
+                  global.type == 'donor'
+                      ? 'NGO\'s Requests'
+                      : 'Donor\'s Listings',
+                  style: TextStyle(
+                    fontFamily: 'Varela',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15.0,
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  global.type == 'donor' ? 'All NGOs' : 'All Donors',
                   style: TextStyle(
                     fontFamily: 'Varela',
                     fontWeight: FontWeight.bold,
@@ -183,25 +207,44 @@ class _DonationsState extends State<Donations>
           ),
           SizedBox(height: 10.0),
           Container(
-            height: MediaQuery.of(context).size.height - 370,
-            child: TabBarView(
-              controller: tabController,
-              children: <Widget>[
-                GridView.count(
-                    crossAxisCount: 2,
-                    primary: false,
-                    crossAxisSpacing: 0.0,
-                    mainAxisSpacing: 15.0,
-                    childAspectRatio: 0.9,
-                    children: donorList),
-                GridView.count(
-                    crossAxisCount: 2,
-                    primary: false,
-                    crossAxisSpacing: 0.0,
-                    mainAxisSpacing: 15.0,
-                    childAspectRatio: 0.9,
-                    children: ngoList),
-              ],
+            height: MediaQuery.of(context).size.height - 372,
+            child: GlowingOverscrollIndicator(
+              color: Colors.pink[600],
+              axisDirection: AxisDirection.right,
+              child: TabBarView(
+                controller: tabController,
+                children: <Widget>[
+                  GlowingOverscrollIndicator(
+                    color: Colors.pink[600],
+                    axisDirection: AxisDirection.down,
+                    child: GridView.count(
+                        padding: EdgeInsets.all(0),
+                        crossAxisCount: 2,
+                        primary: false,
+                        crossAxisSpacing: 0.0,
+                        mainAxisSpacing: 15.0,
+                        childAspectRatio: 0.9,
+                        children: donorList),
+                  ),
+                  GlowingOverscrollIndicator(
+                    color: Colors.pink[600],
+                    axisDirection: AxisDirection.down,
+                    child: GridView.count(
+                        padding: EdgeInsets.all(0),
+                        crossAxisCount: 2,
+                        primary: false,
+                        crossAxisSpacing: 0.0,
+                        mainAxisSpacing: 15.0,
+                        childAspectRatio: 0.9,
+                        children: ngoList),
+                  ),
+                  GlowingOverscrollIndicator(
+                      color: Colors.pink[600],
+                      axisDirection: AxisDirection.down,
+                      child: ListView(
+                          padding: EdgeInsets.all(0), children: userList)),
+                ],
+              ),
             ),
           ),
         ],
@@ -261,17 +304,16 @@ class _DonationsState extends State<Donations>
                   ),
                 ],
               ),
-              Center(
-                child: Container(
-                  width: 145.0,
-                  child: Text(
-                    itemName,
-                    style: TextStyle(
-                        fontFamily: "Varela",
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15.0),
-                  ),
+              Padding(
+                padding: EdgeInsets.only(left: 12.0),
+                // width: 145.0,
+                child: Text(
+                  itemName,
+                  style: TextStyle(
+                      fontFamily: "Varela",
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.0),
                 ),
               ),
               SizedBox(height: 5.0),
@@ -306,6 +348,64 @@ class _DonationsState extends State<Donations>
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  _userlist(String imgurl, String username, String email) {
+    return Padding(
+      padding: EdgeInsets.only(left: 15.0, top: 5.0, right: 15, bottom: 5),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              // height: 95.0,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  children: <Widget>[
+                    CircularProfileAvatar(
+                      imgurl,
+                      animateFromOldImageOnUrlChange: true,
+                      radius: 25,
+                    ),
+                    SizedBox(width: 20.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        // SizedBox(height: 10.0),
+                        Text(
+                          username,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                              fontFamily: 'Montserrat',
+                              fontSize: 15.0),
+                        ),
+                        SizedBox(height: 5.0),
+                        Container(
+                          width: 260.0,
+                          child: Text(
+                            email,
+                            style: TextStyle(
+                                color: Colors.black87,
+                                fontFamily: 'Varella',
+                                fontSize: 15),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

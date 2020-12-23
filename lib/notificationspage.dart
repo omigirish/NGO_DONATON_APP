@@ -54,7 +54,7 @@ class _NotificationsState extends State<Notifications>
             Stack(
               children: <Widget>[
                 Container(
-                  height: 230.0,
+                  height: 140.0,
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                           // colors: [Color(0x000000), Color(0xBB923CB5)],
@@ -90,28 +90,6 @@ class _NotificationsState extends State<Notifications>
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 160.0, left: 15.0, right: 35.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(25.0),
-                          bottomLeft: Radius.circular(5.0),
-                          topLeft: Radius.circular(5.0),
-                        )),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 14.0),
-                        hintText: 'Search in Notifications',
-                        hintStyle:
-                            TextStyle(fontFamily: 'Montserrat', fontSize: 14.0),
-                        prefixIcon: Icon(Icons.search, color: Colors.grey),
-                      ),
-                    ),
-                  ),
-                )
               ],
             ),
             Container(
@@ -158,14 +136,14 @@ class _NotificationsState extends State<Notifications>
         children: <Widget>[
           Container(
             height: 145.0,
-            width: MediaQuery.of(context).size.width,
+            // width: MediaQuery.of(context).size.width / 2,
           ),
           Positioned(
             left: 15.0,
             top: 30.0,
             child: Container(
               height: 92.0,
-              width: MediaQuery.of(context).size.width - 15.0,
+              width: MediaQuery.of(context).size.width - 25.0,
               decoration: BoxDecoration(
                 color: Colors.purple[50],
                 borderRadius: BorderRadius.circular(5.0),
@@ -177,7 +155,7 @@ class _NotificationsState extends State<Notifications>
               top: 56.0,
               child: Container(
                 height: 80.0,
-                width: MediaQuery.of(context).size.width - 15.0,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                     color: Colors.purple[50],
                     borderRadius: BorderRadius.circular(5.0),

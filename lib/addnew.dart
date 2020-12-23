@@ -22,6 +22,7 @@ class _AddnewState extends State<Addnew> {
       // backgroundColor: Color(0xff21254A),
       backgroundColor: Colors.black87,
       body: ListView(
+        padding: EdgeInsets.all(0),
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   firebase_auth: ^0.18.3+1
   firebase_core: ^0.5.2+1
+  firebase_database:
   firebase_storage:
   image_cropper: 1.0.2
   image_picker: 0.6.0+17

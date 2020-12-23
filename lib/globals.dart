@@ -17,6 +17,7 @@ var ngoitemlist = [];
 var donoritemlist = [];
 var requestlist = [];
 var requestlistuser = [];
+var userlist = [];
 
 DocumentReference userinst;
 CollectionReference requestinst;
@@ -87,6 +88,7 @@ getrequests(String type) async {
       'reqid': d.reference.path.split("/")[1],
       'reqref': d.reference,
       'datetime': d['datetime'],
+      'id': d.reference.id
     });
   }
   requests.sort((a, b) {
@@ -115,4 +117,18 @@ cleardata() {
   // ngoitems = [];
 
   calledfrom = "";
+}
+
+getall(String type) async {
+  List users = new List();
+  var userdata = await ngoinst.where('type', isEqualTo: type).get();
+  for (var data in userdata.docs) {
+    try {
+      // if (data.data()['items'] != null) ngoitems.add(data.data()['items']);
+      users.add(data.data());
+    } catch (e) {
+      // print(e);
+    }
+  }
+  userlist = users;
 }
